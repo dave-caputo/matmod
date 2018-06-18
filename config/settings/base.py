@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     # Project apps
     'answers',
+    'clients',
     'core',
     'questions'
 ]

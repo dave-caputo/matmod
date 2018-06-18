@@ -1,11 +1,13 @@
 from django.db import models
 
+from clients.models import Client
 from questions.models import Questionnaire, Question
 
 
 # Create your models here.
 class AnswerSet(models.Model):
     questionnaire = models.ForeignKey(Questionnaire, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
     name = models.CharField(max_length=55)
 
 
