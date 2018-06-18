@@ -1,0 +1,38 @@
+{
+    "build_systems":
+    [
+        {
+            "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+            "name": "Anaconda Python Builder",
+            "selector": "source.python",
+            "shell_cmd": "\"/Users/davecaputo/.virtualenvs/matmod/bin/python\" -u \"$file\""
+        }
+    ],
+    "folders":
+    [
+        {
+            "follow_symlinks": true,
+            "path": "."
+        },
+        {
+            "folder_exclude_patterns":
+            [
+                "include"
+            ],
+            "path": "/Users/davecaputo/.virtualenvs/matmod/"
+        },
+    ],
+    "settings":
+    {
+        "extra_paths":
+        [
+            "/Users/davecaputo/.virtualenvs/matmod/lib",
+        ],
+        "ignored_packages":
+        [
+            "Vintage",
+            "ESLint-Formatter"
+        ],
+        "python_interpreter": "/Users/davecaputo/.virtualenvs/matmod/bin/python"
+    }
+}
