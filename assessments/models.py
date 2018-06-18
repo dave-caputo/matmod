@@ -5,11 +5,10 @@ from questions.models import Questionnaire, Question
 
 
 # Create your models here.
-class AnswerSet(models.Model):
+class Assessment(models.Model):
     questionnaire = models.ForeignKey(Questionnaire, on_delete=models.CASCADE)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     name = models.CharField(max_length=55)
-
 
     class Meta:
         ordering = ('name',)
@@ -18,16 +17,22 @@ class AnswerSet(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        
+
         created = True if not self.pk else False
         super().save(*args, **kwargs)
-        # Create answerset
+
+        # Create answers for new assessment
         if created:
             for question in self.questionnaire.question_set.all():
                 Answer.objects.create(
-                    answerset=self,
+                    assessment=self,
                     question=question,
                 )
+
+    @property
+    def is_pending(self):
+        qs = self.answers.filter(answer=0)
+        return True if qs.exists() else False
 
 
 class Answer(models.Model):
@@ -41,7 +46,10 @@ class Answer(models.Model):
         (5, '5')
     ]
 
-    answerset = models.ForeignKey(AnswerSet, on_delete=models.CASCADE)
+    assessment = models.ForeignKey(Assessment,
+                                   on_delete=models.CASCADE,
+                                   related_name='answers')
+
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
     answer = models.IntegerField(choices=ANSWER_CHOICES,
@@ -50,7 +58,7 @@ class Answer(models.Model):
                                  default=0)
 
     def __str__(self):
-        return f'{self.answerset}: Q{self.question.order  + 1} = {self.answer}'
+        return f'{self.assessment}: Q{self.question.order  + 1} = {self.answer}'
 
     class Meta:
-        ordering = ('answerset', 'question__order',)
+        ordering = ('assessment', 'question__order',)

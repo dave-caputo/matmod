@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'ordered_model',
 
     # Project apps
-    'answers',
+    'assessments',
     'clients',
     'core',
     'questions'
