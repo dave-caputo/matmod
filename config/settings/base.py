@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'assessments',
     'clients',
     'core',
-    'questions'
+    'questionnaires'
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "Dropping bomb..."
+
+echo "Recreating database..."
+psql -d postgres -c "DROP DATABASE matmod_dev;"
+psql -d postgres -c "CREATE DATABASE matmod_dev;"
+
+echo "Destroying migrations..."
+find . -path "*migrations/*.py" -not -name __init__.py -delete
+
+echo "Recreating migrations and migrating to db..."
+python manage.py makemigrations
+python manage.py migrate
+
+echo "Setting up initial data"
+# python manage.py loaddata initial_data
+# python manage.py loaddata initial_tests
+
+# echo -e "from core.data import generate_test_data\ngenerate_test_data()\n" | python manage.py shell
+echo -e "from core.data import load_test_data\nload_test_data()\n" | python manage.py shell

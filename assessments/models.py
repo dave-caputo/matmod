@@ -1,12 +1,15 @@
 from django.db import models
 
 from clients.models import Client
-from questions.models import Questionnaire, Question
+from questionnaires.models import Qre, Question
 
 
 # Create your models here.
 class Assessment(models.Model):
-    questionnaire = models.ForeignKey(Questionnaire, on_delete=models.CASCADE)
+    qre = models.ForeignKey(Qre,
+                            verbose_name='questionnaire',
+                            related_name='assessments',
+                            on_delete=models.CASCADE)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     name = models.CharField(max_length=55)
 
@@ -23,7 +26,7 @@ class Assessment(models.Model):
 
         # Create answers for new assessment
         if created:
-            for question in self.questionnaire.question_set.all():
+            for question in self.qre.questions.all():
                 Answer.objects.create(
                     assessment=self,
                     question=question,
@@ -33,6 +36,10 @@ class Assessment(models.Model):
     def is_pending(self):
         qs = self.answers.filter(answer=0)
         return True if qs.exists() else False
+
+    @property
+    def score(self):
+        return self.answers.aggregate(total=models.Sum('answer'))['total']
 
 
 class Answer(models.Model):
