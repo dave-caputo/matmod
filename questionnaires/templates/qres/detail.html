@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Questionnaire
+{% endblock title %}
+
+{% block breadcrumbs %}
+  <a href="{% url 'dashboard:index' %}">dashboard</a> / questionnaire
+{% endblock breadcrumbs %}
+
+{% block header %}
+  {{ object.name }}
+{% endblock header %}
+
+{% block content %}
+  <a href="#" id="update_display_qre" style="text-decoration:none;">~ Update</a>
+  <div id="qre_update_div" hidden></div>
+
+{% endblock content %}
+
+{% block page_data %}
+  <div id="page_urls" data-qre-update-url="{% url 'qres:update' object.pk %}"></div>
+{% endblock page_data %}
+
+
+{% block scripts %}
+  {{ block.super }}
+  <script src="{% static 'qres/js/update.js' %}"></script>
+{% endblock scripts %}

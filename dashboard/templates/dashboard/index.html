@@ -1,42 +1,60 @@
+{% extends 'base.html' %}
 {% load static %}
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-  </head>
-  <body style="padding:20px;">
-    <h1>Dashboard</h1>
-    <div id="breadcrumbs">dashboard / </div>
-    <div>
-      <h3>Clients</h3>
+
+{% block title %}
+  Dashboard
+{% endblock title %}
+
+{% block header %}
+  MatMod
+{% endblock header %}
+
+{% block breadcrumbs %}
+  dashboard /
+{% endblock breadcrumbs %}
+
+{% block content %}
+  <!-- Client Section -->
+  <div>
+    <h3>Clients</h3>
+    <ul>
+      {% for client in client_list %}
+        <li>{{ client }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <!-- End Client Section -->
+  <!-- Questionnaire Section -->
+  <div>
+    <h3>Questionnaires</h3>
+    <a href="#" id="create_display_qre" style="text-decoration:none;">+ New</a>
+    <div id="qre_create_div" hidden></div>
+    <div id="qre_list_div">
       <ul>
-        {% for client in client_list %}
-          <li>{{ client }}</li>
+        {% for qre in qre_list %}
+          <li><a href="{% url 'qres:detail' qre.pk %}">{{ qre }}</a></li>
         {% endfor %}
       </ul>
     </div>
-    <div>
-      <h3>Questionnaires</h3>
-      <a href="#" id="create_display_qre" style="text-decoration:none;">+ New</a>
-      <div id="qre_create_div" hidden></div>
-      <div id="qre_list_div">
-        <ul>
-          {% for qre in qre_list %}
-            <li>{{ qre }}</li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
-    <div>
-      <h3>Assessments</h3>
-      <ul>
-        {% for assess in assess_list %}
-          <li>{{ assess }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-    <div id="page_urls" data-qre-create-url="{% url 'qres:create' %}" data-qre-list-url="{% url 'qres:list' %}"></div>
-    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'qres/js/create.js' %}"></script>
-  </body>
-</html>
+  </div>
+  <!-- End Questionnaire Section -->
+  <!-- Assessment Section -->
+  <div>
+    <h3>Assessments</h3>
+    <ul>
+      {% for assess in assess_list %}
+        <li>{{ assess }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <!-- End Assessment Section -->
+{% endblock content %}
+
+{% block page_data %}
+  <div id="page_urls" data-qre-create-url="{% url 'qres:create' %}" data-qre-list-url="{% url 'qres:list' %}"></div>
+{% endblock page_data %}
+
+{% block scripts %}
+  {{ block.super }}
+  <script src="{% static 'qres/js/create.js' %}"></script>
+{% endblock scripts %}
