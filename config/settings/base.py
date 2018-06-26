@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'assessments',
     'clients',
     'core',
+    'dashboard',
     'questionnaires'
 ]
 

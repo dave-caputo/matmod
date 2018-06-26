@@ -14,8 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.http import HttpResponseRedirect
+from django.urls import path, include, reverse
 
 urlpatterns = [
+    path('', lambda x: HttpResponseRedirect(reverse('dashboard:index'))),
     path('admin/', admin.site.urls),
+    path('dashboard/', include('dashboard.urls')),
+    path('qres/', include('questionnaires.urls')),
 ]
