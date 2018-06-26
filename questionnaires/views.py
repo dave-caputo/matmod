@@ -28,3 +28,9 @@ class QreUpdateView(generic.UpdateView):
 
     def get_success_url(self):
         return reverse('qres:update', kwargs={'pk': self.kwargs['pk']})
+
+
+class QreDeleteView(generic.DeleteView):
+    model = Qre
+    template_name = 'qres/delete.html'
+    success_url = reverse_lazy('dashboard:index')

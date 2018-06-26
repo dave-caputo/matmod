@@ -16,6 +16,9 @@
 {% block content %}
   <a href="#" id="update_display_qre" style="text-decoration:none;">~ Update</a>
   <div id="qre_update_div" hidden></div>
+  <br />
+  <a href="{% url 'qres:delete' object.pk %}" id="delete_display_qre" style="text-decoration:none;">- Delete questionnaire</a>
+
 
 {% endblock content %}
 

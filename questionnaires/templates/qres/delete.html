@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Delete Questionnaire
+{% endblock title %}
+
+{% block breadcrumbs %}
+  <a href="{% url 'dashboard:index' %}">dashboard</a> / <a href="{% url 'qres:detail' object.pk %}">questionnaire</a> / delete
+{% endblock breadcrumbs %}
+
+{% block header %}
+  Delete questionnaire "{{ object.name }}"
+{% endblock header %}
+
+
+{% block content %}
+    <p>This questionnaire and all its questions and assessments will be deleted. Are you sure you want to continue?</p>
+    <p><a href="{% url 'qres:detail' object.pk %}">No, go back</a></p>
+    <br />
+
+    <form id="qre_delete_form" method="POST">{% csrf_token %}
+      <input type="submit" id="qre_delete_btn" value="Yes, delete" />
+    </form>
+{% endblock content %}
