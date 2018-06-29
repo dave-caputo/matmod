@@ -1,0 +1,14 @@
+<table>
+  <tbody>
+    {% for section in object_list.all %}
+      <tr>
+        <td><strong>{{ section }}</strong></td>
+      </tr>
+      {% for question in section.questions.all %}
+        <tr>
+          <td>{{ question }}</td>
+        </tr>
+      {% endfor %}
+    {% endfor %}
+  </tbody>
+</table>

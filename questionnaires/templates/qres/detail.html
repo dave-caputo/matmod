@@ -1,33 +1,54 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block title %}
   Questionnaire
 {% endblock title %}
-
 {% block breadcrumbs %}
   <a href="{% url 'dashboard:index' %}">dashboard</a> / questionnaire
 {% endblock breadcrumbs %}
-
 {% block header %}
   {{ object.name }}
 {% endblock header %}
-
 {% block content %}
-  <a href="#" id="update_display_qre" style="text-decoration:none;">~ Update</a>
+  <a href="#" id="update_display_qre">~ Edit questionnaire</a>
   <div id="qre_update_div" hidden></div>
-  <br />
-  <a href="{% url 'qres:delete' object.pk %}" id="delete_display_qre" style="text-decoration:none;">- Delete questionnaire</a>
-
-
+  <hr>
+  <!-- Sections -->
+  <div id="qre_sections_div">
+    <h3>Sections</h3>
+    <!-- Create Section -->
+    <a href="#" id="qre_section_create_display">+ New section</a>
+    <div id="qre_section_create_div" hidden></div>
+    <!-- End Create Question -->
+    <br>
+    <br>
+    <div id="qre_section_list_div">
+      <table>
+        <tbody>
+          {% for section in object.sections.all %}
+            <tr>
+              <td><strong>{{ section }}</strong></td>
+            </tr>
+            {% for question in section.questions.all %}
+              <tr>
+                <td>{{ question }}</td>
+              </tr>
+            {% endfor %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- End Questions -->
+  <hr>
+  <p><a href="{% url 'qres:delete' object.pk %}" id="delete_display_qre">- Delete questionnaire</a></p>
+  <p><a href="/admin/">Go to admin site</a></p>
 {% endblock content %}
-
 {% block page_data %}
-  <div id="page_urls" data-qre-update-url="{% url 'qres:update' object.pk %}"></div>
+  <div id="page_urls" data-qre-update-url="{% url 'qres:update' object.pk %}" data-qre-section-create-url="{% url 'qres:section_create' object.pk %}" data-qre-section-list-url="{% url 'qres:section_list' object.pk %}">></div>
 {% endblock page_data %}
-
-
 {% block scripts %}
   {{ block.super }}
   <script src="{% static 'qres/js/update.js' %}"></script>
+  <script src="{% static 'qres/js/section_create.js' %}"></script>
 {% endblock scripts %}
