@@ -34,12 +34,11 @@ class Question(OrderedModel):
                             verbose_name='questionnaire',
                             related_name='questions',
                             on_delete=models.CASCADE)
-
     section = models.ForeignKey(Section,
                                 related_name='questions',
                                 on_delete=models.CASCADE)
-
     question = models.TextField()
+    order_with_respect_to = 'section'
 
     def __str__(self):
         return f'{self.order  + 1}. {self.question}'

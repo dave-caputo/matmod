@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Questionnaire
+{% endblock title %}
+{% block breadcrumbs %}
+  <a href="{% url 'dashboard:index' %}">dashboard</a> /
+  <a href="{% url 'qres:detail' view.kwargs.qre_id %}">questionnaire: "{{ object.qre.name }}"</a> /
+  section
+{% endblock breadcrumbs %}
+{% block header %}
+  {{ object.name }}
+{% endblock header %}
+{% block content %}
+<p><a href="#" id="update_display_qre">~ Edit section</a></p>
+<div id="qre_update_div" hidden></div>
+<hr>
+<!-- Questions -->
+  <div id="qre_qns_div">
+    <h3>Questions</h3>
+  </div>
+<!-- End Questions -->
+<hr>
+<p><a href="#">- Delete section</a></p>
+<p><a target="_blank" href="/admin/">Go to admin site</a></p>
+
+{% endblock content %}

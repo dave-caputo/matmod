@@ -86,3 +86,8 @@ class SectionMoveView(generic.UpdateView):
     def get_success_url(self):
         return reverse('qres:section_list',
                        kwargs={'qre_id': self.kwargs['qre_id']})
+
+
+class SectionDetailView(generic.DetailView):
+    model = Section
+    template_name = 'qres/section_detail.html'

@@ -22,5 +22,8 @@ urlpatterns = [
     path('<int:qre_id>/move-section-<int:pk>-<direction>/',
          views.SectionMoveView.as_view(),
          name='section_move'),
+    path('<int:qre_id>/section-<int:pk>/',
+         views.SectionDetailView.as_view(),
+         name='section_detail'),
 
 ]

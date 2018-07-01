@@ -10,7 +10,7 @@
   {{ object.name }}
 {% endblock header %}
 {% block content %}
-  <a href="#" id="update_display_qre">~ Edit questionnaire</a>
+  <p><a href="#" id="update_display_qre">~ Edit questionnaire</a></p>
   <div id="qre_update_div" hidden></div>
   <hr>
   <!-- Sections -->
@@ -19,15 +19,15 @@
     <!-- Create Section -->
     <a href="#" id="qre_section_create_display">+ New section</a>
     <div id="qre_section_create_div" hidden></div>
-    <!-- End Create Question -->
+    <!-- End Create Section -->
     <br>
     <br>
     <div id="qre_section_list_div"></div>
   </div>
-  <!-- End Questions -->
+  <!-- End Sections -->
   <hr>
   <p><a href="{% url 'qres:delete' object.pk %}" id="delete_display_qre">- Delete questionnaire</a></p>
-  <p><a href="/admin/">Go to admin site</a></p>
+  <p><a target="_blank" href="/admin/">Go to admin site</a></p>
 
 
   <!-- Section Move Form -->
