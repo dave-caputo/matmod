@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views import generic
@@ -64,3 +65,24 @@ class SectionListView(generic.ListView):
             Section.objects.select_related('qre')
             .filter(qre__id=self.kwargs['qre_id'])
         )
+
+
+class SectionMoveView(generic.UpdateView):
+    '''
+    Move section up or down in the qre by updating the order field
+    using the Ordered Model 'up' and 'down' methods.
+    '''
+    model = Section
+    fields = []
+
+    def form_valid(self, form):
+
+        direction = self.kwargs.get('direction')  # Accepts str 'up' or 'down'
+        self.object = form.save()
+        getattr(self.object, direction)()
+
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('qres:section_list',
+                       kwargs={'qre_id': self.kwargs['qre_id']})

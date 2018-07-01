@@ -12,12 +12,15 @@ urlpatterns = [
     path('update/<int:pk>/', views.QreUpdateView.as_view(), name='update'),
     path('delete/<int:pk>/', views.QreDeleteView.as_view(), name='delete'),
 
-    # Sections...
-    path('questionnaire-<int:qre_id>/create-section/',
+    # Questionnaire sections...
+    path('<int:qre_id>/create-section/',
          views.SectionCreateView.as_view(),
          name='section_create'),
-    path('questionnaire-<int:qre_id>/section-list/',
+    path('<int:qre_id>/section-list/',
          views.SectionListView.as_view(),
          name='section_list'),
+    path('<int:qre_id>/move-section-<int:pk>-<direction>/',
+         views.SectionMoveView.as_view(),
+         name='section_move'),
 
 ]

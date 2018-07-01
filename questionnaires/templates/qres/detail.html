@@ -22,33 +22,28 @@
     <!-- End Create Question -->
     <br>
     <br>
-    <div id="qre_section_list_div">
-      <table>
-        <tbody>
-          {% for section in object.sections.all %}
-            <tr>
-              <td><strong>{{ section }}</strong></td>
-            </tr>
-            {% for question in section.questions.all %}
-              <tr>
-                <td>{{ question }}</td>
-              </tr>
-            {% endfor %}
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
+    <div id="qre_section_list_div"></div>
   </div>
   <!-- End Questions -->
   <hr>
   <p><a href="{% url 'qres:delete' object.pk %}" id="delete_display_qre">- Delete questionnaire</a></p>
   <p><a href="/admin/">Go to admin site</a></p>
+
+
+  <!-- Section Move Form -->
+  <form id="qre_section_move_form">
+    {% csrf_token %}
+  </form>
+
+  <!-- End Section Move Form-->
 {% endblock content %}
 {% block page_data %}
-  <div id="page_urls" data-qre-update-url="{% url 'qres:update' object.pk %}" data-qre-section-create-url="{% url 'qres:section_create' object.pk %}" data-qre-section-list-url="{% url 'qres:section_list' object.pk %}">></div>
+  <div id="page_urls" data-qre-update-url="{% url 'qres:update' object.pk %}" data-qre-section-create-url="{% url 'qres:section_create' object.pk %}" data-qre-section-list-url="{% url 'qres:section_list' object.pk %}"></div>
 {% endblock page_data %}
 {% block scripts %}
   {{ block.super }}
   <script src="{% static 'qres/js/update.js' %}"></script>
+  <script src="{% static 'qres/js/section_list.js' %}"></script>
   <script src="{% static 'qres/js/section_create.js' %}"></script>
+  <script src="{% static 'qres/js/section_move.js' %}"></script>
 {% endblock scripts %}
