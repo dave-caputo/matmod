@@ -5,7 +5,6 @@ from . import views
 app_name = 'qres'
 urlpatterns = [
 
-    # Questionnaires...
     path('create/',
          views.QreCreateView.as_view(),
          name='create'),

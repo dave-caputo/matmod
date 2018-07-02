@@ -1,0 +1,5 @@
+<ul>
+  {% for client in client_list %}
+    <li><a href="{% url 'clients:detail' client.pk %}">{{ client }}</a></li>
+  {% endfor %}
+</ul>

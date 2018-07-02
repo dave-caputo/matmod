@@ -17,17 +17,18 @@
   <!-- Client Section -->
   <div>
     <h3>Clients</h3>
-    <ul>
-      {% for client in client_list %}
-        <li><a href="{% url 'clients:detail' client.pk %}">{{ client }}</a></li>
-      {% endfor %}
-    </ul>
+    <a href="#" id="client_create_link" style="text-decoration:none;">+ New client</a>
+    <div id="client_create_div" hidden>
+    </div>
+    <div id="client_list_div">
+      {% include 'clients/list.html' %}
+    </div>
   </div>
   <!-- End Client Section -->
   <!-- Questionnaire Section -->
   <div>
     <h3>Questionnaires</h3>
-    <a href="#" id="create_display_qre" style="text-decoration:none;">+ New</a>
+    <a href="#" id="create_display_qre" style="text-decoration:none;">+ New questionnaire</a>
     <div id="qre_create_div" hidden></div>
     <div id="qre_list_div">
       {% include 'qres/list.html' %}
@@ -47,10 +48,11 @@
 {% endblock content %}
 
 {% block page_data %}
-  <div id="page_urls" data-qre-create-url="{% url 'qres:create' %}" data-qre-list-url="{% url 'qres:list' %}"></div>
+  <div id="page_urls" data-qre-create-url="{% url 'qres:create' %}" data-qre-list-url="{% url 'qres:list' %}" data-client-create-url="{% url 'clients:create' %}" data-client-list-url="{% url 'clients:list' %}"></div>
 {% endblock page_data %}
 
 {% block scripts %}
   {{ block.super }}
   <script src="{% static 'qres/js/create.js' %}"></script>
+  <script src="{% static 'clients/js/create.js' %}"></script>
 {% endblock scripts %}
