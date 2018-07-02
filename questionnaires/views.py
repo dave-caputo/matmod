@@ -91,3 +91,20 @@ class SectionMoveView(generic.UpdateView):
 class SectionDetailView(generic.DetailView):
     model = Section
     template_name = 'qres/section_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['question_list'] = self.object.questions.all()
+        return context
+
+
+class SectionUpdateView(generic.UpdateView):
+    model = Section
+    template_name = 'qres/section_update.html'
+    fields = ['name']
+
+    def get_success_url(self):
+        return reverse('qres:section_update', kwargs={
+            'qre_id': self.kwargs['qre_id'],
+            'pk': self.kwargs['pk']
+        })

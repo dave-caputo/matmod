@@ -12,16 +12,29 @@
   {{ object.name }}
 {% endblock header %}
 {% block content %}
-<p><a href="#" id="update_display_qre">~ Edit section</a></p>
-<div id="qre_update_div" hidden></div>
+<p><a href="#" id="update_qre_section_link">~ Edit section</a></p>
+<div id="qre_section_update_div" hidden></div>
 <hr>
 <!-- Questions -->
   <div id="qre_qns_div">
     <h3>Questions</h3>
   </div>
+  <br>
+  <br>
+  <div id="qre_question_list_div">
+    {% include 'qres/question_list.html' %}
+  </div>
 <!-- End Questions -->
 <hr>
 <p><a href="#">- Delete section</a></p>
 <p><a target="_blank" href="/admin/">Go to admin site</a></p>
-
 {% endblock content %}
+
+{% block page_data %}
+  <div id="page_urls" data-qre-section-update-url="{% url 'qres:section_update' object.qre.id object.pk %}"></div>
+{% endblock page_data %}
+
+{% block scripts %}
+  {{ block.super }}
+  <script src="{% static 'qres/js/section_update.js' %}"></script>
+{% endblock scripts %}

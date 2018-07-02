@@ -25,5 +25,8 @@ urlpatterns = [
     path('<int:qre_id>/section-<int:pk>/',
          views.SectionDetailView.as_view(),
          name='section_detail'),
+    path('<int:qre_id>/update-section-<int:pk>/',
+         views.SectionUpdateView.as_view(),
+         name='section_update'),
 
 ]
