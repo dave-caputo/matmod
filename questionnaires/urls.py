@@ -12,7 +12,7 @@ urlpatterns = [
     path('update/<int:pk>/', views.QreUpdateView.as_view(), name='update'),
     path('delete/<int:pk>/', views.QreDeleteView.as_view(), name='delete'),
 
-    # Questionnaire sections...
+    # Sections...
     path('<int:qre_id>/create-section/',
          views.SectionCreateView.as_view(),
          name='section_create'),
@@ -28,5 +28,7 @@ urlpatterns = [
     path('<int:qre_id>/update-section-<int:pk>/',
          views.SectionUpdateView.as_view(),
          name='section_update'),
-
+    path('<int:qre_id>/delete-section-<int:pk>/',
+         views.SectionDeleteView.as_view(),
+         name='section_delete'),
 ]

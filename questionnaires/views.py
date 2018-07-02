@@ -108,3 +108,11 @@ class SectionUpdateView(generic.UpdateView):
             'qre_id': self.kwargs['qre_id'],
             'pk': self.kwargs['pk']
         })
+
+
+class SectionDeleteView(generic.DeleteView):
+    model = Section
+    template_name = 'qres/section_delete.html'
+
+    def get_success_url(self):
+        return reverse('qres:detail', kwargs={'pk': self.kwargs['qre_id']})

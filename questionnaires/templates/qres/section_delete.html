@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Delete Section
+{% endblock title %}
+
+{% block breadcrumbs %}
+  <a href="{% url 'dashboard:index' %}">dashboard</a> /
+  <a href="{% url 'qres:detail' view.kwargs.qre_id %}">questionnaire: "{{ object.qre.name }}"</a> /
+  <a href="{% url 'qres:section_detail' view.kwargs.qre_id object.id %}">section: "{{ object.name }}"</a> /
+  delete
+{% endblock breadcrumbs %}
+
+{% block header %}
+  Delete section "{{ object.name }}"
+{% endblock header %}
+
+
+{% block content %}
+    <p>This section and all its questions and assessments will be deleted. Are you sure you want to continue?</p>
+    <p><a href="{% url 'qres:section_detail' object.pk object.id %}">No, go back</a></p>
+    <br />
+
+    <form id="qre_section_delete_form" method="POST">{% csrf_token %}
+      <input type="submit" id="qre_section_delete_btn" value="Yes, delete" />
+    </form>
+{% endblock content %}
