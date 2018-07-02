@@ -15,4 +15,4 @@ class Section(OrderedModel):
         pass
 
     def __str__(self):
-        return f'{self.order}. {self.name}'
+        return f'{self.order + 1}. {self.name}'

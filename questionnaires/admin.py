@@ -22,20 +22,11 @@ class QreAdmin(admin.ModelAdmin):
 
             qns_list = ''.join(
                 [f'<span style="display:block">'
-                 f'<a href="/admin/questionnaires/question/{q.id}/change/"'
+                 f'<a href="/admin/questions/question/{q.id}/change/"'
                  ' target="_blank">'
-                 f'{q.order + 1}. {q.question}</a></span>'
+                 f'&#9642; {q}</a></span>'
                  for q in s.questions.all()]
             )
             html.append(qns_list)
 
         return format_html(''.join(html))
-
-
-# @admin.register(Section)
-# class SectionAdmin(admin.ModelAdmin):
-#     list_display = ['get_str', 'qre']
-
-#     def get_str(self, obj):
-#         return obj
-#     get_str.short_description = 'section'

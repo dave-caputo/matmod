@@ -1,3 +1,12 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Section
+
+
+@admin.register(Section)
+class SectionAdmin(admin.ModelAdmin):
+    list_display = ['get_str', 'qre']
+
+    def get_str(self, obj):
+        return obj
+    get_str.short_description = 'section'
