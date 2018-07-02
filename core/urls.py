@@ -20,6 +20,7 @@ from django.urls import path, include, reverse
 urlpatterns = [
     path('', lambda x: HttpResponseRedirect(reverse('dashboard:index'))),
     path('admin/', admin.site.urls),
+    path('clients/', include('clients.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('questionnaires/', include('questionnaires.urls')),
     path('questionnaire-<int:qre_pk>/', include('sections.urls')),

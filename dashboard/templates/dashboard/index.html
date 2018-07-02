@@ -19,7 +19,7 @@
     <h3>Clients</h3>
     <ul>
       {% for client in client_list %}
-        <li>{{ client }}</li>
+        <li><a href="{% url 'clients:detail' client.pk %}">{{ client }}</a></li>
       {% endfor %}
     </ul>
   </div>

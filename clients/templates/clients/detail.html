@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Client
+{% endblock title %}
+{% block breadcrumbs %}
+  <a href="{% url 'dashboard:index' %}">dashboard</a> / client
+{% endblock breadcrumbs %}
+{% block header %}
+  {{ client }}
+{% endblock header %}
+{% block content %}
+  <p><a href="#" id="client_update_link">~ Edit client</a></p>
+  <div id="client_update_div" hidden></div>
+  <hr>
+  <p><a href="#" id="client_delete_link">- Delete client</a></p>
+  <p><a target="_blank" href="/admin/">Go to admin site</a></p>
+
+{% endblock content %}
+{% block page_data %}
+  <div id="page_urls" data-client-update-url="#"></div>
+{% endblock page_data %}
+
+{% block scripts %}
+  {{ block.super }}
+{% endblock scripts %}
