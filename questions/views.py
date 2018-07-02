@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views import generic
 from django.urls import reverse
@@ -30,3 +31,45 @@ class QuestionListView(generic.ListView):
     def get_queryset(self):
         qs = super().get_queryset()
         return qs.filter(section__pk=self.kwargs['section_pk'])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['qre_pk'] = self.kwargs['qre_pk']
+        context['section_pk'] = self.kwargs['section_pk']
+        return context
+
+
+class QuestionDetailView(generic.DetailView):
+    model = Question
+    template_name = 'questions/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['qre_pk'] = self.kwargs['qre_pk']
+        context['section_pk'] = self.kwargs['section_pk']
+
+        return context
+
+
+class QuestionMoveView(generic.UpdateView):
+    '''
+    Move section up or down in the qre by updating the order field
+    using the Ordered Model 'up' and 'down' methods.
+    '''
+    model = Question
+    fields = []
+
+    def form_valid(self, form):
+
+        direction = self.kwargs.get('direction')  # Accepts str 'up' or 'down'
+        self.object = form.save()
+        getattr(self.object, direction)()
+
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('questions:list', kwargs={
+            'qre_pk': self.kwargs['qre_pk'],
+            'section_pk': self.kwargs['section_pk']
+        })

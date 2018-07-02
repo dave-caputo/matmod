@@ -13,5 +13,11 @@ urlpatterns = [
     path('question-list/',
          views.QuestionListView.as_view(),
          name='list'),
+    path('move-question-<int:pk>-<direction>/',
+         views.QuestionMoveView.as_view(),
+         name='move'),
+    path('question-detail-<int:pk>/',
+         views.QuestionDetailView.as_view(),
+         name='detail'),
 
 ]

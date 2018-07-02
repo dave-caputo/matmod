@@ -62,6 +62,8 @@ class SectionDetailView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['question_list'] = self.object.questions.all()
+        context['qre_pk'] = self.kwargs['qre_pk']
+        context['section_pk'] = self.object.pk
         return context
 
 

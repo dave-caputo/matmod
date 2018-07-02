@@ -34,8 +34,8 @@
   <form id="qre_section_move_form">
     {% csrf_token %}
   </form>
-
   <!-- End Section Move Form-->
+
 {% endblock content %}
 {% block page_data %}
   <div id="page_urls" data-qre-update-url="{% url 'qres:update' object.pk %}" data-qre-section-create-url="{% url 'sections:create' object.pk %}" data-qre-section-list-url="{% url 'sections:list' object.pk %}"></div>
