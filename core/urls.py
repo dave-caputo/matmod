@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashboard/', include('dashboard.urls')),
     path('questionnaires/', include('questionnaires.urls')),
-    path('qre-id-<int:qre_pk>/', include('sections.urls')),
-    path('qre-id-<int:qre_pk>/section-id-<int:section_pk>/',
+    path('questionnaire-<int:qre_pk>/', include('sections.urls')),
+    path('questionnaire-<int:qre_pk>/section-<int:section_pk>/',
          include('questions.urls'))
 ]

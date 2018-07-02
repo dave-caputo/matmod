@@ -30,11 +30,7 @@
     <a href="#" id="create_display_qre" style="text-decoration:none;">+ New</a>
     <div id="qre_create_div" hidden></div>
     <div id="qre_list_div">
-      <ul>
-        {% for qre in qre_list %}
-          <li><a href="{% url 'qres:detail' qre.pk %}">{{ qre }}</a></li>
-        {% endfor %}
-      </ul>
+      {% include 'qres/list.html' %}
     </div>
   </div>
   <!-- End Questionnaire Section -->

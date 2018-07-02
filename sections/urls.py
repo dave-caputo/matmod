@@ -6,16 +6,16 @@ app_name = 'sections'
 
 urlpatterns = [
 
-    path('create-section/',
+    path('create/',
          views.SectionCreateView.as_view(),
          name='create'),
-    path('section-list/',
+    path('list/',
          views.SectionListView.as_view(),
          name='list'),
     path('move-section-<int:pk>-<direction>/',
          views.SectionMoveView.as_view(),
          name='move'),
-    path('section-<int:pk>/',
+    path('detail-section-<int:pk>/',
          views.SectionDetailView.as_view(),
          name='detail'),
     path('update-section-<int:pk>/',

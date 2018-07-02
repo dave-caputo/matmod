@@ -1,5 +1,5 @@
 <ul>
-  {% for qre in object_list %}
-    <li>{{ qre }}</li>
+  {% for qre in qre_list %}
+    <li><a href="{% url 'qres:detail' qre.pk %}">{{ qre }}</a></li>
   {% endfor %}
 </ul>
