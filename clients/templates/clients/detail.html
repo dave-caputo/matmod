@@ -13,7 +13,7 @@
   <p><a href="#" id="client_update_link">~ Edit client</a></p>
   <div id="client_update_div" hidden></div>
   <hr>
-  <p><a href="#" id="client_delete_link">- Delete client</a></p>
+  <p><a href="{% url 'clients:delete' client.pk %}" id="client_delete_link">- Delete client</a></p>
   <p><a target="_blank" href="/admin/">Go to admin site</a></p>
 
 {% endblock content %}

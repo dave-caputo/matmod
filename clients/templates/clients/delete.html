@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Delete Client
+{% endblock title %}
+
+{% block breadcrumbs %}
+  <a href="{% url 'dashboard:index' %}">dashboard</a> / <a href="{% url 'clients:detail' client.pk %}">client</a> / delete
+{% endblock breadcrumbs %}
+
+{% block header %}
+  Delete client "{{ client.name }}"
+{% endblock header %}
+
+
+{% block content %}
+    <p>This client and all its assessments will be deleted. Are you sure you want to continue?</p>
+    <p><a href="{% url 'clients:detail' client.pk %}">No, go back</a></p>
+    <br />
+
+    <form id="client_delete_form" method="POST">{% csrf_token %}
+      <input type="submit" id="client_delete_btn" value="Yes, delete" />
+    </form>
+{% endblock content %}

@@ -15,4 +15,7 @@ urlpatterns = [
     path('update-client-<int:pk>/',
          views.ClientUpdateView.as_view(),
          name='update'),
+    path('delete-client-<int:pk>/',
+         views.ClientDeleteView.as_view(),
+         name='delete'),
 ]

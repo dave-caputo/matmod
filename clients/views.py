@@ -28,3 +28,9 @@ class ClientUpdateView(generic.UpdateView):
 
     def get_success_url(self):
         return reverse('clients:update', kwargs={'pk': self.kwargs['pk']})
+
+
+class ClientDeleteView(generic.DeleteView):
+    model = Client
+    template_name = 'clients/delete.html'
+    success_url = reverse_lazy('dashboard:index')
