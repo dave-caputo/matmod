@@ -1,4 +1,4 @@
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.views import generic
 
 from .models import Client
@@ -19,3 +19,12 @@ class ClientListView(generic.ListView):
 class ClientDetailView(generic.DetailView):
     model = Client
     template_name = 'clients/detail.html'
+
+
+class ClientUpdateView(generic.UpdateView):
+    model = Client
+    template_name = 'clients/update.html'
+    fields = ['name']
+
+    def get_success_url(self):
+        return reverse('clients:update', kwargs={'pk': self.kwargs['pk']})

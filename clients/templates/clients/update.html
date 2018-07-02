@@ -1,0 +1,6 @@
+<form action="/" id="client_update_form">
+    {% csrf_token %}
+    {{ form }}
+    <button id="client_update_btn">Update</button>
+</form>
+<div id="client_update_form_data" data-client-name="{{ client }}"></div>

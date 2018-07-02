@@ -18,9 +18,10 @@
 
 {% endblock content %}
 {% block page_data %}
-  <div id="page_urls" data-client-update-url="#"></div>
+  <div id="page_urls" data-client-update-url="{% url 'clients:update' client.pk %}"></div>
 {% endblock page_data %}
 
 {% block scripts %}
   {{ block.super }}
+  <script src="{% static 'clients/js/update.js' %}"></script>
 {% endblock scripts %}
