@@ -1,12 +1,12 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Question, Qre, Section
+from .models import Qre
 
 
-@admin.register(Question)
-class QuestionAdmin(admin.ModelAdmin):
-    pass
+# @admin.register(Question)
+# class QuestionAdmin(admin.ModelAdmin):
+#     pass
 
 
 @admin.register(Qre)
@@ -32,10 +32,10 @@ class QreAdmin(admin.ModelAdmin):
         return format_html(''.join(html))
 
 
-@admin.register(Section)
-class SectionAdmin(admin.ModelAdmin):
-    list_display = ['get_str', 'qre']
+# @admin.register(Section)
+# class SectionAdmin(admin.ModelAdmin):
+#     list_display = ['get_str', 'qre']
 
-    def get_str(self, obj):
-        return obj
-    get_str.short_description = 'section'
+#     def get_str(self, obj):
+#         return obj
+#     get_str.short_description = 'section'

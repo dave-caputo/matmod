@@ -10,20 +10,20 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('questionnaires', '0001_initial'),
-        ('clients', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Assessment',
+            name='Section',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('order', models.PositiveIntegerField(db_index=True, editable=False)),
                 ('name', models.CharField(max_length=55)),
-                ('client', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='clients.Client')),
-                ('qre', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='assessments', to='questionnaires.Qre', verbose_name='questionnaire')),
+                ('qre', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='sections', to='questionnaires.Qre', verbose_name='questionnaire')),
             ],
             options={
-                'ordering': ('name',),
+                'ordering': ('order',),
+                'abstract': False,
             },
         ),
     ]

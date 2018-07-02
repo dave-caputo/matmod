@@ -1,7 +1,9 @@
 from django.contrib.auth import get_user_model
 
 from clients.models import Client
-from questionnaires.models import Qre, Question, Section
+from questionnaires.models import Qre
+from questions.models import Question
+from sections.models import Section
 
 
 def load_test_data():
@@ -35,25 +37,21 @@ def load_test_data():
     )
 
     Question.objects.create(
-        qre=fgmt,
         section=tropical,
         question='You eat at 5 mangos a week.'
     )
 
     Question.objects.create(
-        qre=fgmt,
         section=tropical,
         question='You climb palm trees to get coconuts at least once a day.'
     )
 
     Question.objects.create(
-        qre=fgmt,
         section=berries,
         question='You eat raspberries with your cereal every morning.'
     )
 
     Question.objects.create(
-        qre=fgmt,
         section=berries,
         question='You have a blueberry smoothie when everyone else is ordering coffee.'
     )

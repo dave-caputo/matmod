@@ -43,11 +43,14 @@ INSTALLED_APPS = [
     'ordered_model',
 
     # Project apps
+    'answers',
     'assessments',
     'clients',
     'core',
     'dashboard',
-    'questionnaires'
+    'questionnaires',
+    'questions',
+    'sections'
 ]
 
 MIDDLEWARE = [

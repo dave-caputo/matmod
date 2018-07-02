@@ -5,7 +5,7 @@
 {% endblock title %}
 {% block breadcrumbs %}
   <a href="{% url 'dashboard:index' %}">dashboard</a> /
-  <a href="{% url 'qres:detail' view.kwargs.qre_id %}">questionnaire: "{{ object.qre.name }}"</a> /
+  <a href="{% url 'qres:detail' view.kwargs.qre_pk %}">questionnaire: "{{ object.qre }}"</a> /
   section
 {% endblock breadcrumbs %}
 {% block header %}
@@ -22,19 +22,19 @@
   <br>
   <br>
   <div id="qre_question_list_div">
-    {% include 'qres/question_list.html' %}
+    {% include 'questions/list.html' %}
   </div>
 <!-- End Questions -->
 <hr>
-<p><a href="{% url 'qres:section_delete' view.kwargs.qre_id object.pk %}">- Delete section</a></p>
+<p><a href="{% url 'sections:delete' view.kwargs.qre_pk object.pk %}">- Delete section</a></p>
 <p><a target="_blank" href="/admin/">Go to admin site</a></p>
 {% endblock content %}
 
 {% block page_data %}
-  <div id="page_urls" data-qre-section-update-url="{% url 'qres:section_update' object.qre.id object.pk %}"></div>
+  <div id="page_urls" data-qre-section-update-url="{% url 'sections:update' object.qre.id object.pk %}"></div>
 {% endblock page_data %}
 
 {% block scripts %}
   {{ block.super }}
-  <script src="{% static 'qres/js/section_update.js' %}"></script>
+  <script src="{% static 'sections/js/update.js' %}"></script>
 {% endblock scripts %}

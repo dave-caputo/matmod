@@ -1,0 +1,23 @@
+<table id="qre_section_table">
+  <thead>
+    <tr>
+      <th></th>
+      <th width="5%"></th>
+      <th width="5%"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for section in object_list %}
+      <tr>
+        <td><strong><a href="{% url 'sections:detail' view.kwargs.qre_pk section.pk %}">{{ section }}</a></strong></td>
+        <td>{% if not forloop.first %}<a href="#" class="qre_section_move_link" data-url="{% url 'sections:move' view.kwargs.qre_pk section.pk 'up' %}">up</a>{% endif %}</td>
+        <td>{% if not forloop.last %}<a href="#" class="qre_section_move_link" data-url="{% url 'sections:move' view.kwargs.qre_pk section.pk 'down' %}">down</a>{% endif %}</td>
+      </tr>
+      {% for question in section.questions.all %}
+        <tr>
+          <td>{{ question }}</td>
+        </tr>
+      {% endfor %}
+    {% endfor %}
+  </tbody>
+</table>

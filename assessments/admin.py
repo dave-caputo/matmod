@@ -1,12 +1,14 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Answer, Assessment
+
+from answers.models import Answer
+from .models import Assessment
 
 
-@admin.register(Answer)
-class AnswerAdmin(admin.ModelAdmin):
-    pass
+# @admin.register(Answer)
+# class AnswerAdmin(admin.ModelAdmin):
+#     pass
 
 
 @admin.register(Assessment)

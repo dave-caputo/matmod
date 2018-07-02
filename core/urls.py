@@ -21,5 +21,8 @@ urlpatterns = [
     path('', lambda x: HttpResponseRedirect(reverse('dashboard:index'))),
     path('admin/', admin.site.urls),
     path('dashboard/', include('dashboard.urls')),
-    path('qres/', include('questionnaires.urls')),
+    path('questionnaires/', include('questionnaires.urls')),
+    path('qre-id-<int:qre_pk>/', include('sections.urls')),
+    path('qre-id-<int:qre_pk>/section-id-<int:section_pk>/',
+         include('questions.urls'))
 ]

@@ -7,8 +7,8 @@
 
 {% block breadcrumbs %}
   <a href="{% url 'dashboard:index' %}">dashboard</a> /
-  <a href="{% url 'qres:detail' view.kwargs.qre_id %}">questionnaire: "{{ object.qre.name }}"</a> /
-  <a href="{% url 'qres:section_detail' view.kwargs.qre_id object.id %}">section: "{{ object.name }}"</a> /
+  <a href="{% url 'qres:detail' view.kwargs.qre_pk %}">questionnaire: "{{ object.qre.name }}"</a> /
+  <a href="{% url 'sections:detail' view.kwargs.qre_pk object.id %}">section: "{{ object.name }}"</a> /
   delete
 {% endblock breadcrumbs %}
 
@@ -19,7 +19,7 @@
 
 {% block content %}
     <p>This section and all its questions and assessments will be deleted. Are you sure you want to continue?</p>
-    <p><a href="{% url 'qres:section_detail' object.pk object.id %}">No, go back</a></p>
+    <p><a href="{% url 'sections:detail' object.pk object.id %}">No, go back</a></p>
     <br />
 
     <form id="qre_section_delete_form" method="POST">{% csrf_token %}
