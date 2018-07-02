@@ -9,7 +9,7 @@
   section
 {% endblock breadcrumbs %}
 {% block header %}
-  {{ object.name }}
+  {{ object }}
 {% endblock header %}
 {% block content %}
 <p><a href="#" id="update_qre_section_link">~ Edit section</a></p>
@@ -18,10 +18,12 @@
 <!-- Questions -->
   <div id="qre_qns_div">
     <h3>Questions</h3>
+    <a href="#" id="create_question_link">+ Add question</a>
+    <div id="question_create_div" hidden></div>
   </div>
   <br>
   <br>
-  <div id="qre_question_list_div">
+  <div id="question_list_div">
     {% include 'questions/list.html' %}
   </div>
 <!-- End Questions -->
@@ -31,10 +33,11 @@
 {% endblock content %}
 
 {% block page_data %}
-  <div id="page_urls" data-qre-section-update-url="{% url 'sections:update' object.qre.id object.pk %}"></div>
+  <div id="page_urls" data-qre-section-update-url="{% url 'sections:update' object.qre.id object.pk %}" data-question-create-url="{% url 'questions:create' view.kwargs.qre_pk object.pk %}" data-question-list-url="{% url 'questions:list' view.kwargs.qre_pk object.pk %}"></div>
 {% endblock page_data %}
 
 {% block scripts %}
   {{ block.super }}
   <script src="{% static 'sections/js/update.js' %}"></script>
+  <script src="{% static 'questions/js/create.js' %}"></script>
 {% endblock scripts %}

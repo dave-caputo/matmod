@@ -1,5 +1,5 @@
-<form action="/" id="qre_question_create_form" autocomplete="off">
+<form action="/" id="question_create_form" autocomplete="off">
     {% csrf_token %}
-    {{ form }}
-    <button id="qre_question_create_btn">Create question</button>
+    {{ form.as_p }}
+    <button id="question_create_btn">Create question</button>
 </form>

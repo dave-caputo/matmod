@@ -9,9 +9,9 @@ from .models import Section
 
 
 class SectionCreateView(generic.CreateView):
+    form_class = SectionForm
     model = Section
     template_name = 'sections/create.html'
-    form_class = SectionForm
     success_url = reverse_lazy('sections:create')
 
     def get_initial(self):

@@ -7,7 +7,11 @@ app_name = 'questions'
 urlpatterns = [
 
     # Questions...
-    path('<int:qre_pk>/section-<int:section_pk>/create-question/',
+    path('create-question/',
          views.QuestionCreateView.as_view(),
          name='create'),
+    path('question-list/',
+         views.QuestionListView.as_view(),
+         name='list'),
+
 ]
