@@ -6,10 +6,10 @@ app_name = 'sections'
 
 urlpatterns = [
 
-    path('create/',
+    path('create-section/',
          views.SectionCreateView.as_view(),
          name='create'),
-    path('list/',
+    path('section-list/',
          views.SectionListView.as_view(),
          name='list'),
     path('move-section-<int:pk>-<direction>/',

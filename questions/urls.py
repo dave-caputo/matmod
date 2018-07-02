@@ -19,5 +19,10 @@ urlpatterns = [
     path('question-detail-<int:pk>/',
          views.QuestionDetailView.as_view(),
          name='detail'),
-
+    path('update-question-<int:pk>/',
+         views.QuestionUpdateView.as_view(),
+         name='update'),
+    path('delete-question-<int:pk>/',
+         views.QuestionDeleteView.as_view(),
+         name='delete'),
 ]

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Delete Question
+{% endblock title %}
+
+{% block breadcrumbs %}
+  <a href="{% url 'dashboard:index' %}">dashboard</a> /
+  <a href="{% url 'qres:detail' qre_pk %}">questionnaire: "{{ question.section.qre.name }}"</a> /
+  <a href="{% url 'sections:detail' qre_pk section_pk %}">section: "{{ question.section }}"</a> /
+  <a href="{% url 'questions:detail' qre_pk section_pk question.pk %}">detail: "{{ question }}"</a> / delete
+{% endblock breadcrumbs %}
+
+{% block header %}
+  Delete question "{{ question }}"
+{% endblock header %}
+
+
+{% block content %}
+    <p>This questions and all its assessments will be permanently deleted. Are you sure you want to continue?</p>
+    <p><a href="{% url 'questions:detail' qre_pk section_pk question.pk %}">No, go back</a></p>
+    <br />
+
+    <form id="question_delete_form" method="POST">{% csrf_token %}
+      <input type="submit" id="question_delete_btn" value="Yes, delete" />
+    </form>
+{% endblock content %}

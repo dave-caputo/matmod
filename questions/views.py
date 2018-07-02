@@ -45,10 +45,8 @@ class QuestionDetailView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         context['qre_pk'] = self.kwargs['qre_pk']
         context['section_pk'] = self.kwargs['section_pk']
-
         return context
 
 
@@ -72,4 +70,34 @@ class QuestionMoveView(generic.UpdateView):
         return reverse('questions:list', kwargs={
             'qre_pk': self.kwargs['qre_pk'],
             'section_pk': self.kwargs['section_pk']
+        })
+
+
+class QuestionUpdateView(generic.UpdateView):
+    model = Question
+    template_name = 'questions/update.html'
+    fields = ['question']
+
+    def get_success_url(self):
+        return reverse('questions:update', kwargs={
+            'qre_pk': self.kwargs['qre_pk'],
+            'section_pk': self.kwargs['section_pk'],
+            'pk': self.kwargs['pk']
+        })
+
+
+class QuestionDeleteView(generic.DeleteView):
+    model = Question
+    template_name = 'questions/delete.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['qre_pk'] = self.kwargs['qre_pk']
+        context['section_pk'] = self.kwargs['section_pk']
+        return context
+
+    def get_success_url(self):
+        return reverse('sections:detail', kwargs={
+            'qre_pk': self.kwargs['qre_pk'],
+            'pk': self.kwargs['section_pk'],
         })

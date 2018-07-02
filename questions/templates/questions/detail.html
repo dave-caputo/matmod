@@ -6,20 +6,24 @@
 {% block breadcrumbs %}
   <a href="{% url 'dashboard:index' %}">dashboard</a> /
   <a href="{% url 'qres:detail' qre_pk %}">questionnaire: "{{ question.section.qre }}"</a> /
-  <a href="{% url 'sections:detail' qre_pk section_pk %}">section: {{ question.section }}</a> /
-  question
+  <a href="{% url 'sections:detail' qre_pk section_pk %}">section: {{ question.section }}</a> / question
 {% endblock breadcrumbs %}
 {% block header %}
   {{ question }}
 {% endblock header %}
 {% block content %}
-<p><a href="#" id="update_question_link">~ Edit question</a></p>
+<p><a href="#" id="question_update_link">~ Edit question</a></p>
 <div id="question_update_div" hidden></div>
 <hr>
-<p><a href="#">- Delete question</a></p>
+<p><a href="{% url 'questions:delete' qre_pk section_pk question.pk %}">- Delete question</a></p>
 <p><a target="_blank" href="/admin/">Go to admin site</a></p>
 {% endblock content %}
 
 {% block page_data %}
-  {# <div id="page_urls" data-qre-section-update-url="{% url 'sections:update' object.qre.id object.pk %}" data-question-create-url="{% url 'questions:create' view.kwargs.qre_pk object.pk %}" data-question-list-url="{% url 'questions:list' view.kwargs.qre_pk object.pk %}"></div> #}
+  <div id="page_urls" data-question-update-url="{% url 'questions:update' qre_pk section_pk question.pk %}"></div>
 {% endblock page_data %}
+
+{% block scripts %}
+  {{ block.super }}
+  <script src="{% static 'questions/js/update.js' %}"></script>
+{% endblock scripts %}
