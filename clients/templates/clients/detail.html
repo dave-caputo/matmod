@@ -13,15 +13,30 @@
   <p><a href="#" id="client_update_link">~ Edit client</a></p>
   <div id="client_update_div" hidden></div>
   <hr>
+  <!-- Assessments -->
+  <div id="assess_div">
+    <h3>Assessments</h3>
+    <a href="#" id="assess_create_link">+ New assessment</a>
+    <div id="assess_create_div" hidden></div>
+    <br>
+    <br>
+    <div id="assess_list_div">
+      {% include 'assess/list.html' %}
+    </div>
+  </div>
+  <!-- End Assessments -->
+
+  <hr>
   <p><a href="{% url 'clients:delete' client.pk %}" id="client_delete_link">- Delete client</a></p>
   <p><a target="_blank" href="/admin/">Go to admin site</a></p>
 
 {% endblock content %}
 {% block page_data %}
-  <div id="page_urls" data-client-update-url="{% url 'clients:update' client.pk %}"></div>
+  <div id="page_urls" data-client-update-url="{% url 'clients:update' client.pk %}" data-assess-create-url="{% url 'assess:create' client.pk %}" data-assess-list-url="{% url 'assess:list' client.pk %}"></div>
 {% endblock page_data %}
 
 {% block scripts %}
   {{ block.super }}
   <script src="{% static 'clients/js/update.js' %}"></script>
+  <script src="{% static 'assess/js/create.js' %}"></script>
 {% endblock scripts %}

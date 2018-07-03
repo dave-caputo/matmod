@@ -1,13 +1,18 @@
 from django.db import models
 
 
+from answers.models import Answer
+
+
 # Create your models here.
 class Assessment(models.Model):
     qre = models.ForeignKey('questionnaires.Qre',
                             verbose_name='questionnaire',
                             related_name='assessments',
                             on_delete=models.CASCADE)
-    client = models.ForeignKey('clients.Client', on_delete=models.CASCADE)
+    client = models.ForeignKey('clients.Client',
+                               related_name='assessments',
+                               on_delete=models.CASCADE)
     name = models.CharField(max_length=55)
 
     class Meta:
@@ -23,7 +28,7 @@ class Assessment(models.Model):
 
         # Create answers for new assessment
         if created:
-            for question in self.qre.questions.all():
+            for question in self.qre.get_questions():
                 Answer.objects.create(
                     assessment=self,
                     question=question,

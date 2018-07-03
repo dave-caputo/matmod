@@ -1,0 +1,15 @@
+<table>
+  <thead>
+    <tr>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for assess in assessment_list %}
+    <tr>
+      <td>{{ assess.name }}</td>
+      <td>{{ assess.qre }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>

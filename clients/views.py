@@ -20,6 +20,11 @@ class ClientDetailView(generic.DetailView):
     model = Client
     template_name = 'clients/detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['assessment_list'] = self.object.assessments.all()
+        return context
+
 
 class ClientUpdateView(generic.UpdateView):
     model = Client
