@@ -21,3 +21,14 @@ class AssessmentCreateView(generic.CreateView):
 class AssessmentListView(generic.ListView):
     model = Assessment
     template_name = 'assess/list.html'
+
+
+class AssessmentDetailView(generic.DetailView):
+    model = Assessment
+    template_name = 'assess/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['answer_list'] = self.object.answers.all()
+        context['client_pk'] = self.kwargs['client_pk']
+        return context

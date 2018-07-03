@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Assessment
+{% endblock title %}
+{% block breadcrumbs %}
+  <a href="{% url 'dashboard:index' %}">dashboard</a> /
+  <a href="{% url 'clients:detail' client_pk %}">client: "{{ assessment.client }}"</a> / assessment
+{% endblock breadcrumbs %}
+{% block header %}
+  {{ assessment }}
+{% endblock header %}
+{% block content %}
+  <p><a href="#" id="assess_section_link">~ Edit assessment</a></p>
+  <div id="assess_update_div" hidden></div>
+  <hr>
+  <!-- Answers -->
+  <div id="answers_div">
+    <h3>Answers</h3>
+  </div>
+  <br>
+  <br>
+  <div id="answer_list_div">
+    {% include 'answers/list.html' %}
+  </div>
+  <!-- End Answers -->
+  <hr>
+  <p><a href="#">- Delete assessment</a></p>
+  <p><a target="_blank" href="/admin/">Go to admin site</a></p>
+
+{% endblock content %}
+{% block page_data %}
+  <div id="page_urls"></div>
+{% endblock page_data %}
+{% block scripts %}
+  {{ block.super }}
+{% endblock scripts %}
