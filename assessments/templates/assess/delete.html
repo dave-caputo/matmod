@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Delete Assessment
+{% endblock title %}
+
+{% block breadcrumbs %}
+    <a href="{% url 'dashboard:index' %}">dashboard</a> /
+  <a href="{% url 'clients:detail' assessment.client.pk %}">client: "{{ assessment.client }}"</a> /
+  <a href="{% url 'assess:detail' assessment.client.pk assessment.pk %}">assessment: "{{ assessment }}"</a> / delete
+{% endblock breadcrumbs %}
+
+{% block header %}
+  Delete assessment "{{ assessment }}"
+{% endblock header %}
+
+
+{% block content %}
+    <p>This assessment and all its answers will be permanently deleted. Are you sure you want to continue?</p>
+    <p><a href="{% url 'assess:detail' assessment.client.pk assessment.pk %}">No, go back</a></p>
+    <br />
+
+    <form id="assess_delete_form" method="POST">{% csrf_token %}
+      <input type="submit" id="assess_delete_btn" value="Yes, delete" />
+    </form>
+{% endblock content %}

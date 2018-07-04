@@ -48,3 +48,12 @@ class AssessmentUpdateView(generic.UpdateView):
         return reverse('assess:update', kwargs={
             'client_pk': self.kwargs['client_pk'],
             'pk': self.kwargs['pk']})
+
+
+class AssessmentDeleteView(generic.DeleteView):
+    model = Assessment
+    template_name = 'assess/delete.html'
+
+    def get_success_url(self):
+        return reverse('clients:detail', kwargs={
+            'pk': self.kwargs['client_pk']})

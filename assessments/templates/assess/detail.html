@@ -25,7 +25,7 @@
   </div>
   <!-- End Answers -->
   <hr>
-  <p><a href="#">- Delete assessment</a></p>
+  <p><a href="{% url 'assess:delete' client_pk assessment.pk %}">- Delete assessment</a></p>
   <p><a target="_blank" href="/admin/">Go to admin site</a></p>
 
 {% endblock content %}

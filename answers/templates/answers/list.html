@@ -1,5 +1,11 @@
-<ul>
-  {% for answer in answer_list %}
-    <li>{{ answer }}</li>
-  {% endfor %}
-</ul>
+<table>
+  <tbody>
+    {% for answer in answer_list %}
+      <tr>
+        <td>{{ answer.question.section }}</td>
+        <td>{{ answer.question }}</td>
+        <td>{{ answer.answer }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
