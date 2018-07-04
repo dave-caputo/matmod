@@ -37,3 +37,14 @@ class AssessmentDetailView(generic.DetailView):
         context['answer_list'] = self.object.answers.all()
         context['client_pk'] = self.kwargs['client_pk']
         return context
+
+
+class AssessmentUpdateView(generic.UpdateView):
+    model = Assessment
+    template_name = 'assess/update.html'
+    fields = ['name']
+
+    def get_success_url(self):
+        return reverse('assess:update', kwargs={
+            'client_pk': self.kwargs['client_pk'],
+            'pk': self.kwargs['pk']})
