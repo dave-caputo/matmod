@@ -22,6 +22,11 @@ class AssessmentListView(generic.ListView):
     model = Assessment
     template_name = 'assess/list.html'
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.select_related('client').filter(
+            client__pk=self.kwargs['client_pk'])
+
 
 class AssessmentDetailView(generic.DetailView):
     model = Assessment

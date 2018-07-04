@@ -7,7 +7,7 @@
   <tbody>
     {% for assess in assessment_list %}
     <tr>
-      <td><a href="{% url 'assess:detail' client.pk assess.pk %}">{{ assess.name }}</a></td>
+      <td><a href="{% url 'assess:detail' assess.client.pk assess.pk %}">{{ assess.name }}</a></td>
       <td>{{ assess.qre }}</td>
     </tr>
   {% endfor %}
