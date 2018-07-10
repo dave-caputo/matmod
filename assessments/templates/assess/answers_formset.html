@@ -1,0 +1,13 @@
+<form method="POST" id="answers_update_formset">
+  {% csrf_token %}
+  {{ answer_formset.management_form }}
+  {% for form in answer_formset %}
+    {% ifchanged  %}
+      <h4>{{ form.instance.question.section }}</h4>
+    {% endifchanged %}
+    <h5>{{ form.instance.question }}</h5>
+    {{ form.id }}
+    {{ form.answer }}
+  {% endfor %}
+  <button id="answers_update_btn">Save Answers</button>
+</form>

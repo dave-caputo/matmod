@@ -1,11 +1,31 @@
 <table>
+  <thead>
+    <tr>
+      <th>Section</th>
+      <th>Question</th>
+      <th>Answer</th>
+      <th>Weight</th>
+      <th>Score</th>
+    </tr>
+  </thead>
   <tbody>
     {% for answer in answer_list %}
       <tr>
         <td>{{ answer.question.section }}</td>
         <td>{{ answer.question }}</td>
         <td>{{ answer.answer }}</td>
+        <td>{{ answer.weight }}</td>
+        <td>{{ answer.score }}</td>
       </tr>
     {% endfor %}
   </tbody>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>{{ answer_totals.total_score }}</th>
+    </tr>
+  </tfoot>
 </table>

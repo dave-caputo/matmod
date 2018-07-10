@@ -1,26 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-  Assessment
+  Complete Assessment
 {% endblock title %}
 {% block breadcrumbs %}
   <a href="{% url 'dashboard:index' %}">dashboard</a> /
-  <a href="{% url 'clients:detail' client_pk %}">client: "{{ assessment.client }}"</a> / assessment
+  <a href="{% url 'clients:detail' client_pk %}">client: "{{ assessment.client }}"</a> /
+  <a href="{% url 'assess:detail' client_pk assessment.pk %}">assessment: "{{ assessment.name }}"</a> /
+  complete
 {% endblock breadcrumbs %}
 {% block header %}
-  {{ assessment }}
+  Complete assessment: {{ assessment }}
 {% endblock header %}
 {% block content %}
   <h3>Current status: "{{ assessment.is_pending|yesno:'Pending,Completed' }}"</h3>
-  <p><a href="#" id="assess_update_link">~ Edit assessment</a> | <a href="{% url 'assess:complete' client_pk assessment.pk %}">Complete assessment</a></p>
+  <p><a href="#" id="assess_update_link">~ Edit assessment</a> | <a href="{% url 'assess:detail' client_pk assessment.pk %}">View results</a></p>
   <div id="assess_update_div" hidden></div>
   <hr>
   <!-- Answers -->
-  <div id="answers_div">
-    <h3>Assessment Results</h3>
-  </div>
-  <div id="answer_list_div">
-    {% include 'answers/list.html' %}
+  <div id="answer_formset_div">
+    {% include 'assess/answers_formset.html' %}
   </div>
   <!-- End Answers -->
   <hr>
