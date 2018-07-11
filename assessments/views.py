@@ -37,7 +37,7 @@ class AssessmentDetailView(generic.DetailView):
     template_name = 'assess/detail.html'
 
     def get_answers(self):
-        return self.object.answers \
+        return self.get_object().answers \
             .select_related('question__section') \
             .order_by('question__section', 'question')
 
@@ -46,20 +46,12 @@ class AssessmentDetailView(generic.DetailView):
 
         ans_qs = self.get_answers()
         context['answer_list'] = ans_qs
-        context['answer_totals'] = self.object.answers.totals()
         context['client_pk'] = self.kwargs['client_pk']
         return context
 
 
-class AssessmentCompleteView(generic.UpdateView):
-    model = Assessment
+class AssessmentCompleteView(AssessmentDetailView):
     template_name = 'assess/complete.html'
-    fields = ['name']
-
-    def get_answers(self):
-        return self.get_object().answers \
-            .select_related('question__section') \
-            .order_by('question__section', 'question')
 
     def post(self, request, *args, **kwargs):
 
@@ -85,7 +77,6 @@ class AssessmentCompleteView(generic.UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['answer_formset'] = self.get_answers_formset()
-        context['client_pk'] = self.kwargs['client_pk']
         return context
 
 

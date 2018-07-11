@@ -43,7 +43,8 @@ class Answer(models.Model):
         ordering = ('assessment', 'question__order',)
 
     def __str__(self):
-        return f'{self.assessment}: Q{self.question.order  + 1} {self.question.question} = {self.answer}'
+        return (f'{self.assessment}: Q{self.question.order  + 1} '
+                f'{self.question.question} = {self.answer}')
 
     def save(self, *args, **kwargs):
         self.score = self.answer * self.weight

@@ -25,7 +25,7 @@
       <th></th>
       <th></th>
       <th></th>
-      <th>{{ answer_totals.total_score }}</th>
+      <th>{{ assessment.score|floatformat:1 }} / {{ assessment.max_score|floatformat:1 }} ({{ assessment.score_pc|floatformat:0 }}%)</th>
     </tr>
   </tfoot>
 </table>
