@@ -22,6 +22,10 @@
   <div id="answer_list_div">
     {% include 'answers/list.html' %}
   </div>
+  <hr>
+  <div id="section_list_div">
+   {% include 'sections/totals.html' %}
+  </div>
   <!-- End Answers -->
   <hr>
   <p><a href="{% url 'assess:delete' client_pk assessment.pk %}">- Delete assessment</a></p>

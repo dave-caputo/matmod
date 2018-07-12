@@ -1,0 +1,19 @@
+<h3>Results by section</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Section</th>
+      <th>Score</th>
+      <th>Maturity</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for section in section_totals %}
+      <tr>
+        <td>{{ section.order }}. {{ section.name }}</td>
+        <td>{{ section.score }} / {{section.max_score }}</td>
+        <td>{{ section.score_pc|floatformat:0 }}%</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

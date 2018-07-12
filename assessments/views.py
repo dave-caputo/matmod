@@ -47,6 +47,12 @@ class AssessmentDetailView(generic.DetailView):
         ans_qs = self.get_answers()
         context['answer_list'] = ans_qs
         context['client_pk'] = self.kwargs['client_pk']
+
+        # ========
+        context['section_totals'] = self.get_object().answers.section_totals()
+
+        # ========
+
         return context
 
 

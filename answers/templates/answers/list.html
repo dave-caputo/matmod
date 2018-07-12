@@ -6,6 +6,7 @@
       <th>Answer</th>
       <th>Weight</th>
       <th>Score</th>
+      <th>Maturity</th>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +17,7 @@
         <td>{{ answer.answer }}</td>
         <td>{{ answer.weight }}</td>
         <td>{{ answer.score }}</td>
+        <td></td>
       </tr>
     {% endfor %}
   </tbody>
@@ -25,7 +27,8 @@
       <th></th>
       <th></th>
       <th></th>
-      <th>{{ assessment.score|floatformat:1 }} / {{ assessment.max_score|floatformat:1 }} ({{ assessment.score_pc|floatformat:0 }}%)</th>
+      <th>{{ assessment.score|floatformat:1 }} / {{ assessment.max_score|floatformat:1 }}</th>
+      <th>{{ assessment.score_pc|floatformat:0 }}%</th>
     </tr>
   </tfoot>
 </table>
