@@ -49,7 +49,7 @@ class AssessmentDetailView(generic.DetailView):
         context['client_pk'] = self.kwargs['client_pk']
 
         # ========
-        context['section_totals'] = self.get_object().answers.section_totals()
+        context['section_totals'] = self.get_object().answers.section_totals
 
         # ========
 

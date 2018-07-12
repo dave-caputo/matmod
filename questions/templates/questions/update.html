@@ -1,6 +1,9 @@
 <form action="/" id="question_update_form" autocomplete="off">
     {% csrf_token %}
-    {{ form }}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <br />
     <button id="question_update_btn">Update</button>
 </form>
-<div id="question_update_form_data" data-question="{{ question }}"></div>
+<div id="question_update_form_data" data-question="{{ question }}" data-weight="{{ question.weight }}"></div>

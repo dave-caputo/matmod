@@ -29,11 +29,6 @@ class Answer(models.Model):
                                  null=True,
                                  default=0)
 
-    weight = models.DecimalField(max_digits=2,
-                                 decimal_places=1,
-                                 null=True,
-                                 default=1)
-
     score = models.DecimalField(max_digits=3,
                                 decimal_places=1,
                                 null=0,
@@ -47,5 +42,5 @@ class Answer(models.Model):
                 f'{self.question.question} = {self.answer}')
 
     def save(self, *args, **kwargs):
-        self.score = self.answer * self.weight
+        self.score = self.answer * self.question.weight
         super().save(*args, **kwargs)

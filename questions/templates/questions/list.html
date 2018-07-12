@@ -1,17 +1,18 @@
 <table id="question_table">
   <thead>
     <tr>
-      <th></th>
-      <th width="5%"></th>
-      <th width="5%"></th>
+      <th>Question</th>
+      <th>Weight</th>
+      <th width="10%" colspan="2">Move</th>
     </tr>
   </thead>
   <tbody>
     {% for question in question_list %}
       <tr>
         <td><a href="{% url 'questions:detail' qre_pk section_pk question.pk %}">{{ question }}</a></td>
-        <td>{% if not forloop.first %}<a href="#" class="question_move_link" data-url="{% url 'questions:move' qre_pk section_pk question.pk 'up' %}">up</a>{% endif %}</td>
-        <td>{% if not forloop.last %}<a href="#" class="question_move_link" data-url="{% url 'questions:move' qre_pk section_pk question.pk 'down' %}">down</a>{% endif %}</td>
+        <td>{{ question.weight }}</td>
+        <td width="5%">{% if not forloop.first %}<a href="#" class="question_move_link" data-url="{% url 'questions:move' qre_pk section_pk question.pk 'up' %}">up</a>{% endif %}</td>
+        <td width="5%">{% if not forloop.last %}<a href="#" class="question_move_link" data-url="{% url 'questions:move' qre_pk section_pk question.pk 'down' %}">down</a>{% endif %}</td>
       </tr>
     {% endfor %}
   </tbody>

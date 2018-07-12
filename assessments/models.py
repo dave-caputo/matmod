@@ -41,14 +41,11 @@ class Assessment(models.Model):
 
     @property
     def score(self):
-        return self.answers.aggregate(total=models.Sum('answer'))['total']
+        return self.answers.totals['score']
 
     @property
     def max_score(self):
-        return sum(
-            map(lambda x: Answer.ANSWER_CHOICES[-1][0] * x.weight,
-                self.answers.all())
-        )
+        return self.answers.totals['max_score']
 
     @property
     def score_pc(self):
