@@ -1,13 +1,14 @@
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 
+from .forms import ClientForm
 from .models import Client
 
 
 class ClientCreateView(generic.CreateView):
+    form_class = ClientForm
     model = Client
     template_name = 'clients/create.html'
-    fields = ['name', ]
     success_url = reverse_lazy('clients:create')
 
 

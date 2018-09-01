@@ -1,6 +1,6 @@
 <form action="/" id="client_create_form" autocomplete="off">
     {% csrf_token %}
-    {{ form }}
-    <button id="client_create_btn">Create</button>
+    {{ form.as_p }}
+    <button class="btn" id="client_create_btn">Create</button>
 </form>
 

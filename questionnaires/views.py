@@ -3,13 +3,14 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 
+from .forms import QreForm
 from .models import Qre
 
 
 class QreCreateView(generic.CreateView):
+    form_class = QreForm
     model = Qre
     template_name = 'qres/create.html'
-    fields = ['name']
     success_url = reverse_lazy('qres:create')
 
 

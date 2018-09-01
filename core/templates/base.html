@@ -5,11 +5,23 @@
     <head>
       <meta charset="UTF-8">
       <title>{% block title %}{% endblock title %}</title>
+      {% block styles %}
+        <link href="https://fonts.googleapis.com/css?family=Muli|Orbitron:700" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+      {% endblock styles %}
     </head>
   {% endblock head %}
-  <body style="padding:20px;">
-    <div id="breadcrumbs">{% block breadcrumbs %}{% endblock breadcrumbs %}</div>
-    <h1 id="page_header">{% block header %}{% endblock header %}</h1>
+  <body>
+
+    <!-- Start Breadcrumbs -->
+    <div class="breadcrumbs_div">
+        <div>
+          {% block breadcrumbs %}{% endblock breadcrumbs %}
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+
+    <div><h1 id="page_header">{% block header %}{% endblock header %}</h1></div>
 
     {% block content %}
     {% endblock content %}
@@ -19,6 +31,7 @@
 
     {% block scripts %}
       <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+      <script src="{% static 'js/fontawesome/all.js' %}"></script>
     {% endblock scripts %}
   </body>
 </html>

@@ -5,7 +5,7 @@
 {% endblock title %}
 {% block breadcrumbs %}
   <a href="{% url 'dashboard:index' %}">dashboard</a> /
-  <a href="{% url 'qres:detail' view.kwargs.qre_pk %}">questionnaire: "{{ object.qre }}"</a> /
+  <a href="{% url 'qres:detail' view.kwargs.qre_pk %}">{{ object.qre }}</a> /
   section
 {% endblock breadcrumbs %}
 {% block header %}

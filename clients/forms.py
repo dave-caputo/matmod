@@ -1,12 +1,12 @@
 from django import forms
 
-from .models import Qre
+from .models import Client
 
 
-class QreForm(forms.ModelForm):
+class ClientForm(forms.ModelForm):
 
     class Meta:
-        model = Qre
+        model = Client
         fields = ['name']
         widgets = {
             'name': forms.TextInput(attrs={'placeholder': 'Enter name'}),

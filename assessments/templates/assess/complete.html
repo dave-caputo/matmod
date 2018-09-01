@@ -5,9 +5,8 @@
 {% endblock title %}
 {% block breadcrumbs %}
   <a href="{% url 'dashboard:index' %}">dashboard</a> /
-  <a href="{% url 'clients:detail' client_pk %}">client: "{{ assessment.client }}"</a> /
-  <a href="{% url 'assess:detail' client_pk assessment.pk %}">assessment: "{{ assessment.name }}"</a> /
-  complete
+  <a href="{% url 'clients:detail' client_pk %}">{{ assessment.client }}</a> /
+  complete assessment
 {% endblock breadcrumbs %}
 {% block header %}
   Complete assessment: {{ assessment }}

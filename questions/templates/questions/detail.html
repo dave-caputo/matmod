@@ -5,8 +5,8 @@
 {% endblock title %}
 {% block breadcrumbs %}
   <a href="{% url 'dashboard:index' %}">dashboard</a> /
-  <a href="{% url 'qres:detail' qre_pk %}">questionnaire: "{{ question.section.qre }}"</a> /
-  <a href="{% url 'sections:detail' qre_pk section_pk %}">section: {{ question.section }}</a> / question
+  <a href="{% url 'qres:detail' qre_pk %}">{{ question.section.qre }}</a> /
+  <a href="{% url 'sections:detail' qre_pk section_pk %}">{{ question.section }}</a> / question
 {% endblock breadcrumbs %}
 {% block header %}
   {{ question }}

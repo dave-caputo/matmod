@@ -1,56 +1,60 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block title %}
   Dashboard
 {% endblock title %}
-
 {% block header %}
-  MatMod
+  <span class="brand">Digital Maturity Modelling</span>
 {% endblock header %}
-
 {% block breadcrumbs %}
   dashboard /
 {% endblock breadcrumbs %}
-
 {% block content %}
-  <!-- Client Section -->
-  <div>
-    <h3>Clients</h3>
-    <a href="#" id="client_create_link" style="text-decoration:none;">+ New client</a>
-    <div id="client_create_div" hidden>
-    </div>
-    <div id="client_list_div">
-      {% include 'clients/list.html' %}
-    </div>
-  </div>
-  <!-- End Client Section -->
-  <!-- Questionnaire Section -->
-  <div>
-    <h3>Questionnaires</h3>
-    <a href="#" id="create_display_qre" style="text-decoration:none;">+ New questionnaire</a>
-    <div id="qre_create_div" hidden></div>
-    <div id="qre_list_div">
-      {% include 'qres/list.html' %}
-    </div>
-  </div>
-  <!-- End Questionnaire Section -->
-  <!-- Assessment Section -->
-  <div>
-    <h3>Assessments</h3>
-    <ul>
-      {% for assess in assess_list %}
-        <li>{{ assess }}</li>
-      {% endfor %}
-    </ul>
-  </div>
-  <!-- End Assessment Section -->
-{% endblock content %}
+  <div class="card-container">
+    <!-- Client Section -->
+    <div class="card">
+      <div class="card_header">
+        <h3>Clients</h3>
+        <a href="#" id="client_create_link"><i class="fas fa-plus-circle"></i></a>
+      </div>
 
+
+      <div id="client_create_div" hidden>
+      </div>
+      <div id="client_list_div">
+        {% include 'clients/list.html' %}
+      </div>
+    </div>
+    <!-- End Client Section -->
+    <!-- Questionnaire Section -->
+    <div class="card">
+      <div class="card_header">
+        <h3>Questionnaires</h3>
+        <a href="#" id="create_display_qre"><i class="fas fa-plus-circle"></i></a>
+      </div>
+      <div id="qre_create_div" hidden></div>
+      <div id="qre_list_div">
+        {% include 'qres/list.html' %}
+      </div>
+    </div>
+    <!-- End Questionnaire Section -->
+    <!-- Assessment Section -->
+    {% comment %}
+    <div class="card">
+      <h3>Assessments</h3>
+      <ul>
+        {% for assess in assess_list %}
+          <li>{{ assess }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endcomment %}
+    <!-- End Assessment Section -->
+  </div>
+{% endblock content %}
 {% block page_data %}
   <div id="page_urls" data-qre-create-url="{% url 'qres:create' %}" data-qre-list-url="{% url 'qres:list' %}" data-client-create-url="{% url 'clients:create' %}" data-client-list-url="{% url 'clients:list' %}"></div>
 {% endblock page_data %}
-
 {% block scripts %}
   {{ block.super }}
   <script src="{% static 'qres/js/create.js' %}"></script>
