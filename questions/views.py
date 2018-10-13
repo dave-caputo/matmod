@@ -1,9 +1,10 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.views import generic
 from django.urls import reverse
+from django.views import generic
 
 from sections.models import Section
+
 from .forms import QuestionForm
 from .models import Question
 
@@ -76,7 +77,7 @@ class QuestionMoveView(generic.UpdateView):
 class QuestionUpdateView(generic.UpdateView):
     model = Question
     template_name = 'questions/update.html'
-    fields = ['question', 'weight']
+    fields = ['question', 'weight', 'min_legend', 'max_legend']
 
     def get_success_url(self):
         return reverse('questions:update', kwargs={
