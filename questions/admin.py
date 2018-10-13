@@ -5,7 +5,7 @@ from .models import Question
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ['get_str', 'get_qre', 'section']
+    list_display = ['get_str', 'get_qre', 'section', 'min_legend', 'max_legend']
     ordering = ['section__qre', 'section__order', 'order']
 
     def get_str(self, obj):
