@@ -11,11 +11,11 @@ class Question(OrderedModel):
     weight = models.DecimalField(max_digits=2, decimal_places=1, null=True, default=1)
     min_legend = models.CharField(
         max_length=155, blank=True, null=True,
-        help_text='Brief explanation of the meaning of selecting the answer with the lowest score.'
+        help_text='Meaning of the answer with the lowest score.'
     )
     max_legend = models.CharField(
             max_length=155, blank=True, null=True,
-            help_text='Brief explanation of the meaning of selecting the answer with the highest score.'
+            help_text='Meaning of the answer with the highest score.'
     )
 
     order_with_respect_to = ('section',)

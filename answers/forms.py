@@ -10,11 +10,11 @@ class AnswerForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['answer'].choices = [
             (0, 'No response'),
-            (1, f'{self.instance.question.min_legend or 1}'),
+            (1, f"{'1'} {self.instance.question.min_legend or ''}"),
             (2, '2'),
             (3, '3'),
             (4, '4'),
-            (5, f'{self.instance.question.max_legend or 5}'),
+            (5, f"{'5'} {self.instance.question.max_legend or ''}"),
         ]
 
     class Meta:

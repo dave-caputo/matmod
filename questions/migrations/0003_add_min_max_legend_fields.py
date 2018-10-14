@@ -13,11 +13,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='question',
             name='max_legend',
-            field=models.CharField(blank=True, help_text='Brief explanation of the meaning of selecting the answer with the highest score.', max_length=155, null=True),
+            field=models.CharField(blank=True, help_text='Meaning of the answer with the highest score.', max_length=155, null=True),
         ),
         migrations.AddField(
             model_name='question',
             name='min_legend',
-            field=models.CharField(blank=True, help_text='Brief explanation of the meaning of selecting the answer with the lowest score.', max_length=155, null=True),
+            field=models.CharField(blank=True, help_text='Meaning of the answer with the lowest score.', max_length=155, null=True),
         ),
     ]
