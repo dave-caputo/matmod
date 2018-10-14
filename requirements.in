@@ -1,0 +1,23 @@
+# This file is used to auto-generate requirements.txt using pip-tools:
+# https://github.com/jazzband/pip-tools
+#
+# To update, run:
+#
+#    pip-compile --output-file requirements.txt requirements.in
+#
+# To upgrade requirements:
+#
+#    pip-compile --upgrade
+#
+
+django<2.2  # https://www.djangoproject.com/download/
+django-ordered-model  # https://github.com/bfirsh/django-ordered-model
+
+## Database
+psycopg2-binary
+
+## Linting
+flake8
+flake8-docstrings
+flake8-isort
+isort
