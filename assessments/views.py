@@ -1,13 +1,14 @@
-from django.forms import modelformset_factory
+from django import forms
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 
 from answers.forms import AnswerForm
 from answers.models import Answer
 from clients.models import Client
-from .forms import AssessmentForm, get_answers_formset
+
+from .forms import AssessmentForm
 from .models import Assessment
 
 
@@ -37,9 +38,13 @@ class AssessmentDetailView(generic.DetailView):
     template_name = 'assess/detail.html'
 
     def get_answers(self):
-        return self.get_object().answers \
-            .select_related('question__section') \
+        """Return a queryset with the assessment answers ordered by section and question."""
+        return (
+            self.get_object()
+            .answers
+            .select_related('question__section')
             .order_by('question__section', 'question')
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -60,30 +65,26 @@ class AssessmentCompleteView(AssessmentDetailView):
     template_name = 'assess/complete.html'
 
     def post(self, request, *args, **kwargs):
-
-        AnswerFormSet = get_answers_formset()
-        # formset = AnswerFormSet(request.POST, instance=self.self_object)
-        formset = AnswerFormSet(request.POST, queryset=self.get_answers())
+        """Save answer formset data."""
+        formset = self.get_answers_formset(data=request.POST)
         if formset.is_valid():
             formset.save()
         else:
-            # formset = AnswerFormSet(instance=self.get_object)
-            formset = AnswerFormSet(queryset=self.get_answers())
+            formset = self.get_answers_formset()
 
-        return HttpResponseRedirect(reverse('assess:detail', kwargs={
-            'client_pk': self.kwargs['client_pk'],
-            'pk': self.get_object().pk
-        }))
-
-    def get_answers_formset(self):
-        AnswerFormSet = get_answers_formset()
-        # return AnswerFormSet(instance=self.object)
-        return AnswerFormSet(queryset=self.get_answers())
+        return HttpResponseRedirect(
+            reverse('assess:detail', kwargs={'client_pk': self.kwargs['client_pk'], 'pk': self.get_object().pk})
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['answer_formset'] = self.get_answers_formset()
         return context
+
+    def get_answers_formset(self, data=None):
+        """Return a bound/unbound formset containing a form for each of the assessment answers."""
+        AnswerFormSet = forms.modelformset_factory(form=AnswerForm, model=Answer, extra=0, max_num=0)
+        return AnswerFormSet(data=data, queryset=self.get_answers())
 
 
 class AssessmentUpdateView(generic.UpdateView):
