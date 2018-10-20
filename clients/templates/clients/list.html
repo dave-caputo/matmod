@@ -1,5 +1,5 @@
-<ul class="stacked_links">
+<ul class="list-group">
   {% for client in client_list %}
-    <li><a href="{% url 'clients:detail' client.pk %}">{{ client }}</a></li>
+  <li class="list-group-item"><a href="{% url 'clients:detail' client.pk %}">{{ client }}</a></li>
   {% endfor %}
 </ul>

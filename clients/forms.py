@@ -4,6 +4,7 @@ from .models import Client
 
 
 class ClientForm(forms.ModelForm):
+    """A representation of a third party who is the subject of questionnaire assessments."""
 
     class Meta:
         model = Client

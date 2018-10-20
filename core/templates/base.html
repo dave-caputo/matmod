@@ -6,22 +6,29 @@
       <meta charset="UTF-8">
       <title>{% block title %}{% endblock title %}</title>
       {% block styles %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Muli|Orbitron:700" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
       {% endblock styles %}
     </head>
   {% endblock head %}
   <body>
+    <div class="container">
+      <!-- Page Header -->
+      <div class="row">
+        <div class="col-sm">
+            <h1 id="page_header">{% block header %}{% endblock header %}</h1>
+        </div>
+      </div>
+      <!-- End Page Header -->
 
     <!-- Start Breadcrumbs -->
-    <div class="breadcrumbs_div">
-        <div>
-          {% block breadcrumbs %}{% endblock breadcrumbs %}
-        </div>
-    </div>
+    <nav aria-label="breadcrumb">
+      {% block breadcrumbs %}{% endblock breadcrumbs %}
+    </nav>
     <!-- End Breadcrumbs -->
 
-    <div><h1 id="page_header">{% block header %}{% endblock header %}</h1></div>
+
 
     {% block content %}
     {% endblock content %}
@@ -29,8 +36,11 @@
     {% block page_data %}
     {% endblock page_data %}
 
+    </div>
+
     {% block scripts %}
       <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
       <script src="{% static 'js/fontawesome/all.js' %}"></script>
     {% endblock scripts %}
   </body>
