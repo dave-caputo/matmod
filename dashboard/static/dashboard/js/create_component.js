@@ -1,7 +1,5 @@
-// This components should be reusable by the various cards.
-// It displays a create form after clicking an add button.
-
-function setCreateComponent(config){
+function objectCreateComponent(config){
+    // A reusable component to create objects on page.
 
     /*================================
     =            GET FORM            =
@@ -17,20 +15,18 @@ function setCreateComponent(config){
     }
 
     $(document).one('click', config.formDisplayBtn, function(event) {
-        // Event to get and display the create form.
+        // Get and display the create form when clicking the display button for the first time.
         $.ajax({
             url: config.actionUrl,
             type: 'GET',
         })
         .done(function(data) {
-
             $(config.formDisplayDiv).html(data);
             showOrHideLabels(config.formDisplayDiv);
-
             $(config.formDisplayDiv).toggle();
         })
         .fail(function(e) {
-            console.log("error");
+            console.log('An error occurred when trying to get the '+ config.objectClass +' create form.');
             console.log(e);
         });
     });
@@ -41,7 +37,7 @@ function setCreateComponent(config){
 
 
     $(document).on('click', config.formDisplayBtn, function(event) {
-        console.log('clicked display button');
+        // Toggle the create form.
         $(config.formDisplayDiv).toggle();
     });
 
@@ -52,6 +48,7 @@ function setCreateComponent(config){
 
 
     $(document).on('click', config.formSubmitBtn, function(event) {
+        // Create new object.
         event.preventDefault();
         $.ajax({
             url: config.actionUrl,
@@ -64,13 +61,13 @@ function setCreateComponent(config){
             $(document).trigger(config.actionEvent);
         })
         .fail(function(e) {
-            console.log("error");
+            console.log('An error occurred when trying to create a new'+ config.objectClass +'.');
             console.log(e);
         });
     });
 
     $(document).on('submit', config.createForm, function(event){
-        // prevent submit on hitting <enter> key
+        // Prevent submit on hitting <enter> key
         event.preventDefault();
     });
 
@@ -80,6 +77,7 @@ function setCreateComponent(config){
     ========================================*/
 
     $(document).on(config.actionEvent, function(event) {
+        // Get an updated object list after object creation.
         $.ajax({
             url: config.listUrl,
             type: 'GET',
@@ -89,14 +87,15 @@ function setCreateComponent(config){
             $(config.formDisplayDiv).toggle();
         })
         .fail(function(e) {
-            console.log("error");
+            console.log('An error ocurred when trying to get the ' + config.objectClass + ' list.');
             console.log(e);
         });
     });
 }
 
 $(document).ready(function(){
-    var config = {
+    var clientConfig = {
+        objectClass: 'client',
         actionUrl: $('#page_urls').data('clientCreateUrl'),
         listUrl: $('#page_urls').data('clientListUrl'),
         formDisplayBtn: '#client_create_display',
@@ -107,9 +106,10 @@ $(document).ready(function(){
         actionEvent: 'clientCreated',
         hiddenLabels: true,
     };
-    setCreateComponent(config);
+    setCreateComponent(clientConfig);
 
-    var config = {
+    var qreConfig = {
+        objectClass: 'questionnaire',
         actionUrl: $('#page_urls').data('qreCreateUrl'),
         listUrl: $('#page_urls').data('qreListUrl'),
         formDisplayBtn: '#qre_create_display',
@@ -120,7 +120,7 @@ $(document).ready(function(){
         actionEvent: 'qreCreated',
         hiddenLabels: true,
     };
-    setCreateComponent(config);
+    setCreateComponent(qreConfig);
 
 });
 
