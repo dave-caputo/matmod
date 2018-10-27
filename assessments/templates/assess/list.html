@@ -1,22 +1,10 @@
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Date</th>
-      <th>Questionnaire</th>
-      <th width="15%">Score</th>
-      <th width="15%">Maturity</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for assess in assessment_list %}
-    <tr>
-      <td><a href="{% url 'assess:detail' assess.client.pk assess.pk %}">{{ assess.name }}</a></td>
-      <td>{{ assess.created|date:'d N Y' }}</td>
-      <td>{{ assess.qre }}</td>
-      <td>{{ assess.score|floatformat:1 }} / {{ assess.max_score|floatformat:1 }}</td>
-      <td>{{ assess.score_pc|floatformat:1 }}%</td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
+{% for assess in assessment_list %}
+  <tr>
+    <td><a href="{% url 'assess:detail' assess.client.pk assess.pk %}">{{ assess.name }}</a></td>
+    <td>{{ assess.created|date:'d/m/Y' }}</td>
+    <td>{{ assess.qre }}</td>
+    <td class="text-right pr-4">{{ assess.score|floatformat:1 }}</td>
+    <td class="text-right pr-4">{{ assess.max_score|floatformat:1 }}</td>
+    <td class="text-right pr-4">{{ assess.score_pc|floatformat:1 }}%</td>
+  </tr>
+{% endfor %}

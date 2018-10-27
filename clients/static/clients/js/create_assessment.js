@@ -5,9 +5,8 @@ $(document).ready(function(){
         listUrl: $('#page_urls').data('assessListUrl'),
         formDisplayBtn: '#assess_create_display',
         formDisplayDiv: '#assess_create_div',
-        listDisplayDiv: '#assess_list_div',
+        listDisplayDiv: '#assess_table_body',
         formSubmitBtn: '#assess_create_btn',
-        createForm: '#assess_create_form',
         actionEvent: 'assessCreated',
         hiddenLabels: false,
     };

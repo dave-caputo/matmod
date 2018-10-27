@@ -14,21 +14,27 @@
   {% endblock head %}
   <body>
     <div class="container">
+
+      <!-- Breadcrumbs -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          {% block breadcrumbs %}{% endblock breadcrumbs %}
+        </ol>
+      </nav>
+      <!-- End Breadcrumbs -->
+
       <!-- Page Header -->
       <div class="row">
         <div class="col-sm">
             <h1 id="page_header">{% block header %}{% endblock header %}</h1>
+            <div class="page_subheader">
+              {% block subheader %}{% endblock subheader %}
+            </div>
+            <hr>
+            <br>
         </div>
       </div>
       <!-- End Page Header -->
-
-    <!-- Breadcrumbs -->
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        {% block breadcrumbs %}{% endblock breadcrumbs %}
-      </ol>
-    </nav>
-    <!-- End Breadcrumbs -->
 
     {% block content %}
     {% endblock content %}

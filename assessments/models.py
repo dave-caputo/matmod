@@ -1,6 +1,5 @@
 from django.db import models
 
-
 from answers.models import Answer
 
 

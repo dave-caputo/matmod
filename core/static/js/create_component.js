@@ -50,10 +50,11 @@ function createObject(config){
     $(document).on('click', config.formSubmitBtn, function(event) {
         // Create new object.
         event.preventDefault();
+        console.log('clicking form submit button');
         $.ajax({
             url: config.actionUrl,
             type: 'POST',
-            data: $(config.createForm).serialize()
+            data: $(this).parents('form').serialize()
         })
         .done(function(data) {
             $(config.formDisplayDiv).html(data);
@@ -85,6 +86,7 @@ function createObject(config){
         .done(function(data) {
             $(config.listDisplayDiv).html(data);
             $(config.formDisplayDiv).toggle();
+            $(document).trigger(config.objectClass + 'ListUpdated');
         })
         .fail(function(e) {
             console.log('An error ocurred when trying to get the ' + config.objectClass + ' list.');

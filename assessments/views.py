@@ -1,7 +1,7 @@
 from django import forms
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 from django.views import generic
 
 from answers.forms import AnswerForm
@@ -16,7 +16,9 @@ class AssessmentCreateView(generic.CreateView):
     form_class = AssessmentForm
     model = Assessment
     template_name = 'assess/create.html'
-    success_url = reverse_lazy('clients:create')
+
+    def get_success_url(self):
+        return reverse('assess:create', kwargs={'client_pk': self.kwargs['client_pk']})
 
     def get_initial(self):
         client = get_object_or_404(Client, id=self.kwargs['client_pk'])
