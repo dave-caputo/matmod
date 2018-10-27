@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    console.log('yeps, loaded')
     var clientConfig = {
         objectClass: 'client',
         actionUrl: $('#page_urls').data('clientCreateUrl'),

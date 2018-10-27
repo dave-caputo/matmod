@@ -1,17 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}
-  Client
-{% endblock title %}
+
+{% block title %}Client{% endblock title %}
+
 {% block breadcrumbs %}
-  <a href="{% url 'dashboard:index' %}">dashboard</a> / client</div>
+  <li class="breadcrumb-item" aria-current="page"><a href="{% url 'dashboard:index' %}">dashboard</a></li>
+  <li class="breadcrumb-item active" aria-current="page">client</li>
 {% endblock breadcrumbs %}
 {% block header %}
-  {{ client }}
+  Client: {{ client }}
 {% endblock header %}
 {% block content %}
-  <p><a href="#" id="client_update_link">~ Edit client</a></p>
-  <div id="client_update_div" hidden></div>
+  <div class="row">
+    <div class="col-md-4">
+        <p id="client_update_display"><a href="#"><i class="fas fa-pen"></i> Rename client</a></small></p>
+        <div id="client_update_div"></div>
+    </div>
+  </div>
   <hr>
   <!-- Assessments -->
   <div id="assess_div">
@@ -37,6 +42,6 @@
 
 {% block scripts %}
   {{ block.super }}
-  <script src="{% static 'clients/js/update.js' %}"></script>
-  <script src="{% static 'assess/js/create.js' %}"></script>
+  <script src="{% static 'js/update_component.js' %}"></script>
+  <script src="{% static 'clients/js/update_object.js' %}"></script>
 {% endblock scripts %}

@@ -22,13 +22,13 @@
       </div>
       <!-- End Page Header -->
 
-    <!-- Start Breadcrumbs -->
+    <!-- Breadcrumbs -->
     <nav aria-label="breadcrumb">
-      {% block breadcrumbs %}{% endblock breadcrumbs %}
+      <ol class="breadcrumb">
+        {% block breadcrumbs %}{% endblock breadcrumbs %}
+      </ol>
     </nav>
     <!-- End Breadcrumbs -->
-
-
 
     {% block content %}
     {% endblock content %}
