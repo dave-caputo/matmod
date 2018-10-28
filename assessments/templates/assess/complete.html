@@ -13,8 +13,8 @@
 {% endblock header %}
 {% block content %}
   <h3>Current status: "{{ assessment.is_pending|yesno:'Pending,Completed' }}"</h3>
-  <p><a href="#" id="assess_update_link">~ Edit assessment</a> | <a href="{% url 'assess:detail' client_pk assessment.pk %}">View results</a></p>
-  <div id="assess_update_div" hidden></div>
+  <p><a href="#" id="assess_rename_display">~ Edit assessment</a> | <a href="{% url 'assess:detail' client_pk assessment.pk %}">View results</a></p>
+  <div id="assess_rename_div" hidden></div>
   <hr>
   <!-- Answers -->
   <div id="answer_formset_div">
@@ -26,7 +26,7 @@
   <p><a target="_blank" href="/admin/">Go to admin site</a></p>
 {% endblock content %}
 {% block page_data %}
-  <div id="page_urls" data-assess-update-url="{% url 'assess:update' client_pk assessment.pk %}"></div>
+  <div id="page_urls" data-assess-rename-url="{% url 'assess:rename' client_pk assessment.pk %}"></div>
 {% endblock page_data %}
 {% block scripts %}
   {{ block.super }}

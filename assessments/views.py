@@ -89,13 +89,13 @@ class AssessmentCompleteView(AssessmentDetailView):
         return AnswerFormSet(data=data, queryset=self.get_answers())
 
 
-class AssessmentUpdateView(generic.UpdateView):
+class AssessmentRenameView(generic.UpdateView):
     model = Assessment
-    template_name = 'assess/update.html'
+    template_name = 'assess/rename.html'
     fields = ['name']
 
     def get_success_url(self):
-        return reverse('assess:update', kwargs={
+        return reverse('assess:rename', kwargs={
             'client_pk': self.kwargs['client_pk'],
             'pk': self.kwargs['pk']})
 
