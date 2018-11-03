@@ -1,21 +1,6 @@
 var moveQreSection = (function() {
 
-  /*============================
-  =            URLS            =
-  ============================*/
-
-  var qreSectionMoveUrl;
-  var qreSectionListUrl;
-  $(document).ready(function() {
-    qreSectionMoveUrl = $('#page_urls').data('qreSectionMoveUrl');
-    qreSectionListUrl = $('#page_urls').data('qreSectionListUrl');
-  });
-
-  /*=================================
-  =            POST FORM            =
-  =================================*/
-
-  $(document).on('click', '.qre_section_move_link',
+  $(document).on('click', '.section_move_link',
     function(event) {
       event.preventDefault();
 
@@ -24,10 +9,10 @@ var moveQreSection = (function() {
       $.ajax({
           url: moveUrl,
           type: 'POST',
-          data: $('#qre_section_move_form').serialize()
+          data: $('#section_move_form').serialize()
         })
         .done(function(data) {
-          $('#qre_section_list_div').html(data);
+          $('#section_table_body').html(data);
         })
         .fail(function(e) {
           console.log("error");

@@ -1,49 +1,96 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}
-  Questionnaire
-{% endblock title %}
-{% block breadcrumbs %}
-  <a href="{% url 'dashboard:index' %}">dashboard</a> / questionnaire
-{% endblock breadcrumbs %}
-{% block header %}
-  {{ object.name }}
-{% endblock header %}
-{% block content %}
-  <p><a href="#" id="update_display_qre">~ Edit questionnaire</a></p>
-  <div id="qre_update_div" hidden></div>
-  <hr>
-  <!-- Sections -->
-  <div id="qre_sections_div">
-    <h3>Sections</h3>
-    <!-- Create Section -->
-    <a href="#" id="qre_section_create_display">+ New section</a>
-    <div id="qre_section_create_div" hidden></div>
-    <!-- End Create Section -->
-    <br>
-    <br>
-    <div id="qre_section_list_div"></div>
-  </div>
-  <!-- End Sections -->
-  <hr>
-  <p><a href="{% url 'qres:delete' object.pk %}" id="delete_display_qre">- Delete questionnaire</a></p>
-  <p><a target="_blank" href="/admin/">Go to admin site</a></p>
 
+{% block breadcrumbs %}
+  <li class="breadcrumb-item" aria-current="page"><a href="{% url 'dashboard:index' %}">dashboard</a></li>
+  <li class="breadcrumb-item active" aria-current="page">questionnaire</li>
+{% endblock breadcrumbs %}
+
+{% block title %}Questionnaire{% endblock title %}
+
+{% block header %}{{ object.name }}{% endblock header %}
+
+{% block subheader %}
+  <div class="row">
+    <div class="col-md-4">
+        <div>
+          <span id="qre_rename_display"><a href="#"><i class="fas fa-pen"></i> Rename</a></small></span> |
+          <a href="{% url 'qres:delete' qre.pk %}" id="qre_delete_link"><i class="fas fa-trash-alt"></i> Delete</a>
+        </div>
+        <div id="qre_rename_div"></div>
+    </div>
+  </div>
+{% endblock subheader %}
+
+{% block content %}
+
+  <!-- Section Create -->
+  <div class="row">
+    <div class="col">
+      <h3>Sections</h3>
+      <div id="section_div">
+        <a href="#" id="section_create_display"><i class="fas fa-plus-circle"></i> Add section</a>
+        <div id="section_create_div"></div>
+      </div>
+    </div>
+  </div>
+  <!-- End Section Create -->
+
+  <!-- Section Table -->
+  <div class="row">
+    <div class="col">
+      <table class="table mt-4" id="assess_table">
+        <thead>
+          <tr>
+            <th width="5%">Move up</th>
+            <th width="5%">Move down</th>
+            <th>Section</th>
+          </tr>
+        </thead>
+        <tbody id="section_table_body">
+        {% with object_list=qre.sections.all qre_pk=qre.pk %}
+          {% include 'sections/list.html' %}
+        {% endwith %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+  <!-- End Section Table -->
+
+  <!-- Admin Link -->
+  <div class="row">
+    <div class="col">
+        <hr>
+        <p class="text-right"><a target="_blank" href="/admin/"><i class="fas fa-tachometer-alt"></i> Go to admin site</a></p>
+    </div>
+  </div>
+  <!-- End Admin Link -->
 
   <!-- Section Move Form -->
-  <form id="qre_section_move_form">
+  <form id="section_move_form">
     {% csrf_token %}
   </form>
   <!-- End Section Move Form-->
-
 {% endblock content %}
+
 {% block page_data %}
-  <div id="page_urls" data-qre-update-url="{% url 'qres:update' object.pk %}" data-qre-section-create-url="{% url 'sections:create' object.pk %}" data-qre-section-list-url="{% url 'sections:list' object.pk %}"></div>
+  <div id="page_urls" data-qre-rename-url="{% url 'qres:rename' object.pk %}" data-section-create-url="{% url 'sections:create' object.pk %}" data-section-list-url="{% url 'sections:list' object.pk %}"></div>
 {% endblock page_data %}
+
 {% block scripts %}
   {{ block.super }}
-  <script src="{% static 'qres/js/update.js' %}"></script>
-  <script src="{% static 'sections/js/list.js' %}"></script>
-  <script src="{% static 'sections/js/create.js' %}"></script>
+  <script src="{% static 'js/create_component.js' %}"></script>
+  <script src="{% static 'qres/js/qre-create-section.js' %}"></script>
+  <script src="{% static 'js/update_component.js' %}"></script>
+  <script src="{% static 'qres/js/qre-rename.js' %}"></script>
+  <!-- <script src="{% static 'sections/js/list.js' %}"></script> -->
+  <!-- <script src="{% static 'sections/js/create.js' %}"></script> -->
   <script src="{% static 'sections/js/move.js' %}"></script>
 {% endblock scripts %}

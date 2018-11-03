@@ -4,6 +4,7 @@ from django.urls import reverse, reverse_lazy
 from django.views import generic
 
 from questionnaires.models import Qre
+
 from .forms import SectionForm
 from .models import Section
 
@@ -33,12 +34,15 @@ class SectionListView(generic.ListView):
             .filter(qre__id=self.kwargs['qre_pk'])
         )
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['qre_pk'] = self.kwargs['qre_pk']
+        return context
+
 
 class SectionMoveView(generic.UpdateView):
-    '''
-    Move section up or down in the qre by updating the order field
-    using the Ordered Model 'up' and 'down' methods.
-    '''
+    """Move section up/down in the qre by updating the order field using the Ordered Model 'up'/'down' methods."""
+
     model = Section
     fields = []
 
