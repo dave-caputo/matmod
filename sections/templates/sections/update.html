@@ -1,6 +1,8 @@
-<form action="/" id="qre_section_update_form" autocomplete="off">
+{% load crispy_forms_tags %}
+
+<form action="/" id="section_rename_form" autocomplete="off">
     {% csrf_token %}
-    {{ form }}
-    <button id="qre_section_update_btn">Update</button>
+    {{ form|crispy }}
+    <button class="btn btn-primary" id="section_rename_btn">Rename</button>
 </form>
-<div id="qre_section_update_form_data" data-qre-name="{{ object.name }}"></div>
+<div id="section_rename_form_data" data-section-name="{{ section.name }}"></div>

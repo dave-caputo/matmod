@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}
-  Question
-{% endblock title %}
+
+{% block title %}Question{% endblock title %}
+
 {% block breadcrumbs %}
-  <a href="{% url 'dashboard:index' %}">dashboard</a> /
-  <a href="{% url 'qres:detail' qre_pk %}">{{ question.section.qre }}</a> /
-  <a href="{% url 'sections:detail' qre_pk section_pk %}">{{ question.section }}</a> / question
+<li class="breadcrumb-item" aria-current="page"><a href="{% url 'dashboard:index' %}">dashboard</a></li>
+<li class="breadcrumb-item" aria-current="page"><a href="{% url 'qres:detail' qre_pk %}">{{ question.section.qre }}</a></li>
+<li class="breadcrumb-item" aria-current="page"><a href="{% url 'sections:detail' qre_pk section_pk %}">{{ question.section }}</a></li>
+<li class="breadcrumb-item active" aria-current="page">Question</li>
 {% endblock breadcrumbs %}
+
 {% block header %}
   {{ question }}
 {% endblock header %}

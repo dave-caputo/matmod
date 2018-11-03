@@ -1,11 +1,10 @@
-var moveQreSection = (function() {
+var moveSection = (function() {
 
   $(document).on('click', '.section_move_link',
     function(event) {
       event.preventDefault();
 
       var moveUrl = $(this).data('url');
-
       $.ajax({
           url: moveUrl,
           type: 'POST',
