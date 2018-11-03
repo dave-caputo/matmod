@@ -13,8 +13,7 @@ $(document).ready(function(){
         source: '#question_update_form_data',
         name: 'weight',
         target: '#question_weight'
-      }
-      ],
+      }],
       formSubmitBtn: '#question_update_btn',
       actionEvent: 'questionUpdated',
       hiddenLabels: true,

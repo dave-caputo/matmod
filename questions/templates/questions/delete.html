@@ -1,28 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}
-  Delete Question
-{% endblock title %}
+{% block title %}Delete Question{% endblock title %}
 
 {% block breadcrumbs %}
-  <a href="{% url 'dashboard:index' %}">dashboard</a> /
-  <a href="{% url 'qres:detail' qre_pk %}">questionnaire: "{{ question.section.qre.name }}"</a> /
-  <a href="{% url 'sections:detail' qre_pk section_pk %}">section: "{{ question.section }}"</a> /
-  <a href="{% url 'questions:detail' qre_pk section_pk question.pk %}">detail: "{{ question }}"</a> / delete
+  <li class="breadcrumb-item" aria-current="page"><a href="{% url 'dashboard:index' %}">dashboard</a></li>
+  <li class="breadcrumb-item" aria-current="page"><a href="{% url 'qres:detail' qre_pk %}">{{ question.section.qre.name }}</a></li>
+  <li class="breadcrumb-item" aria-current="page"><a href="{% url 'sections:detail' qre_pk section_pk %}">{{ question.section }}</a></li>
+  <li class="breadcrumb-item" aria-current="page"><a href="{% url 'questions:detail' qre_pk section_pk question.pk %}">{{ question|truncatechars:40 }}</a></li>
+  <li class="breadcrumb-item active" aria-current="page">delete question</li>
 {% endblock breadcrumbs %}
 
 {% block header %}
-  Delete question "{{ question }}"
+  Delete: {{ question }}
 {% endblock header %}
 
 
 {% block content %}
-    <p>This questions and all its assessments will be permanently deleted. Are you sure you want to continue?</p>
-    <p><a href="{% url 'questions:detail' qre_pk section_pk question.pk %}">No, go back</a></p>
-    <br />
+  <div class="row">
+    <div class="col">
+        <h5>This question and all its assessments will be permanently deleted. Are you sure you want to continue?</h5>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <a href="{% url 'questions:detail' qre_pk section_pk question.pk %}" class="btn btn-primary">No, go back</a>
+    </div>
+    <div class="col-md-6 text-right">
+      <form id="question_delete_form" method="POST">{% csrf_token %}
+        <input class="btn btn-danger" type="submit" id="question_delete_btn" value="Yes, delete" />
+      </form>
+    </div>
+  </div>
 
-    <form id="question_delete_form" method="POST">{% csrf_token %}
-      <input type="submit" id="question_delete_btn" value="Yes, delete" />
-    </form>
 {% endblock content %}
