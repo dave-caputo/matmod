@@ -3,10 +3,14 @@
   {{ answer_formset.management_form }}
   {% for form in answer_formset %}
     {% ifchanged  %}
-    <h4>{{ form.instance.question.section }}</h4>
+      <h4 class="mt-4">{{ form.instance.question.section }}</h4>
+      <hr>
     {% endifchanged %}
     <h5>{{ form.instance.question }}</h5>
     {{ form }}
   {% endfor %}
-  <input type="submit" class="btn btn-primary" id="answers_update_btn" value="Submit Assessment">
+  <div class="text-right mt-4">
+      <input type="submit" class="btn btn-primary" id="answers_update_btn" value="Submit Assessment">
+  </div>
+
 </form>
