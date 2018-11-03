@@ -1,34 +1,44 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}
-  Complete Assessment
-{% endblock title %}
+
+{% block styles %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'css/ion.rangeSlider.css' %}">
+  <link rel="stylesheet" href="{% static 'css/ion.rangeSlider.skinHTML5.css' %}">
+{% endblock  %}
+
+{% block title %}Complete Assessment{% endblock title %}
+
 {% block breadcrumbs %}
-  <a href="{% url 'dashboard:index' %}">dashboard</a> /
-  <a href="{% url 'clients:detail' client_pk %}">{{ assessment.client }}</a> /
-  complete assessment
+  <li class="breadcrumb-item" aria-current="page"><a href="{% url 'dashboard:index' %}">dashboard</a></li>
+  <li class="breadcrumb-item" aria-current="page"><a href="{% url 'clients:detail' client_pk %}"> {{ assessment.client }}</a></li>
+  <li class="breadcrumb-item" aria-current="page"><a href="{% url 'assess:detail' client_pk assessment.pk %}"> {{ assessment }}</a></li>
+  <li class="breadcrumb-item active" aria-current="page">complete</li>
 {% endblock breadcrumbs %}
-{% block header %}
-  Complete assessment: {{ assessment }}
-{% endblock header %}
+
+{% block header %}{{ assessment }}{% endblock header %}
+
+{% block subheader %}
+<h4><span class="badge badge-primary">{{ assessment.is_pending|yesno:'pending,complete' }}</span></h4>
+{% endblock subheader %}
+
 {% block content %}
-  <h3>Current status: "{{ assessment.is_pending|yesno:'Pending,Completed' }}"</h3>
-  <p><a href="#" id="assess_rename_display">~ Edit assessment</a> | <a href="{% url 'assess:detail' client_pk assessment.pk %}">View results</a></p>
-  <div id="assess_rename_div" hidden></div>
-  <hr>
   <!-- Answers -->
   <div id="answer_formset_div">
     {% include 'assess/answers_formset.html' %}
   </div>
   <!-- End Answers -->
   <hr>
-  <p><a href="{% url 'assess:delete' client_pk assessment.pk %}">- Delete assessment</a></p>
-  <p><a target="_blank" href="/admin/">Go to admin site</a></p>
+  <p class="text-right"><a target="_blank" href="/admin/"><i class="fas fa-tachometer-alt"></i> Go to admin site</a></p>
+
 {% endblock content %}
+
 {% block page_data %}
   <div id="page_urls" data-assess-rename-url="{% url 'assess:rename' client_pk assessment.pk %}"></div>
 {% endblock page_data %}
+
 {% block scripts %}
   {{ block.super }}
-  <script src="{% static 'assess/js/update.js' %}"></script>
+  <script src="{% static 'js/ion.rangeSlider.min.js' %}"></script>
+  <script src="{% static 'assess/js/assess-answer-sliders.js' %}"></script>
 {% endblock scripts %}

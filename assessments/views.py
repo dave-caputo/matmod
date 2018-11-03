@@ -31,8 +31,11 @@ class AssessmentListView(generic.ListView):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        return qs.select_related('client').filter(
-            client__pk=self.kwargs['client_pk'])
+        return (
+            qs
+            .select_related('client')
+            .filter(client__pk=self.kwargs['client_pk'])
+        )
 
 
 class AssessmentDetailView(generic.DetailView):
@@ -54,11 +57,7 @@ class AssessmentDetailView(generic.DetailView):
         ans_qs = self.get_answers()
         context['answer_list'] = ans_qs
         context['client_pk'] = self.kwargs['client_pk']
-
-        # ========
         context['section_totals'] = self.get_object().answers.section_totals
-
-        # ========
 
         return context
 
@@ -95,9 +94,7 @@ class AssessmentRenameView(generic.UpdateView):
     fields = ['name']
 
     def get_success_url(self):
-        return reverse('assess:rename', kwargs={
-            'client_pk': self.kwargs['client_pk'],
-            'pk': self.kwargs['pk']})
+        return reverse('assess:rename', kwargs={'client_pk': self.kwargs['client_pk'], 'pk': self.kwargs['pk']})
 
 
 class AssessmentDeleteView(generic.DeleteView):

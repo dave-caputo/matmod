@@ -16,9 +16,14 @@
 {% block header %}{{ assessment }}{% endblock header %}
 {% block subheader %}
 <h4><span class="badge badge-primary">{{ assessment.is_pending|yesno:'pending,complete' }}</span></h4>
-<p><span><a href="#" id="assess_rename_display"><i class="fas fa-pen"></i> Rename assessment</a> | <a href="{% url 'assess:complete' client_pk assessment.pk %}"><i class="fas fa-list-alt"></i> Complete assessment</a> | <a href="{% url 'assess:delete' client_pk assessment.pk %}"><i class="fas fa-trash-alt"></i> Delete assessment</a></p>
+<p>
+  <a href="{% url 'assess:complete' client_pk assessment.pk %}"><i class="fas fa-list-alt"></i> Complete assessment</a> |
+  <span><a href="#" id="assess_rename_display"><i class="fas fa-pen"></i> Rename assessment</a> |
+  <a href="{% url 'assess:delete' client_pk assessment.pk %}"><i class="fas fa-trash-alt"></i> Delete assessment</a>
+</p>
 <div id="assess_rename_div"></div>
 {% endblock subheader %}
+
 {% block content %}
   <!-- Answers -->
   <div id="answer_div">
