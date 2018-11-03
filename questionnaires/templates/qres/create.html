@@ -1,6 +1,8 @@
+{% load crispy_forms_tags %}
+
 <form action="/" id="qre_create_form" autocomplete="off">
     {% csrf_token %}
-      {{ form.as_p }}
-    <button class="btn" id="qre_create_btn">Create</button>
+      {{ form|crispy }}
+    <button class="btn btn-primary" id="qre_create_btn">Create</button>
 </form>
 

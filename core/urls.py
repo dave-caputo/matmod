@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.http import HttpResponseRedirect
-from django.urls import path, include, reverse
+from django.urls import include, path, reverse
 
 urlpatterns = [
     path('', lambda x: HttpResponseRedirect(reverse('dashboard:index'))),

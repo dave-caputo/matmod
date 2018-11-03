@@ -1,19 +1,20 @@
-<table id="question_table">
-  <thead>
-    <tr>
-      <th>Question</th>
-      <th>Weight</th>
-      <th width="10%" colspan="2">Move</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for question in question_list %}
-      <tr>
-        <td><a href="{% url 'questions:detail' qre_pk section_pk question.pk %}">{{ question }}</a></td>
-        <td>{{ question.weight }}</td>
-        <td width="5%">{% if not forloop.first %}<a href="#" class="question_move_link" data-url="{% url 'questions:move' qre_pk section_pk question.pk 'up' %}">up</a>{% endif %}</td>
-        <td width="5%">{% if not forloop.last %}<a href="#" class="question_move_link" data-url="{% url 'questions:move' qre_pk section_pk question.pk 'down' %}">down</a>{% endif %}</td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
+{% for question in question_list %}
+  <tr>
+    <td width="5%" class="text-center">
+      {% if not forloop.first %}
+      <a href="#" class="question_move_link" data-url="{% url 'questions:move' qre_pk section_pk question.pk 'up' %}">
+          <i class="fas fa-arrow-alt-circle-up"></i>
+      </a>
+      {% endif %}
+    </td>
+    <td width="5%" class="text-center">
+      {% if not forloop.last %}
+      <a href="#" class="question_move_link" data-url="{% url 'questions:move' qre_pk section_pk question.pk 'down' %}">
+          <i class="fas fa-arrow-alt-circle-down"></i>
+      </a>
+      {% endif %}
+    </td>
+    <td><a href="{% url 'questions:detail' qre_pk section_pk question.pk %}">{{ question }}</a></td>
+    <td width="10%" class="text-right">{{ question.weight }}</td>
+  </tr>
+{% endfor %}

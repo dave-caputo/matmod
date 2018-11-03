@@ -1,40 +1,87 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}
-  Assessment
-{% endblock title %}
+{% block title %}Assessment{% endblock title %}
+
+{% block styles %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.css"/>
+{% endblock %}
+
 {% block breadcrumbs %}
-  <a href="{% url 'dashboard:index' %}">dashboard</a> /
-  <a href="{% url 'clients:detail' client_pk %}"> {{ assessment.client }}</a> / assessment
+  <li class="breadcrumb-item" aria-current="page"><a href="{% url 'dashboard:index' %}">dashboard</a></li>
+  <li class="breadcrumb-item" aria-current="page"><a href="{% url 'clients:detail' client_pk %}"> {{ assessment.client }}</a></li>
+  <li class="breadcrumb-item active" aria-current="page">assessment</li>
 {% endblock breadcrumbs %}
-{% block header %}
-  {{ assessment }}
-{% endblock header %}
+
+{% block header %}{{ assessment }}{% endblock header %}
+{% block subheader %}
+<h4><span class="badge badge-primary">{{ assessment.is_pending|yesno:'pending,complete' }}</span></h4>
+<p>
+  <a href="{% url 'assess:complete' client_pk assessment.pk %}"><i class="fas fa-list-alt"></i> Complete assessment</a> |
+  <span><a href="#" id="assess_rename_display"><i class="fas fa-pen"></i> Rename assessment</a> |
+  <a href="{% url 'assess:delete' client_pk assessment.pk %}"><i class="fas fa-trash-alt"></i> Delete assessment</a>
+</p>
+<div id="assess_rename_div"></div>
+{% endblock subheader %}
+
 {% block content %}
-  <h3>Current status: "{{ assessment.is_pending|yesno:'Pending,Completed' }}"</h3>
-  <p><a href="#" id="assess_update_link">~ Edit assessment</a> | <a href="{% url 'assess:complete' client_pk assessment.pk %}">Complete assessment</a></p>
-  <div id="assess_update_div" hidden></div>
-  <hr>
   <!-- Answers -->
-  <div id="answers_div">
+  <div id="answer_div">
     <h3>Assessment Results</h3>
+    <table class="table table-striped" id="answer_table">
+      <thead>
+        <tr>
+          <th>Section</th>
+          <th>Question</th>
+          <th>Answer</th>
+          <th>Weight</th>
+          <th>Score</th>
+          <th>Maturity</th>
+        </tr>
+      </thead>
+      <tbody id="answer_table_body">
+        {% include 'answers/list.html' %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th class="text-right pr-4">{{ assessment.score|floatformat:1 }} / {{ assessment.max_score|floatformat:1 }}</th>
+          <th class="text-right pr-4">{{ assessment.score_pc|floatformat:0 }}%</th>
+        </tr>
+      </tfoot>
+    </table>
   </div>
-  <div id="answer_list_div">
-    {% include 'answers/list.html' %}
-  </div>
-  <hr>
-  <div id="section_list_div">
-   {% include 'sections/totals.html' %}
+  <br>
+  <br>
+  <div id="section_div">
+    <h3>Results by Section</h3>
+    <table class="table table-striped" id="section_table">
+      <thead>
+        <tr>
+          <th>Section</th>
+          <th>Score</th>
+          <th>Maturity</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% include 'sections/totals.html' %}
+      </tbody>
+    </table>
   </div>
   <!-- End Answers -->
   <hr>
-  <p><a href="{% url 'assess:delete' client_pk assessment.pk %}">- Delete assessment</a></p>
-  <p><a target="_blank" href="/admin/">Go to admin site</a></p>
+  <p class="text-right"><a target="_blank" href="/admin/"><i class="fas fa-tachometer-alt"></i> Go to admin site</a></p>
 {% endblock content %}
 {% block page_data %}
-  <div id="page_urls" data-assess-update-url="{% url 'assess:update' client_pk assessment.pk %}"></div>
+  <div id="page_urls" data-assess-rename-url="{% url 'assess:rename' client_pk assessment.pk %}"></div>
 {% endblock page_data %}
 {% block scripts %}
   {{ block.super }}
-  <script src="{% static 'assess/js/update.js' %}"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.js"></script>
+  <script src="{% static 'answers/js/table.js' %}"></script>
+  <script src="{% static 'js/update_component.js' %}"></script>
+  <script src="{% static 'assess/js/assess_rename.js' %}"></script>
 {% endblock scripts %}

@@ -1,0 +1,18 @@
+.irs-bar {
+    border-top: 1px solid #007bff;
+    border-bottom: 1px solid #007bff;
+    background: #007bff;
+    background: linear-gradient(to top, rgba(0, 123, 255, 1) 0%,rgba(127,195,232,1) 100%); /* W3C */
+}
+.irs-bar-edge {
+    border: 1px solid #007bff;
+    border-right: 0;
+    background: #007bff;
+    background: linear-gradient(to top, rgba(0, 123, 255, 1) 0%,rgba(127,195,232,1) 100%); /* W3C */
+}
+.irs-from, .irs-to, .irs-single {
+    background: #007bff;
+}
+.irs-grid-pol {
+    background: #007bff;
+}

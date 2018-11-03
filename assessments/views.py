@@ -1,7 +1,7 @@
 from django import forms
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 from django.views import generic
 
 from answers.forms import AnswerForm
@@ -16,7 +16,9 @@ class AssessmentCreateView(generic.CreateView):
     form_class = AssessmentForm
     model = Assessment
     template_name = 'assess/create.html'
-    success_url = reverse_lazy('clients:create')
+
+    def get_success_url(self):
+        return reverse('assess:create', kwargs={'client_pk': self.kwargs['client_pk']})
 
     def get_initial(self):
         client = get_object_or_404(Client, id=self.kwargs['client_pk'])
@@ -29,8 +31,11 @@ class AssessmentListView(generic.ListView):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        return qs.select_related('client').filter(
-            client__pk=self.kwargs['client_pk'])
+        return (
+            qs
+            .select_related('client')
+            .filter(client__pk=self.kwargs['client_pk'])
+        )
 
 
 class AssessmentDetailView(generic.DetailView):
@@ -52,11 +57,7 @@ class AssessmentDetailView(generic.DetailView):
         ans_qs = self.get_answers()
         context['answer_list'] = ans_qs
         context['client_pk'] = self.kwargs['client_pk']
-
-        # ========
         context['section_totals'] = self.get_object().answers.section_totals
-
-        # ========
 
         return context
 
@@ -87,15 +88,13 @@ class AssessmentCompleteView(AssessmentDetailView):
         return AnswerFormSet(data=data, queryset=self.get_answers())
 
 
-class AssessmentUpdateView(generic.UpdateView):
+class AssessmentRenameView(generic.UpdateView):
     model = Assessment
-    template_name = 'assess/update.html'
+    template_name = 'assess/rename.html'
     fields = ['name']
 
     def get_success_url(self):
-        return reverse('assess:update', kwargs={
-            'client_pk': self.kwargs['client_pk'],
-            'pk': self.kwargs['pk']})
+        return reverse('assess:rename', kwargs={'client_pk': self.kwargs['client_pk'], 'pk': self.kwargs['pk']})
 
 
 class AssessmentDeleteView(generic.DeleteView):

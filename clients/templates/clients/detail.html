@@ -1,34 +1,66 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}
-  Client
-{% endblock title %}
+
+{% block styles %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.css"/>
+{% endblock %}
+
 {% block breadcrumbs %}
-  <a href="{% url 'dashboard:index' %}">dashboard</a> / client</div>
+  <li class="breadcrumb-item" aria-current="page"><a href="{% url 'dashboard:index' %}">dashboard</a></li>
+  <li class="breadcrumb-item active" aria-current="page">client</li>
 {% endblock breadcrumbs %}
-{% block header %}
-  {{ client }}
-{% endblock header %}
+
+{% block title %}Client{% endblock title %}
+
+{% block header %}{{ client }}{% endblock header %}
+{% block subheader %}
+  <div class="row">
+    <div class="col-md-4">
+        <p><span id="client_update_display"><a href="#"><i class="fas fa-pen"></i> Rename client</a></small></span> | <a href="{% url 'clients:delete' client.pk %}" id="client_delete_link"><i class="fas fa-trash-alt"></i> Delete client</a></p>
+        <div id="client_update_div"></div>
+    </div>
+  </div>
+{% endblock subheader %}
+
 {% block content %}
-  <p><a href="#" id="client_update_link">~ Edit client</a></p>
-  <div id="client_update_div" hidden></div>
-  <hr>
   <!-- Assessments -->
   <div id="assess_div">
     <h3>Assessments</h3>
-    <a href="#" id="assess_create_link">+ New assessment</a>
-    <div id="assess_create_div" hidden></div>
-    <br>
-    <br>
-    <div id="assess_list_div">
-      {% include 'assess/list.html' %}
+    <a href="#" id="assess_create_display"><i class="fas fa-plus-circle"></i> New assessment</a>
+    <div id="assess_create_div"></div>
+    <div>
+      <table class="table table-striped" id="assess_table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Questionnaire</th>
+            <th>Score</th>
+            <th>Max Score</th>
+            <th>Maturity</th>
+          </tr>
+        </thead>
+        <tbody id="assess_table_body">
+            {% include 'assess/list.html' %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class="text-right pr-4"></th>
+            <th class="text-right pr-4"></th>
+          </tr>
+        </tfoot>
+      </table>
     </div>
   </div>
   <!-- End Assessments -->
 
   <hr>
-  <p><a href="{% url 'clients:delete' client.pk %}" id="client_delete_link">- Delete client</a></p>
-  <p><a target="_blank" href="/admin/">Go to admin site</a></p>
+  <p class="text-right"><a target="_blank" href="/admin/"><i class="fas fa-tachometer-alt"></i> Go to admin site</a></p>
 
 {% endblock content %}
 {% block page_data %}
@@ -37,6 +69,10 @@
 
 {% block scripts %}
   {{ block.super }}
-  <script src="{% static 'clients/js/update.js' %}"></script>
-  <script src="{% static 'assess/js/create.js' %}"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.js"></script>
+  <script src="{% static 'assess/js/table.js' %}"></script>
+  <script src="{% static 'js/create_component.js' %}"></script>
+  <script src="{% static 'js/update_component.js' %}"></script>
+  <script src="{% static 'clients/js/update_client.js' %}"></script>
+  <script src="{% static 'clients/js/create_assessment.js' %}"></script>
 {% endblock scripts %}

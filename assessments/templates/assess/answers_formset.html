@@ -1,13 +1,16 @@
-<form method="POST" id="answers_update_formset">
+<form action="{% url 'assess:complete' client_pk assessment.pk %}" method="POST" id="answers_update_formset">
   {% csrf_token %}
   {{ answer_formset.management_form }}
   {% for form in answer_formset %}
     {% ifchanged  %}
-      <h4>{{ form.instance.question.section }}</h4>
+      <h4 class="mt-4">{{ form.instance.question.section }}</h4>
+      <hr>
     {% endifchanged %}
     <h5>{{ form.instance.question }}</h5>
-    {{ form.id }}
-    {{ form.answer }}
+    {{ form }}
   {% endfor %}
-  <button id="answers_update_btn">Save Answers</button>
+  <div class="text-right mt-4">
+      <input type="submit" class="btn btn-primary" id="answers_update_btn" value="Submit Assessment">
+  </div>
+
 </form>

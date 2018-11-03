@@ -1,62 +1,77 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}
-  Dashboard
-{% endblock title %}
-{% block header %}
-  <span class="brand">Digital Maturity Modelling</span>
-{% endblock header %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block header %}Digital Maturity Modelling{% endblock header %}
+
 {% block breadcrumbs %}
-  dashboard /
+  <li class="breadcrumb-item active" aria-current="page">dashboard</li>
 {% endblock breadcrumbs %}
+
 {% block content %}
-  <div class="card-container">
-    <!-- Client Section -->
-    <div class="card">
-      <div class="card_header">
-        <h3>Clients</h3>
-        <a href="#" id="client_create_link"><i class="fas fa-plus-circle"></i></a>
-      </div>
-
-
-      <div id="client_create_div" hidden>
-      </div>
-      <div id="client_list_div">
-        {% include 'clients/list.html' %}
+  <div class="row">
+    <div class="col-12">
+      <div class="card-deck">
+        <div class="card">
+          <div class="card-header">Clients</div>
+          <div class="card-body">
+            <div id="client_list_div">
+                {% include 'clients/list.html' %}
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">Questionnaires</div>
+          <div class="card-body">
+            <div id="qre_list_div">
+              {% include 'qres/list.html' %}
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">Recent assessments</div>
+          <div class="card-body">
+            <ul class="list-group">
+              {% for assess in assess_list %}
+              <li class="list-group-item">{{ assess }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- End Client Section -->
-    <!-- Questionnaire Section -->
-    <div class="card">
-      <div class="card_header">
-        <h3>Questionnaires</h3>
-        <a href="#" id="create_display_qre"><i class="fas fa-plus-circle"></i></a>
-      </div>
-      <div id="qre_create_div" hidden></div>
-      <div id="qre_list_div">
-        {% include 'qres/list.html' %}
-      </div>
-    </div>
-    <!-- End Questionnaire Section -->
-    <!-- Assessment Section -->
-    {% comment %}
-    <div class="card">
-      <h3>Assessments</h3>
-      <ul>
-        {% for assess in assess_list %}
-          <li>{{ assess }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% endcomment %}
-    <!-- End Assessment Section -->
   </div>
+  <div class="row pt-1">
+    <div class="col-12">
+      <div class="card-deck">
+        <div class="card">
+          <div class="card-body">
+              <h5 class="text-center"><a href="#" id="client_create_display"><i class="fas fa-plus-circle"></i></a></h5>
+            <div id="client_create_div"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="text-center"><a href="#" id="qre_create_display"><i class="fas fa-plus-circle"></i></a></h5>
+            <div id="qre_create_div"></div>
+          </div>
+        </div>
+        <div class="card">
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <hr>
+  <p><a target="_blank" href="/admin/"><i class="fas fa-tachometer-alt"></i> Go to admin site</a></p>
+
 {% endblock content %}
 {% block page_data %}
   <div id="page_urls" data-qre-create-url="{% url 'qres:create' %}" data-qre-list-url="{% url 'qres:list' %}" data-client-create-url="{% url 'clients:create' %}" data-client-list-url="{% url 'clients:list' %}"></div>
 {% endblock page_data %}
 {% block scripts %}
   {{ block.super }}
-  <script src="{% static 'qres/js/create.js' %}"></script>
-  <script src="{% static 'clients/js/create.js' %}"></script>
+  <script src="{% static 'js/create_component.js' %}"></script>
+  <script src="{% static 'dashboard/js/create_objects.js' %}"></script>
 {% endblock scripts %}

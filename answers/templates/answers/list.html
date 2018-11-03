@@ -1,34 +1,10 @@
-<table>
-  <thead>
-    <tr>
-      <th>Section</th>
-      <th>Question</th>
-      <th>Answer</th>
-      <th>Weight</th>
-      <th>Score</th>
-      <th>Maturity</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for answer in answer_list %}
-      <tr>
-        <td>{{ answer.question.section }}</td>
-        <td>{{ answer.question }}</td>
-        <td>{{ answer.answer }}</td>
-        <td>{{ answer.question.weight }}</td>
-        <td>{{ answer.score }}</td>
-        <td></td>
-      </tr>
-    {% endfor %}
-  </tbody>
-  <tfoot>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th>{{ assessment.score|floatformat:1 }} / {{ assessment.max_score|floatformat:1 }}</th>
-      <th>{{ assessment.score_pc|floatformat:0 }}%</th>
-    </tr>
-  </tfoot>
-</table>
+{% for answer in answer_list %}
+  <tr>
+    <td>{{ answer.question.section }}</td>
+    <td>{{ answer.question }}</td>
+    <td class="text-right pr-4">{{ answer.answer }}</td>
+    <td class="text-right pr-4">{{ answer.question.weight }}</td>
+    <td class="text-right pr-4">{{ answer.score }}</td>
+    <td class="text-right pr-4"></td>
+  </tr>
+{% endfor %}

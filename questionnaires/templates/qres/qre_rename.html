@@ -1,0 +1,8 @@
+{% load crispy_forms_tags %}
+
+<form action="/" id="qre_rename_form">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button class="btn btn-primary" id="qre_rename_btn">Update</button>
+</form>
+<div id="qre_rename_form_data" data-qre-name="{{ object.name }}"></div>

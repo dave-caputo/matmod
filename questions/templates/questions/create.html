@@ -1,5 +1,7 @@
+{% load crispy_forms_tags %}
+
 <form action="/" id="question_create_form" autocomplete="off">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button id="question_create_btn">Create question</button>
+    {{ form|crispy }}
+    <button class="btn btn-primary" id="question_create_btn">Add question</button>
 </form>

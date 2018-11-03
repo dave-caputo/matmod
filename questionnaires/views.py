@@ -1,5 +1,3 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 
@@ -24,13 +22,13 @@ class QreDetailView(generic.DetailView):
     template_name = 'qres/detail.html'
 
 
-class QreUpdateView(generic.UpdateView):
+class QreRenameView(generic.UpdateView):
     model = Qre
-    template_name = 'qres/update.html'
+    template_name = 'qres/qre_rename.html'
     fields = ['name']
 
     def get_success_url(self):
-        return reverse('qres:update', kwargs={'pk': self.kwargs['pk']})
+        return reverse('qres:rename', kwargs={'pk': self.kwargs['pk']})
 
 
 class QreDeleteView(generic.DeleteView):

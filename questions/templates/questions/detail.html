@@ -1,23 +1,43 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}
-  Question
-{% endblock title %}
+
+{% block title %}Question{% endblock title %}
+
 {% block breadcrumbs %}
-  <a href="{% url 'dashboard:index' %}">dashboard</a> /
-  <a href="{% url 'qres:detail' qre_pk %}">{{ question.section.qre }}</a> /
-  <a href="{% url 'sections:detail' qre_pk section_pk %}">{{ question.section }}</a> / question
+<li class="breadcrumb-item" aria-current="page"><a href="{% url 'dashboard:index' %}">dashboard</a></li>
+<li class="breadcrumb-item" aria-current="page"><a href="{% url 'qres:detail' qre_pk %}">{{ question.section.qre }}</a></li>
+<li class="breadcrumb-item" aria-current="page"><a href="{% url 'sections:detail' qre_pk section_pk %}">{{ question.section }}</a></li>
+<li class="breadcrumb-item active" aria-current="page">Question</li>
 {% endblock breadcrumbs %}
-{% block header %}
-  {{ question }}
-{% endblock header %}
+
+{% block header %}{{ question }}{% endblock header %}
+
+{% block subheader %}
+  <div class="row">
+    <div class="col-md-4">
+      <div>
+        <span id="question_update_display"><a href="#"><i class="fas fa-pen"></i> Update</a></small></span> |
+        <a href="{% url 'questions:delete' question.section.qre.pk question.section.pk question.pk %}" id="sections_delete_link"><i class="fas fa-trash-alt"></i> Delete</a>
+      </div>
+      <div id="question_update_div"></div>
+    </div>
+  </div>
+{% endblock subheader %}
+
 {% block content %}
-<h3>Weight: <span id="question_weight">{{ question.weight }}</span></h3>
-<p><a href="#" id="question_update_link">~ Edit question</a></p>
-<div id="question_update_div" hidden></div>
-<hr>
-<p><a href="{% url 'questions:delete' qre_pk section_pk question.pk %}">- Delete question</a></p>
-<p><a target="_blank" href="/admin/">Go to admin site</a></p>
+  <div class="row">
+    <div class="col">
+      <h4>Weight: <span id="question_weight">{{ question.weight }}</span></h4>
+    </div>
+  </div>
+  <!-- Admin Link -->
+  <div class="row">
+    <div class="col">
+      <hr>
+      <p class="text-right"><a target="_blank" href="/admin/"><i class="fas fa-tachometer-alt"></i> Go to admin site</a></p>
+    </div>
+  </div>
+  <!-- End Admin Link -->
 {% endblock content %}
 
 {% block page_data %}
@@ -26,5 +46,6 @@
 
 {% block scripts %}
   {{ block.super }}
-  <script src="{% static 'questions/js/update.js' %}"></script>
+  <script src="{% static 'js/update_component.js' %}"></script>
+  <script src="{% static 'questions/js/question-update.js' %}"></script>
 {% endblock scripts %}

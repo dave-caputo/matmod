@@ -1,5 +1,5 @@
-<ul class="stacked_links">
+<ul class="list-group">
   {% for qre in qre_list %}
-    <li><a href="{% url 'qres:detail' qre.pk %}">{{ qre }}</a></li>
+  <li class="list-group-item"><a href="{% url 'qres:detail' qre.pk %}">{{ qre }}</a></li>
   {% endfor %}
 </ul>
