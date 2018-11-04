@@ -14,7 +14,8 @@
 
 {% block subheader %}
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
+      <h4><span class="badge badge-primary">Weight <span id="question_weight">{{ question.weight }}</span></span></h4>
       <div>
         <span id="question_update_display"><a href="#"><i class="fas fa-pen"></i> Update</a></small></span> |
         <a href="{% url 'questions:delete' question.section.qre.pk question.section.pk question.pk %}" id="sections_delete_link"><i class="fas fa-trash-alt"></i> Delete</a>
@@ -27,11 +28,33 @@
 {% block content %}
   <div class="row">
     <div class="col">
-      <h4>Weight: <span id="question_weight">{{ question.weight }}</span></h4>
+      <h3>Choices</h3>
+      <div class="card-deck">
+        <div class="card">
+          <div class="card-header">Choice 1</div>
+          <div class="card-body" id="choice_text_1">{{ question.choice_text_1 }}</div>
+        </div>
+        <div class="card">
+          <div class="card-header">Choice 2</div>
+          <div class="card-body" id="choice_text_2">{{ question.choice_text_2 }}</div>
+        </div>
+        <div class="card">
+          <div class="card-header">Choice 3</div>
+          <div class="card-body" id="choice_text_3">{{ question.choice_text_3 }}</div>
+        </div>
+        <div class="card">
+          <div class="card-header">Choice 4</div>
+          <div class="card-body" id="choice_text_4">{{ question.choice_text_4 }}</div>
+        </div>
+        <div class="card">
+          <div class="card-header">Choice 5</div>
+          <div class="card-body" id="choice_text_5">{{ question.choice_text_5 }}</div>
+        </div>
+      </div>
     </div>
   </div>
   <!-- Admin Link -->
-  <div class="row">
+  <div class="row mt-4">
     <div class="col">
       <hr>
       <p class="text-right"><a target="_blank" href="/admin/"><i class="fas fa-tachometer-alt"></i> Go to admin site</a></p>
