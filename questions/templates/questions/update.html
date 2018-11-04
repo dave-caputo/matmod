@@ -1,11 +1,4 @@
 {% load crispy_forms_tags %}
 
-<form action="/" id="question_update_form" autocomplete="off">
-    {% csrf_token %}
-    <table>
-      {{ form|crispy }}
-    </table>
-    <br />
-    <button class="btn btn-primary" id="question_update_btn">Update</button>
-</form>
-<div id="question_update_form_data" data-question="{{ question }}" data-weight="{{ question.weight }}"></div>
+{% crispy form %}
+<div id="question_update_form_data" data-question="{{ question }}" data-weight="{{ question.weight }}" data-choice-text1="{{ question.choice_text_1 }}" data-choice-text2="{{ question.choice_text_2 }}"  data-choice-text3="{{ question.choice_text_3 }}" data-choice-text4="{{ question.choice_text_4 }}" data-choice-text5="{{ question.choice_text_5 }}"></div>

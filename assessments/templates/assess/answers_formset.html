@@ -7,7 +7,21 @@
       <hr>
     {% endifchanged %}
     <h5>{{ form.instance.question }}</h5>
-    {{ form }}
+    <div class="row">
+      <div class="col" style="padding:0px 7% 0 7%;">{{ form }}</div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="card-deck">
+          <div class="card"><div class="card-header text-center">0</div><div class="card-body text-center">No response.</div></div>
+          <div class="card"><div class="card-header text-center">1</div><div class="card-body">{{ form.instance.question.choice_text_1 }}</div></div>
+          <div class="card"><div class="card-header text-center">2</div><div class="card-body">{{ form.instance.question.choice_text_2 }}</div></div>
+          <div class="card"><div class="card-header text-center">3</div><div class="card-body">{{ form.instance.question.choice_text_3 }}</div></div>
+          <div class="card"><div class="card-header text-center">4</div><div class="card-body">{{ form.instance.question.choice_text_4 }}</div></div>
+          <div class="card"><div class="card-header text-center">5</div><div class="card-body">{{ form.instance.question.choice_text_5 }}</div></div>
+        </div>
+      </div>
+    </div>
   {% endfor %}
   <div class="text-right mt-4">
       <input type="submit" class="btn btn-primary" id="answers_update_btn" value="Submit Assessment">

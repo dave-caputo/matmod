@@ -52,10 +52,8 @@ class QuestionDetailView(generic.DetailView):
 
 
 class QuestionMoveView(generic.UpdateView):
-    '''
-    Move section up or down in the qre by updating the order field
-    using the Ordered Model 'up' and 'down' methods.
-    '''
+    """Move section up/down in the qre by updating the order field using the Ordered Model 'up'/'down' methods."""
+
     model = Question
     fields = []
 
@@ -75,16 +73,27 @@ class QuestionMoveView(generic.UpdateView):
 
 
 class QuestionUpdateView(generic.UpdateView):
+
+    form_class = QuestionForm
     model = Question
     template_name = 'questions/update.html'
-    fields = ['question', 'weight', 'min_legend', 'max_legend']
+
+    def form_invalid(self, form):
+        print('form invalid!')
+        print(form.errors)
+        return super().form_invalid(form)
+
+    def form_valid(self, form):
+        print('form is valid!')
+        return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('questions:update', kwargs={
+        kwargs = {
             'qre_pk': self.kwargs['qre_pk'],
             'section_pk': self.kwargs['section_pk'],
-            'pk': self.kwargs['pk']
-        })
+            'pk': self.get_object().pk
+        }
+        return reverse('questions:update', kwargs=kwargs)
 
 
 class QuestionDeleteView(generic.DeleteView):

@@ -42,8 +42,14 @@ function updateObject(config) {
         })
         .done(function(data) {
             $(config.formDisplayDiv).html(data);
-            showOrHideLabels(config.formDisplayDiv);
-            $(document).trigger(config.actionEvent);
+
+            if ($(data).find('.invalid-feedback').length) {
+                console.log('Form errors were found');
+            } else {
+                showOrHideLabels(config.formDisplayDiv);
+                $(document).trigger(config.actionEvent);
+            }
+
         })
         .fail(function(e) {
             console.log('An error occurred when trying to update the ' + config.objectClass +'.');
