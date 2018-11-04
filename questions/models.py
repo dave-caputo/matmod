@@ -9,14 +9,12 @@ class Question(OrderedModel):
     section = models.ForeignKey('sections.Section', related_name='questions', on_delete=models.CASCADE)
     question = models.TextField()
     weight = models.DecimalField(max_digits=2, decimal_places=1, null=True, default=1)
-    min_legend = models.CharField(
-        max_length=155, blank=True, null=True,
-        help_text='Meaning of the answer with the lowest score.'
-    )
-    max_legend = models.CharField(
-            max_length=155, blank=True, null=True,
-            help_text='Meaning of the answer with the highest score.'
-    )
+    choice_text_0 = models.TextField(default='No Response', editable=False)
+    choice_text_1 = models.TextField(blank=True)
+    choice_text_2 = models.TextField(blank=True)
+    choice_text_3 = models.TextField(blank=True)
+    choice_text_4 = models.TextField(blank=True)
+    choice_text_5 = models.TextField(blank=True)
 
     order_with_respect_to = ('section',)
 

@@ -77,7 +77,7 @@ class QuestionMoveView(generic.UpdateView):
 class QuestionUpdateView(generic.UpdateView):
     model = Question
     template_name = 'questions/update.html'
-    fields = ['question', 'weight', 'min_legend', 'max_legend']
+    fields = ['question', 'weight']
 
     def get_success_url(self):
         return reverse('questions:update', kwargs={
