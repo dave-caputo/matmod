@@ -6,7 +6,7 @@ __pycache__
 *.project
 *.pkl
 *dev_email.py
-venv_grc_staging
+zappa-venv
 zappa_settings.json
 htmlcov
 .cache*
