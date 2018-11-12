@@ -9,8 +9,7 @@ class Question(OrderedModel):
     section = models.ForeignKey('sections.Section', related_name='questions', on_delete=models.CASCADE)
     question = models.TextField()
     weight = models.DecimalField(max_digits=2, decimal_places=1, null=True, default=1)
-    choice_text_0 = models.TextField(default='No Response', editable=False)
-    choice_text_1 = models.TextField(blank=True, max_length=100)
+    choice_text_1 = models.TextField(blank=True)
     choice_text_2 = models.TextField(blank=True)
     choice_text_3 = models.TextField(blank=True)
     choice_text_4 = models.TextField(blank=True)
@@ -20,6 +19,7 @@ class Question(OrderedModel):
 
     class Meta(OrderedModel.Meta):
         """Meta required to inherit from ``OrderedModel.Meta`` (https://github.com/bfirsh/django-ordered-model)."""
+
         pass
 
     def __str__(self):
