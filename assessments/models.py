@@ -5,13 +5,10 @@ from answers.models import Answer
 
 # Create your models here.
 class Assessment(models.Model):
-    qre = models.ForeignKey('questionnaires.Qre',
-                            verbose_name='questionnaire',
-                            related_name='assessments',
-                            on_delete=models.CASCADE)
-    client = models.ForeignKey('clients.Client',
-                               related_name='assessments',
-                               on_delete=models.CASCADE)
+    qre = models.ForeignKey(
+        'questionnaires.Qre', verbose_name='questionnaire', related_name='assessments', on_delete=models.CASCADE
+    )
+    client = models.ForeignKey('clients.Client', related_name='assessments', on_delete=models.CASCADE)
     name = models.CharField(max_length=55)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)

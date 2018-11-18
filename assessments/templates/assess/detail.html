@@ -74,8 +74,20 @@
     </table>
   </div>
   <!-- End Answers -->
-  <hr>
-  <p class="text-right"><a target="_blank" href="/admin/"><i class="fas fa-tachometer-alt"></i> Go to admin site</a></p>
+
+  <!-- Admin Link -->
+  <div class="row mt-4">
+    <div class="col">
+      <hr>
+      <p class="text-right">
+        <a target="_blank" href="{% url 'admin:assessments_assessment_changelist' %}">
+          <i class="fas fa-tachometer-alt"></i> Go to assessments admin
+        </a>
+      </p>
+    </div>
+  </div>
+  <!-- End Admin Link -->
+
 {% endblock content %}
 {% block page_data %}
   <div id="page_urls" data-assess-rename-url="{% url 'assess:rename' client_pk assessment.pk %}"></div>

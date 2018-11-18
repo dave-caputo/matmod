@@ -17,7 +17,7 @@ class Answer(models.Model):
     objects = AnswerTotalsManager()
 
     assessment = models.ForeignKey('assessments.Assessment', on_delete=models.CASCADE, related_name='answers')
-    question = models.ForeignKey('questions.Question', on_delete=models.CASCADE)
+    question = models.ForeignKey('questions.Question', on_delete=models.CASCADE, related_name='answers')
     answer = models.IntegerField(choices=ANSWER_CHOICES, default=0)
     target = models.IntegerField(choices=ANSWER_CHOICES, default=0)
     score = models.DecimalField(max_digits=6, decimal_places=1, default=0)

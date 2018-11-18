@@ -1,6 +1,7 @@
+from django.contrib.sites.models import Site
 from django.views.generic import TemplateView
 
-from .utils import get_client_list, get_qre_list, get_assess_list
+from .utils import get_assess_list, get_client_list, get_qre_list
 
 
 class DashboardIndexView(TemplateView):
@@ -12,5 +13,6 @@ class DashboardIndexView(TemplateView):
         context['client_list'] = get_client_list()
         context['qre_list'] = get_qre_list()
         context['assess_list'] = get_assess_list()
+        context['site'] = Site.objects.get_current()
 
         return context

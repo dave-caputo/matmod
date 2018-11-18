@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.sites.models import Site
 
 from clients.models import Client
 from questionnaires.models import Qre
@@ -7,6 +8,10 @@ from sections.models import Section
 
 
 def load_test_data():
+
+    site = Site.objects.get_current()
+    site.name = 'Tech Modelling'
+    site.save()
 
     User = get_user_model()
 
