@@ -1,0 +1,18 @@
+.target-slider .irs-bar {
+    border-top: 1px solid #a200ff;
+    border-bottom: 1px solid #a200ff;
+    background: #a200ff;
+    background: linear-gradient(to top, rgba(153, 0, 255, 1) 0%, rgba(220, 127, 232, 1) 100%); /* W3C */
+}
+.target-slider .irs-bar-edge {
+    border: 1px solid #a200ff;
+    border-right: 0;
+    background: #a200ff;
+    background: linear-gradient(to top, rgba(153, 0, 255, 1) 0%, rgba(220, 127, 232, 1) 100%); /* W3C */
+}
+.target-slider .irs-from, .target- .irs-to, .target-slider .irs-single {
+    background: #a200ff;
+}
+.target-slider .irs-grid-pol {
+    background: #a200ff;
+}
