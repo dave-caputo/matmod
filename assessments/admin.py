@@ -1,10 +1,9 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-
 from answers.models import Answer
-from .models import Assessment
 
+from .models import Assessment
 
 # @admin.register(Answer)
 # class AnswerAdmin(admin.ModelAdmin):
@@ -17,15 +16,25 @@ class AssessmentAdmin(admin.ModelAdmin):
                     'score', 'maximum_score']
 
     def answers(self, obj):
-        answers = ''.join(
-            ['<span style="display:block">'
-             '<a target="_blank"'
-             f' href="/admin/assessments/answer/{a.pk}/change/">'
-             f'Q{a.question.order + 1}={a.answer}</span>' for a in
-             obj.answers.select_related('question__qre').all()]
+        answers = (
+            obj.answers
+            .prefetch_related(
+                'question__section',
+            ).order_by(
+                'question__section',
+                'question__order'
+            )
         )
+        answer_rows = ''.join([
+            f'<tr><td><span style="display:block">Section: {answer.question.section}</td>'
+            f'<td>Q{answer.question.order + 1}</td><td>{answer.answer}</td><td>{answer.score}</td></tr>'
+            for answer in answers
+        ])
 
-        return format_html(answers)
+        return format_html(
+            '<table><thead><tr><th>Section</th><th>Question</th><th>Answer</th><th>Score</th></thead><tbody>' +
+            answer_rows + '</tbody></table>'
+        )
 
     def status(self, obj):
         return 'Pending' if obj.is_pending else 'Completed'
