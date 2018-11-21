@@ -12,7 +12,7 @@ class DashboardIndexView(TemplateView):
 
         context['client_list'] = get_client_list()
         context['qre_list'] = get_qre_list()
-        context['assess_list'] = get_assess_list()
+        context['recent_assess_list'] = get_assess_list()[:10]
         context['site'] = Site.objects.get_current()
 
         return context
