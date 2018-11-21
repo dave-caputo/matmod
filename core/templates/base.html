@@ -45,7 +45,7 @@
     {% endblock content %}
 
     {% block logout %}
-      <p class="text-right"><a target="_blank" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Log out</a></p>
+      <p class="text-right">logged in as <strong>{{ user.username }}</strong> | <a target="_blank" href="{% url 'logout' %}">Log out <i class="fas fa-sign-out-alt"></i></a></p>
     {% endblock logout %}
 
     {% block page_data %}
