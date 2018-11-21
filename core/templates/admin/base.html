@@ -1,0 +1,8 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link href="https://fonts.googleapis.com/css?family=Muli|Orbitron:900" rel="stylesheet">
+<link href="{% static 'css/admin_extra.css' %}" rel="stylesheet">
+{% endblock extrastyle %}
