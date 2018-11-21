@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block styles %}
+  {{ block.super }}
+  <link href="https://fonts.googleapis.com/css?family=Muli|Orbitron:900" rel="stylesheet">
+{% endblock styles %}
+
+{% block breadcrumb_section %}{% endblock breadcrumb_section %}
+{% block header_section %}{% endblock header_section %}
+
+
+{% block content %}
+  <div class="row align-items-center h-75">
+    <div class="col-5 mx-auto">
+      <div class="jumbotron text-center">
+        <h1 class="text-center brand">{{ site.name }}</h1>
+        {% if form.errors %}
+          <div class="login_alert">
+            <span>Your username and password didn't match. Please try again.</span>
+          </div>
+        {% endif %}
+
+        {% if next %}
+          {% if user.is_authenticated %}
+            <span>Your account doesn't have access to this page. To proceed, please login with an account that has access.</span>
+          {% endif %}
+        {% endif %}
+        <form class="login-form" method="post" action="{% url 'login' %}">
+          {% csrf_token %}
+          <!-- Username field -->
+          <div id="div_id_username" class="form-group">
+            <div class="">
+              <input type="text" placeholder="username" name="username" autofocus="" maxlength="254" class="textinput textInput form-control input-login" required="" id="id_username" style="">
+            </div>
+          </div>
+          <!-- End username field -->
+          <!-- Password field -->
+          <div id="div_id_password" class="form-group">
+            <div class="">
+              <input type="password" placeholder="password" name="password" class="textinput textInput form-control input-login" required="" id="id_password">
+            </div>
+          </div>
+          <!-- End password field -->
+          <button class="btn btn-primary btn-block btn-login" type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+          <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+        {# Assumes you setup the password_reset view in your URLconf #}
+        <p class="mt-3"><a href="{% url 'password_reset' %}">Forgot password?</a></p>
+      </div>
+    </div>
+  </div>
+{% endblock %}
