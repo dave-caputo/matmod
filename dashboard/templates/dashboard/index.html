@@ -37,7 +37,7 @@
         <div class="card">
           <div class="card-header">Recent assessments</div>
           <div class="card-body">
-            <ul class="list-group">
+            <ul class="list-group scroll">
               {% for assess in recent_assess_list %}
               <li class="list-group-item">
                 <a href="{% url 'assess:detail' assess.client.pk assess.pk %}">

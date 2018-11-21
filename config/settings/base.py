@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'answers',
     'assessments',
     'clients',
-    # 'core',
     'dashboard',
     'questionnaires',
     'questions',
@@ -141,3 +140,6 @@ STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'

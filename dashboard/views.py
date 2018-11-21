@@ -1,10 +1,11 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.models import Site
 from django.views.generic import TemplateView
 
 from .utils import get_assess_list, get_client_list, get_qre_list
 
 
-class DashboardIndexView(TemplateView):
+class DashboardIndexView(LoginRequiredMixin, TemplateView):
     template_name = 'dashboard/index.html'
 
     def get_context_data(self, **kwargs):

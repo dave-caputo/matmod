@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html class="h-100">
   {% block head %}
     <head>
       <meta charset="UTF-8">
@@ -11,32 +11,42 @@
       {% endblock styles %}
     </head>
   {% endblock head %}
-  <body>
-    <div class="container">
+  <body class="h-100">
+    <div class="container h-100">
+
+      <br>
 
       <!-- Breadcrumbs -->
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          {% block breadcrumbs %}{% endblock breadcrumbs %}
-        </ol>
-      </nav>
+      {% block breadcrumb_section %}
+        <nav aria-label="breadcrumb mt-1">
+          <ol class="breadcrumb">
+            {% block breadcrumbs %}{% endblock breadcrumbs %}
+          </ol>
+        </nav>
+      {% endblock breadcrumb_section %}
       <!-- End Breadcrumbs -->
 
       <!-- Page Header -->
+      {% block header_section %}
       <div class="row">
         <div class="col-sm">
-            <h1 id="page_header">{% block header %}{% endblock header %}</h1>
-            <div class="page_subheader">
-              {% block subheader %}{% endblock subheader %}
-            </div>
-            <hr>
-            <br>
+          <h1 id="page_header">{% block header %}{% endblock header %}</h1>
+          <div class="page_subheader">
+            {% block subheader %}{% endblock subheader %}
+          </div>
+          <hr>
+          <br>
         </div>
       </div>
+      {% endblock header_section %}
       <!-- End Page Header -->
 
     {% block content %}
     {% endblock content %}
+
+    {% block logout %}
+      <p class="text-right">logged in as <strong>{{ user.username }}</strong> | <a target="_blank" href="{% url 'logout' %}">Log out <i class="fas fa-sign-out-alt"></i></a></p>
+    {% endblock logout %}
 
     {% block page_data %}
     {% endblock page_data %}

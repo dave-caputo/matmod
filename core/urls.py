@@ -19,6 +19,7 @@ from django.urls import include, path, reverse
 
 urlpatterns = [
     path('', lambda x: HttpResponseRedirect(reverse('dashboard:index'))),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('answers/', include('answers.urls')),
     path('clients/', include('clients.urls')),

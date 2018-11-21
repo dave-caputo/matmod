@@ -1,9 +1,10 @@
-body {
-    margin-top: 20px;
-}
 thead th {
     text-align: center;
 }
 .brand {
     font-family: 'Orbitron', sans-serif;
+}
+.scroll {
+    max-height: 300px;
+    overflow-y: auto;
 }
