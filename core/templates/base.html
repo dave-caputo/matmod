@@ -14,9 +14,11 @@
   <body class="h-100">
     <div class="container h-100">
 
+      <br>
+
       <!-- Breadcrumbs -->
       {% block breadcrumb_section %}
-        <nav aria-label="breadcrumb">
+        <nav aria-label="breadcrumb mt-1">
           <ol class="breadcrumb">
             {% block breadcrumbs %}{% endblock breadcrumbs %}
           </ol>
@@ -41,6 +43,10 @@
 
     {% block content %}
     {% endblock content %}
+
+    {% block logout %}
+      <p class="text-right"><a target="_blank" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Log out</a></p>
+    {% endblock logout %}
 
     {% block page_data %}
     {% endblock page_data %}

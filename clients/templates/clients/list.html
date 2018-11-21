@@ -1,4 +1,4 @@
-<ul class="list-group">
+<ul class="list-group scroll">
   {% for client in client_list %}
   <li class="list-group-item"><a href="{% url 'clients:detail' client.pk %}">{{ client }}</a></li>
   {% endfor %}
