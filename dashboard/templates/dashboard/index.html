@@ -3,7 +3,12 @@
 
 {% block title %}Dashboard{% endblock title %}
 
-{% block header %}{{ site.name }}{% endblock header %}
+{% block styles %}
+{{ block.super }}
+<link href="https://fonts.googleapis.com/css?family=Muli|Orbitron:900" rel="stylesheet">
+{% endblock styles %}
+
+{% block header %}<span class="brand">{{ site.name }}</span>{% endblock header %}
 
 {% block breadcrumbs %}
   <li class="breadcrumb-item active" aria-current="page">dashboard</li>
@@ -33,8 +38,11 @@
           <div class="card-header">Recent assessments</div>
           <div class="card-body">
             <ul class="list-group">
-              {% for assess in assess_list %}
-              <li class="list-group-item">{{ assess }}</li>
+              {% for assess in recent_assess_list %}
+              <li class="list-group-item">
+                <a href="{% url 'assess:detail' assess.client.pk assess.pk %}">
+                  {{ assess }}<small>&nbsp;&nbsp;&#8209;&nbsp;{{assess.client }}</small>
+                </a></li>
               {% endfor %}
             </ul>
           </div>

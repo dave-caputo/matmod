@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'core',
     'core.apps.CustomAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,7 +49,7 @@ INSTALLED_APPS = [
     'answers',
     'assessments',
     'clients',
-    'core',
+    # 'core',
     'dashboard',
     'questionnaires',
     'questions',

@@ -4,3 +4,6 @@ body {
 thead th {
     text-align: center;
 }
+.brand {
+    font-family: 'Orbitron', sans-serif;
+}
