@@ -15,8 +15,9 @@ class QuestionCreateView(generic.CreateView):
     template_name = 'questions/create.html'
 
     def get_initial(self):
-        section = get_object_or_404(Section, id=self.kwargs['section_pk'])
-        return {'section': section}
+        initial = super().get_initial()
+        initial['section'] = get_object_or_404(Section, id=self.kwargs['section_pk'])
+        return initial
 
     def get_success_url(self):
         return reverse('questions:create', kwargs={
@@ -77,15 +78,6 @@ class QuestionUpdateView(generic.UpdateView):
     form_class = QuestionForm
     model = Question
     template_name = 'questions/update.html'
-
-    def form_invalid(self, form):
-        print('form invalid!')
-        print(form.errors)
-        return super().form_invalid(form)
-
-    def form_valid(self, form):
-        print('form is valid!')
-        return super().form_valid(form)
 
     def get_success_url(self):
         kwargs = {
