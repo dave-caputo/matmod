@@ -25,55 +25,75 @@
 {% endblock subheader %}
 
 {% block content %}
-  <!-- Answers -->
-  <div id="answer_div">
-    <h3>Assessment Results</h3>
-    <table class="table table-striped" id="answer_table">
-      <thead>
-        <tr>
-          <th>Section</th>
-          <th>Question</th>
-          <th>Weight</th>
-          <th>Target</th>
-          <th>Answer</th>
-          <th>Score</th>
-          <th>Maturity</th>
-        </tr>
-      </thead>
-      <tbody id="answer_table_body">
-        {% include 'answers/list.html' %}
-      </tbody>
-      <tfoot>
-        <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th class="text-right pr-4">{{ assessment.score|floatformat:1 }} / {{ assessment.max_score|floatformat:1 }}</th>
-          <th class="text-right pr-4">{{ assessment.score_pc|floatformat:0 }}%</th>
-        </tr>
-      </tfoot>
-    </table>
+  <!-- chart -->
+  <div class="card-deck">
+    <div class="card" id="chart_div">
+      <div class="card-body">
+        <h3 class="card-title">Radar</h3>
+        <div id="assess_chart" style="width:100%; min-height:400px;"></div>
+      </div>
+    </div>
   </div>
-  <br>
-  <br>
-  <div id="section_div">
-    <h3>Results by Section</h3>
-    <table class="table table-striped" id="section_table">
-      <thead>
-        <tr>
-          <th>Section</th>
-          <th>Score</th>
-          <th>Maturity</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% include 'sections/totals.html' %}
-      </tbody>
-    </table>
+  <!-- End chart -->
+
+  <!-- section scores -->
+  <div class="card-deck mt-4">
+    <div class="card" id="section_score_div">
+      <div class="card-body">
+        <h3 class="card-title">Section scores</h3>
+        <table class="table table-striped" id="section_table">
+          <thead>
+            <tr>
+              <th>Section</th>
+              <th>Score</th>
+              <th>Maturity</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% include 'sections/totals.html' %}
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-  <!-- End Answers -->
+  <!-- End section scores -->
+
+  <!-- scores -->
+  <div class="card-deck mt-4">
+    <div class="card" id="score_div">
+      <div class="card-body">
+        <h3 class="card-title">Detailed scores</h3>
+        <table class="table table-striped" id="answer_table">
+          <thead>
+            <tr>
+              <th>Section</th>
+              <th>Question</th>
+              <th>Weight</th>
+              <th>Target</th>
+              <th>Answer</th>
+              <th>Score</th>
+              <th>Maturity</th>
+            </tr>
+          </thead>
+          <tbody id="answer_table_body">
+            {% include 'answers/list.html' %}
+          </tbody>
+          <tfoot>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th class="text-right pr-4">{{ assessment.score|floatformat:1 }} / {{ assessment.max_score|floatformat:1 }}</th>
+              <th class="text-right pr-4">{{ assessment.score_pc|floatformat:0 }}%</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- End scores -->
 
   <!-- Admin Link -->
   <div class="row mt-4">
@@ -89,13 +109,27 @@
   <!-- End Admin Link -->
 
 {% endblock content %}
+
 {% block page_data %}
   <div id="page_urls" data-assess-rename-url="{% url 'assess:rename' client_pk assessment.pk %}"></div>
 {% endblock page_data %}
+
 {% block scripts %}
   {{ block.super }}
   <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/datatables.min.js"></script>
-  <script src="{% static 'answers/js/table.js' %}"></script>
-  <script src="{% static 'js/update_component.js' %}"></script>
-  <script src="{% static 'assess/js/assess_rename.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/echarts/echarts.common.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'answers/js/table.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/update_component.js' %}"></script>
+  <script type="text/javascript" src="{% static 'assess/js/assess_rename.js' %}"></script>
+  <script>
+    var sectionList = [
+    {% for section in section_totals %}
+      {"name": "{{ section.order }}. {{ section.name }}", "max": {{ section.max_score|safe }}},
+    {% endfor %}
+    ]
+    var currentScores = [{% for section in section_totals %}parseFloat("{{ section.score }}"),{% endfor %}]
+    var targetScores = [{% for section in section_totals %}parseFloat("{{ section.target_score }}"),{% endfor %}]
+
+  </script>
+  <script type="text/javascript" src="{% static 'assess/js/assess_charts.js' %}"></script>
 {% endblock scripts %}
