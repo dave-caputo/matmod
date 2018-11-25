@@ -4,7 +4,7 @@ var sectionTable;
 $(document).ready(function(){
     answerTable = $('#answer_table').DataTable({
         columnDefs: [{
-            targets: [2, 3, 4, 5],
+            targets: [2, 3, 4],
             width: "12%",
         }],
         paging: false,
@@ -14,7 +14,7 @@ $(document).ready(function(){
             var api = this.api();
 
             var totals = []
-            $.each([2, 3, 4, 5], function(index, value){
+            $.each([2, 3, 4], function(index, value){
             // Calculate totals for each column and insert in footer.
 
                 var colTotal = api.column( value ).data().reduce( function ( a, b ) {
@@ -28,10 +28,10 @@ $(document).ready(function(){
 
             // Calculate total maturity and insert in footer based on totals previously calculated.
             var totalMaturity;
-            if (totals[3] == 0) {
+            if (totals[2] == 0) {
                 totalMaturity = 0;
             } else {
-                totalMaturity = (totals[2] / totals[3] * 100).toFixed(0);
+                totalMaturity = (totals[1] / totals[2] * 100).toFixed(0);
             }
             $( api.column(5).footer() ).html(totalMaturity + '%')
         }
