@@ -2,10 +2,6 @@ var assessTable;
 
 $(document).ready(function(){
     assessTable = $('#assess_table').DataTable({
-        // columnDefs: [{
-        //     targets: -1,
-        //     className: 'dt-body-right',
-        // }],
         order: [[1, 'desc'],],
         paging: false,
         scrollY: 300,

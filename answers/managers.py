@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import F, Sum, Value
+from django.db.models import F, Sum
 
 
 class AnswerTotalsManager(models.Manager):
@@ -17,22 +17,12 @@ class AnswerTotalsManager(models.Manager):
             )
             .annotate(
                 answers=Sum('answer'),
-                score=Sum(
-                    F('answer') * F('question__weight'),
-                    output_field=models.DecimalField()
-                ),
-                target_score=Sum(
-                    F('target') * F('question__weight'),
-                    output_field=models.DecimalField()
-                ),
-                max_score=Sum(
-                    Value(self.model.ANSWER_CHOICES[-1][0]) *
-                    F('question__weight'),
-                    output_field=models.DecimalField()
-                )
+                score=Sum('score', output_field=models.DecimalField()),
+                target_score=Sum('target_score', output_field=models.DecimalField()),
+                max_score=Sum('question__max_score', output_field=models.DecimalField()),
             )
             .annotate(
-                score_pc=F('score') / F('max_score') * 100,
+                maturity=F('score') / F('max_score') * 100,
                 target_score_pc=F('target_score') / F('max_score') * 100
             )
         )
@@ -43,11 +33,6 @@ class AnswerTotalsManager(models.Manager):
             self.get_queryset()
             .select_related('question')
             .aggregate(
-                max_score=Sum(
-                    Value(self.model.ANSWER_CHOICES[-1][0]) *
-                    F('question__weight'),
-                    output_field=models.DecimalField()
-                ),
                 score=Sum(
                     F('answer') * F('question__weight'),
                     output_field=models.DecimalField()
@@ -55,6 +40,10 @@ class AnswerTotalsManager(models.Manager):
                 target_score=Sum(
                     F('target') * F('question__weight'),
                     output_field=models.DecimalField()
-                )
+                ),
+                max_score=Sum(
+                    F('question__max_score'),
+                    output_field=models.DecimalField()
+                ),
             )
         )

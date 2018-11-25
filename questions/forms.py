@@ -18,7 +18,7 @@ class QuestionForm(forms.ModelForm):
             'choice_text_2',
             'choice_text_3',
             'choice_text_4',
-            'choice_text_5'
+            'choice_text_5',
         ]
         model = Question
         widgets = {
@@ -32,7 +32,7 @@ class QuestionForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_id = 'question_update_form' if self.instance.pk else 'question_create_form'
 
-        choice_fields = [Div(Field(f'choice_text_{i}', style='height:100px'), css_class='col-md') for i in range(5)]
+        choice_fields = [Div(Field(f'choice_text_{i}', style='height:100px'), css_class='col-md') for i in range(1, 6)]
         self.helper.layout = Layout(
             Div(
                 Div(Field('question', style='height:100px;'), css_class='col-md-8'),
