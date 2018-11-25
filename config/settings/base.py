@@ -50,9 +50,10 @@ INSTALLED_APPS = [
     'assessments',
     'clients',
     'dashboard',
+    'orgs',
     'questionnaires',
     'questions',
-    'sections'
+    'sections',
 ]
 
 MIDDLEWARE = [
