@@ -127,3 +127,7 @@ def load_test_data():
         choice_text_4='I prefer frozen fruit but wouldn\'t say no to ice cubes.',
         choice_text_5='Always. In my house is forbidden to buy anything else.',
     )
+
+
+if __name__ == '__main__':
+    load_test_data()
