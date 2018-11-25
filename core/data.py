@@ -6,18 +6,26 @@ from questionnaires.models import Qre
 from questions.models import Question
 from sections.models import Section
 
+from .admin import CustomAdminSite
+
 
 def load_test_data():
+
+    # Admin site
 
     site = Site.objects.get_current()
     site.name = 'Tech Modelling'
     site.save()
 
+    CustomAdminSite.name = site.name
+
+    # User
+
     User = get_user_model()
 
     User.objects.create_superuser(
-        username='davecaputo',
-        email='davecaputo@outlook.com',
+        username='superuser',
+        email='test_user@example.com',
         password='mypassword',
     )
 
