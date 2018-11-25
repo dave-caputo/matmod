@@ -30,7 +30,7 @@
     <div class="card" id="chart_div">
       <div class="card-body">
         <h3 class="card-title">Radar</h3>
-        <div id="assess_chart" style="width:100%; min-height:400px;"></div>
+        <div id="assess_chart" style="width:100%; min-height:350px;"></div>
       </div>
     </div>
   </div>
@@ -45,13 +45,24 @@
           <thead>
             <tr>
               <th>Section</th>
-              <th>Score</th>
+              <th>Target</th>
+              <th>Current</th>
+              <th>Max</th>
               <th>Maturity</th>
             </tr>
           </thead>
           <tbody>
             {% include 'sections/totals.html' %}
           </tbody>
+          <tfoot>
+            <tr>
+              <th>Total</th>
+              <th class="text-right pr-4"></th>
+              <th class="text-right pr-4"></th>
+              <th class="text-right pr-4"></th>
+              <th class="text-right pr-4"></th>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>
@@ -62,16 +73,15 @@
   <div class="card-deck mt-4">
     <div class="card" id="score_div">
       <div class="card-body">
-        <h3 class="card-title">Detailed scores</h3>
+        <h3 class="card-title">Detailed Scores</h3>
         <table class="table table-striped" id="answer_table">
           <thead>
             <tr>
               <th>Section</th>
               <th>Question</th>
-              <th>Weight</th>
               <th>Target</th>
-              <th>Answer</th>
-              <th>Score</th>
+              <th>Current</th>
+              <th>Max</th>
               <th>Maturity</th>
             </tr>
           </thead>
@@ -80,13 +90,12 @@
           </tbody>
           <tfoot>
             <tr>
+              <th>Total</th>
               <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th class="text-right pr-4">{{ assessment.score|floatformat:1 }} / {{ assessment.max_score|floatformat:1 }}</th>
-              <th class="text-right pr-4">{{ assessment.score_pc|floatformat:0 }}%</th>
+              <th class="text-right pr-4"></th>
+              <th class="text-right pr-4"></th>
+              <th class="text-right pr-4"></th>
+              <th class="text-right pr-4"></th>
             </tr>
           </tfoot>
         </table>

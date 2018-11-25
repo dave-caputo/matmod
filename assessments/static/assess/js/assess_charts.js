@@ -7,6 +7,7 @@ $(document).ready(function(){
         legend: {
             data: ['Current', 'Target'],
             bottom: 0,
+            left: 0,
         },
         radar: {
             shape: 'circle',

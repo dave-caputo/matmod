@@ -21,6 +21,7 @@ class Answer(models.Model):
     answer = models.IntegerField(choices=ANSWER_CHOICES, default=0)
     target = models.IntegerField(choices=ANSWER_CHOICES, default=0)
     score = models.DecimalField(max_digits=6, decimal_places=1, default=0)
+    target_score = models.DecimalField(max_digits=6, decimal_places=1, default=0)
 
     class Meta:
         ordering = ('assessment', 'question__order',)
@@ -31,6 +32,11 @@ class Answer(models.Model):
             f'{self.question.question} = {self.answer}'
         )
 
+    @property
+    def maturity(self):
+        return self.score / self.question.max_score * 100
+
     def save(self, *args, **kwargs):
         self.score = self.answer * self.question.weight
+        self.target_score = self.target * self.question.weight
         super().save(*args, **kwargs)
