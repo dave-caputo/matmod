@@ -17,18 +17,9 @@ class AnswerTotalsManager(models.Manager):
             )
             .annotate(
                 answers=Sum('answer'),
-                score=Sum(
-                    F('answer') * F('question__weight'),
-                    output_field=models.DecimalField()
-                ),
-                target_score=Sum(
-                    F('target') * F('question__weight'),
-                    output_field=models.DecimalField()
-                ),
-                max_score=Sum(
-                    'question__max_score',
-                    output_field=models.DecimalField()
-                ),
+                score=Sum('score', output_field=models.DecimalField()),
+                target_score=Sum('target_score', output_field=models.DecimalField()),
+                max_score=Sum('question__max_score', output_field=models.DecimalField()),
             )
             .annotate(
                 maturity=F('score') / F('max_score') * 100,
