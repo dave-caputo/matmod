@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'clients',
     'dashboard',
     'orgs',
+    'profiles',
     'questionnaires',
     'questions',
     'sections',
@@ -144,3 +145,5 @@ SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+AUTH_USER_MODEL = 'profiles.User'
