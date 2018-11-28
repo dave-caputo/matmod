@@ -10,11 +10,6 @@ django-ordered-model==3.1.1
 django-storages==1.7.1
 zappa==0.47.0
 
-# Linter
-flake8==3.6.0
-flake8-docstrings==1.3.0
-flake8-isort==2.5
-
 # Tools
 pip-tools
 
