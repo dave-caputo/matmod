@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 
@@ -23,11 +24,12 @@ def load_test_data():
 
     User = get_user_model()
 
-    User.objects.create_superuser(
-        username='superuser',
-        email='test_user@example.com',
-        password='mypassword',
-    )
+    if settings.DEBUG:
+        User.objects.create_superuser(
+            username='superuser',
+            email='superuser@example.com',
+            password='mypassword',
+        )
 
     User.objects.create_user(
         username='test_admin1',
