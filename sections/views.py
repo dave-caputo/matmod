@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
@@ -9,7 +10,7 @@ from .forms import SectionForm
 from .models import Section
 
 
-class SectionCreateView(generic.CreateView):
+class SectionCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = SectionForm
     model = Section
     template_name = 'sections/create.html'
@@ -24,7 +25,7 @@ class SectionCreateView(generic.CreateView):
                        kwargs={'qre_pk': self.kwargs['qre_pk']})
 
 
-class SectionListView(generic.ListView):
+class SectionListView(LoginRequiredMixin, generic.ListView):
     model = Section
     template_name = 'sections/list.html'
 
@@ -40,7 +41,7 @@ class SectionListView(generic.ListView):
         return context
 
 
-class SectionMoveView(generic.UpdateView):
+class SectionMoveView(LoginRequiredMixin, generic.UpdateView):
     """Move section up/down in the qre by updating the order field using the Ordered Model 'up'/'down' methods."""
 
     model = Section
@@ -59,7 +60,7 @@ class SectionMoveView(generic.UpdateView):
                        kwargs={'qre_pk': self.kwargs['qre_pk']})
 
 
-class SectionDetailView(generic.DetailView):
+class SectionDetailView(LoginRequiredMixin, generic.DetailView):
     model = Section
     template_name = 'sections/detail.html'
 
@@ -71,7 +72,7 @@ class SectionDetailView(generic.DetailView):
         return context
 
 
-class SectionUpdateView(generic.UpdateView):
+class SectionUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Section
     template_name = 'sections/update.html'
     fields = ['name']
@@ -83,7 +84,7 @@ class SectionUpdateView(generic.UpdateView):
         })
 
 
-class SectionDeleteView(generic.DeleteView):
+class SectionDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Section
     template_name = 'sections/delete.html'
 

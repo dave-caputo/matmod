@@ -1,8 +1,11 @@
+"""Settings for AWS lamda."""
+
+
 import os
 
-from config.settings.base import *  # NOQA
+from config.settings.base import *  # NOQA F405
 
-INSTALLED_APPS += [
+INSTALLED_APPS += [  # NOQA F403
     'storages'
 ]
 

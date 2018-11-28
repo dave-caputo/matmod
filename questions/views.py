@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -9,7 +10,7 @@ from .forms import QuestionForm
 from .models import Question
 
 
-class QuestionCreateView(generic.CreateView):
+class QuestionCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = QuestionForm
     model = Question
     template_name = 'questions/create.html'
@@ -26,7 +27,7 @@ class QuestionCreateView(generic.CreateView):
         })
 
 
-class QuestionListView(generic.ListView):
+class QuestionListView(LoginRequiredMixin, generic.ListView):
     model = Question
     template_name = 'questions/list.html'
 
@@ -41,7 +42,7 @@ class QuestionListView(generic.ListView):
         return context
 
 
-class QuestionDetailView(generic.DetailView):
+class QuestionDetailView(LoginRequiredMixin, generic.DetailView):
     model = Question
     template_name = 'questions/detail.html'
 
@@ -52,7 +53,7 @@ class QuestionDetailView(generic.DetailView):
         return context
 
 
-class QuestionMoveView(generic.UpdateView):
+class QuestionMoveView(LoginRequiredMixin, generic.UpdateView):
     """Move section up/down in the qre by updating the order field using the Ordered Model 'up'/'down' methods."""
 
     model = Question
@@ -73,7 +74,7 @@ class QuestionMoveView(generic.UpdateView):
         })
 
 
-class QuestionUpdateView(generic.UpdateView):
+class QuestionUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     form_class = QuestionForm
     model = Question
@@ -88,7 +89,7 @@ class QuestionUpdateView(generic.UpdateView):
         return reverse('questions:update', kwargs=kwargs)
 
 
-class QuestionDeleteView(generic.DeleteView):
+class QuestionDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Question
     template_name = 'questions/delete.html'
 

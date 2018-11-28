@@ -1,4 +1,7 @@
-# Update requirements manually here!
+# Update requirements MANUALLY here!
+# To update requirements.txt file, run:
+#
+#    pip-compile --output-file requirements.txt requirements.in
 
 # Django
 Django<2.2
@@ -12,6 +15,7 @@ flake8-docstrings==1.3.0
 flake8-isort==2.5
 
 # Tools
+jedi<0.14
 pip-tools
 
 # Database

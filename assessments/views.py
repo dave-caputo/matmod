@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -12,7 +13,7 @@ from .forms import AssessmentForm
 from .models import Assessment
 
 
-class AssessmentCreateView(generic.CreateView):
+class AssessmentCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = AssessmentForm
     model = Assessment
     template_name = 'assess/create.html'
@@ -25,7 +26,7 @@ class AssessmentCreateView(generic.CreateView):
         return {'client': client}
 
 
-class AssessmentListView(generic.ListView):
+class AssessmentListView(LoginRequiredMixin, generic.ListView):
     model = Assessment
     template_name = 'assess/list.html'
 
@@ -38,7 +39,7 @@ class AssessmentListView(generic.ListView):
         )
 
 
-class AssessmentDetailView(generic.DetailView):
+class AssessmentDetailView(LoginRequiredMixin, generic.DetailView):
     model = Assessment
     template_name = 'assess/detail.html'
 
@@ -88,7 +89,7 @@ class AssessmentCompleteView(AssessmentDetailView):
         return AnswerFormSet(data=data, queryset=self.get_answers())
 
 
-class AssessmentRenameView(generic.UpdateView):
+class AssessmentRenameView(LoginRequiredMixin, generic.UpdateView):
     model = Assessment
     template_name = 'assess/rename.html'
     fields = ['name']
@@ -97,7 +98,7 @@ class AssessmentRenameView(generic.UpdateView):
         return reverse('assess:rename', kwargs={'client_pk': self.kwargs['client_pk'], 'pk': self.kwargs['pk']})
 
 
-class AssessmentDeleteView(generic.DeleteView):
+class AssessmentDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Assessment
     template_name = 'assess/delete.html'
 
