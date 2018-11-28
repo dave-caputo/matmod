@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 
@@ -5,7 +6,7 @@ from .forms import ClientForm
 from .models import Client
 
 
-class ClientCreateView(generic.CreateView):
+class ClientCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = ClientForm
     model = Client
     template_name = 'clients/create.html'
@@ -17,7 +18,7 @@ class ClientListView(generic.ListView):
     template_name = 'clients/list.html'
 
 
-class ClientDetailView(generic.DetailView):
+class ClientDetailView(LoginRequiredMixin, generic.DetailView):
     model = Client
     template_name = 'clients/detail.html'
 
@@ -27,7 +28,7 @@ class ClientDetailView(generic.DetailView):
         return context
 
 
-class ClientUpdateView(generic.UpdateView):
+class ClientUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Client
     template_name = 'clients/update.html'
     fields = ['name']
@@ -36,7 +37,7 @@ class ClientUpdateView(generic.UpdateView):
         return reverse('clients:update', kwargs={'pk': self.kwargs['pk']})
 
 
-class ClientDeleteView(generic.DeleteView):
+class ClientDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Client
     template_name = 'clients/delete.html'
     success_url = reverse_lazy('dashboard:index')
