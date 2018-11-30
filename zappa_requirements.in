@@ -1,9 +1,13 @@
-# Update requirements manually here!
+# Update requirements MANUALLY here!
+# To update requirements.txt file, run:
+#
+#    pip-compile --output-file zappa_requirements.txt zappa_requirements.in
 
 # Django
 Django<2.2
 django-crispy-forms<1.8
 django-extended-choices<1.4
+django-mptt
 django-ordered-model==3.1.1
 
 # AWS lambda deploy

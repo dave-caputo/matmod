@@ -3,6 +3,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 
 from clients.models import Client
+from orgs.countries import COUNTRIES
+from orgs.models import Org
 from questionnaires.models import Qre
 from questions.models import Question
 from sections.models import Section
@@ -20,6 +22,11 @@ def load_test_data():
 
     CustomAdminSite.name = site.name
 
+    # Orgs
+
+    matmod = Org.objects.create(name='MatMod Corp', country=COUNTRIES.GBR)
+    test_org = Org.objects.create(name='Test Org', country=COUNTRIES.GBR, parent=matmod)
+
     # User
 
     User = get_user_model()
@@ -29,6 +36,7 @@ def load_test_data():
             username='superuser',
             email='superuser@example.com',
             password='mypassword',
+            org=matmod,
         )
 
     User.objects.create_user(
@@ -36,6 +44,7 @@ def load_test_data():
         email='test_admin1@example.com',
         password='somepassword',
         is_staff=True,
+        org=test_org,
     )
 
     User.objects.create_user(
@@ -43,17 +52,17 @@ def load_test_data():
         email='test_admin2@example.com',
         password='somepassword',
         is_staff=True,
+        org=test_org,
     )
 
-    Client.objects.create(
-        name='ACME LTD')
+    # Client
 
-    Client.objects.create(
-        name='SKYNET CORP')
+    Client.objects.create(name='ACME LTD', org=test_org)
+    Client.objects.create(name='SKYNET CORP', org=test_org)
 
-    fgmt = Qre.objects.create(
-        name='Fruit Gourmet Maturity Model'
-    )
+    # Questionnaire
+
+    fgmt = Qre.objects.create(name='Fruit Gourmet Maturity Model', org=test_org)
 
     tropical = Section.objects.create(
         qre=fgmt,

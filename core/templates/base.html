@@ -45,7 +45,10 @@
     {% endblock content %}
 
     {% block logout %}
-      <p class="text-right">logged in as <strong>{{ user.username }}</strong> | <a href="{% url 'logout' %}">Log out <i class="fas fa-sign-out-alt"></i></a></p>
+      <p class="text-right">logged in as <strong>{{ user.username }}</strong> @
+        {% if user.org %}{{ user.org }}{% else %}{{ user.client }}{% endif %} |
+        <a href="{% url 'logout' %}">Log out <i class="fas fa-sign-out-alt"></i></a>
+      </p>
     {% endblock logout %}
 
     {% block page_data %}

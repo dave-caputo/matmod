@@ -1,5 +1,4 @@
 from django.db import models
-from ordered_model.models import OrderedModel
 
 from questions.models import Question
 
@@ -7,6 +6,10 @@ from questions.models import Question
 # Create your models here.
 class Qre(models.Model):
     name = models.CharField(max_length=55)
+    org = models.ForeignKey(
+        'orgs.Org', blank=True, null=True, related_name='qres',
+        on_delete=models.SET_NULL, verbose_name='organisation'
+    )
 
     class Meta:
         ordering = ('name',)
