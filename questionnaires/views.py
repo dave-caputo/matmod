@@ -12,10 +12,22 @@ class QreCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = 'qres/create.html'
     success_url = reverse_lazy('qres:create')
 
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['org'] = self.request.user.org
+        return initial
+
 
 class QreListView(LoginRequiredMixin, generic.ListView):
     model = Qre
     template_name = 'qres/list.html'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        if self.request.user.is_superuser:
+            return qs
+        else:
+            qs.filter(org=self.request.user.org)
 
 
 class QreDetailView(LoginRequiredMixin, generic.DetailView):
