@@ -10,4 +10,5 @@ class QreForm(forms.ModelForm):
         fields = ['name']
         widgets = {
             'name': forms.TextInput(attrs={'placeholder': 'Enter name'}),
+            'org': forms.HiddenInput(),
         }

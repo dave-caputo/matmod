@@ -8,7 +8,8 @@ class ClientForm(forms.ModelForm):
 
     class Meta:
         model = Client
-        fields = ['name']
+        fields = ['name', 'org']
         widgets = {
             'name': forms.TextInput(attrs={'placeholder': 'Enter name'}),
+            'org': forms.HiddenInput(),
         }
