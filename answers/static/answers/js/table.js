@@ -33,7 +33,9 @@ $(document).ready(function(){
             } else {
                 totalMaturity = (totals[1] / totals[2] * 100).toFixed(0);
             }
-            $( api.column(5).footer() ).html(totalMaturity + '%')
+            $( api.column(5).footer() ).html(
+                '<h5><span class="badge badge-pill badge-primary">' + totalMaturity + '% </span></h5>'
+            );
         }
     });
 
@@ -69,7 +71,9 @@ $(document).ready(function(){
             } else {
                 totalMaturity = (totals[1] / totals[2] * 100).toFixed(0);
             }
-            $( api.column(4).footer() ).html(totalMaturity + '%')
+            $( api.column(4).footer() ).html(
+                '<h5><span class="badge badge-pill badge-primary">' + totalMaturity + '% </span></h5>'
+            )
         }
     });
 });
