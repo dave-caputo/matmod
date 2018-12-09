@@ -3,43 +3,38 @@
 
 {% block title %}Dashboard{% endblock title %}
 
-{% block styles %}
-{{ block.super }}
-<link href="https://fonts.googleapis.com/css?family=Muli|Orbitron:900" rel="stylesheet">
-{% endblock styles %}
-
-{% block header %}<span class="brand">{{ site.name }}</span>{% endblock header %}
-
 {% block breadcrumbs %}
-  <li class="breadcrumb-item active" aria-current="page">dashboard</li>
+<li class="breadcrumb-item active" aria-current="page">dashboard</li>
 {% endblock breadcrumbs %}
+
+{% block header %}{% endblock header %}
 
 {% block content %}
   <div class="row">
     <div class="col-12">
       <div class="card-deck">
-        <div class="card">
-          <div class="card-header">Clients</div>
-          <div class="card-body">
+        <div class="card border-primary">
+          <div class="card-header text-white bg-primary mb-3 "><strong>Clients</strong></div>
+          <div class="card-body border-primary">
             <div id="client_list_div">
                 {% include 'clients/list.html' %}
             </div>
           </div>
         </div>
-        <div class="card">
-          <div class="card-header">Questionnaires</div>
+        <div class="card border-primary">
+          <div class="card-header text-white bg-primary mb-3"><strong>Questionnaires</strong></div>
           <div class="card-body">
             <div id="qre_list_div">
               {% include 'qres/list.html' %}
             </div>
           </div>
         </div>
-        <div class="card">
-          <div class="card-header">Recent assessments</div>
+        <div class="card border-primary">
+          <div class="card-header text-white bg-primary mb-3"><strong>Recent assessments</strong></div>
           <div class="card-body">
             <ul class="list-group scroll">
               {% for assess in recent_assess_list %}
-              <li class="list-group-item">
+              <li class="list-group-item border-primary">
                 <a href="{% url 'assess:detail' assess.client.pk assess.pk %}">
                   {{ assess }}<small>&nbsp;&nbsp;&#8209;&nbsp;{{assess.client }}</small>
                 </a></li>
@@ -53,31 +48,33 @@
   <div class="row pt-1">
     <div class="col-12">
       <div class="card-deck">
-        <div class="card">
+        <div class="card border-0">
           <div class="card-body">
               <h5 class="text-center"><a href="#" id="client_create_display"><i class="fas fa-plus-circle"></i></a></h5>
             <div id="client_create_div"></div>
           </div>
         </div>
-        <div class="card">
+        <div class="card border-0">
           <div class="card-body">
             <h5 class="text-center"><a href="#" id="qre_create_display"><i class="fas fa-plus-circle"></i></a></h5>
             <div id="qre_create_div"></div>
           </div>
         </div>
-        <div class="card">
+        <div class="card border-0">
         </div>
       </div>
     </div>
   </div>
-  <br>
-  <hr>
-  <p class="text-right"><a target="_blank" href="{% url 'admin:index' %}"><i class="fas fa-tachometer-alt"></i> Go to site admin</a></p>
-
 {% endblock content %}
+
 {% block page_data %}
   <div id="page_urls" data-qre-create-url="{% url 'qres:create' %}" data-qre-list-url="{% url 'qres:list' %}" data-client-create-url="{% url 'clients:create' %}" data-client-list-url="{% url 'clients:list' %}"></div>
 {% endblock page_data %}
+
+{% block admin_link %}
+  <a target="_blank" href="{% url 'admin:index' %}">Site admin</a>
+{% endblock admin_link %}
+
 {% block scripts %}
   {{ block.super }}
   <script src="{% static 'js/create_component.js' %}"></script>

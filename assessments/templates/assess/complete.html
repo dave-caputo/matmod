@@ -30,14 +30,20 @@
     {% include 'assess/answers_formset.html' %}
   </div>
   <!-- End Answers -->
-  <hr>
-  <p class="text-right"><a target="_blank" href="/admin/"><i class="fas fa-tachometer-alt"></i> Go to admin site</a></p>
+
+  <br>
+  <br>
+  <br>
 
 {% endblock content %}
 
 {% block page_data %}
   <div id="page_urls" data-assess-rename-url="{% url 'assess:rename' client_pk assessment.pk %}"></div>
 {% endblock page_data %}
+
+{% block admin_link %}
+<a target="_blank" href="/admin/">Site admin</a>
+{% endblock admin_link %}
 
 {% block scripts %}
   {{ block.super }}

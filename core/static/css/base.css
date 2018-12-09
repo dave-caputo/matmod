@@ -8,3 +8,39 @@ thead th {
     max-height: 300px;
     overflow-y: auto;
 }
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 55px;
+    line-height: 55px;
+    border-top: 1px solid #007bff;
+    background-color: white;
+  }
+.form-control {
+    border-color: #007bff;
+}
+body {
+    background: url("/static/img/pexels-photo-692103.jpeg") 5 0% 0 no-repeat fixed !important;
+}
+
+tr.odd td {
+    background-color: #e6f2ff;
+}
+.breadcrumb {
+    background-color: white;
+}
+
+.dataTable thead th {
+    border: 1px solid #007bff !important;
+}
+.dataTable tfoot th {
+    border-top: 1px solid #007bff !important;
+}
+div.dataTables_scrollBody table tbody tr td {
+    border-top: 1px solid #007bff;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 123, 255, 0.2), 0 6px 20px 0 rgba(0, 123, 255, 0.1);
+}

@@ -27,7 +27,7 @@
 {% block content %}
   <!-- chart -->
   <div class="card-deck">
-    <div class="card" id="chart_div">
+    <div class="card border-primary shadow" id="chart_div">
       <div class="card-body">
         <h3 class="card-title">Radar</h3>
         <div id="assess_chart" style="width:100%; min-height:350px;"></div>
@@ -38,11 +38,11 @@
 
   <!-- section scores -->
   <div class="card-deck mt-4">
-    <div class="card" id="section_score_div">
+    <div class="card border-primary" id="section_score_div">
       <div class="card-body">
         <h3 class="card-title">Section scores</h3>
         <table class="table table-striped" id="section_table">
-          <thead>
+          <thead class="bg-primary text-white">
             <tr>
               <th>Section</th>
               <th>Target</th>
@@ -71,11 +71,11 @@
 
   <!-- scores -->
   <div class="card-deck mt-4">
-    <div class="card" id="score_div">
+    <div class="card border-primary" id="score_div">
       <div class="card-body">
         <h3 class="card-title">Question scores</h3>
         <table class="table table-striped" id="answer_table">
-          <thead>
+          <thead class="bg-primary text-white">
             <tr>
               <th>Section</th>
               <th>Question</th>
@@ -104,24 +104,19 @@
   </div>
   <!-- End scores -->
 
-  <!-- Admin Link -->
-  <div class="row mt-4">
-    <div class="col">
-      <hr>
-      <p class="text-right">
-        <a target="_blank" href="{% url 'admin:assessments_assessment_changelist' %}">
-          <i class="fas fa-tachometer-alt"></i> Go to assessments admin
-        </a>
-      </p>
-    </div>
-  </div>
-  <!-- End Admin Link -->
+  <br>
+  <br>
+  <br>
 
 {% endblock content %}
 
 {% block page_data %}
   <div id="page_urls" data-assess-rename-url="{% url 'assess:rename' client_pk assessment.pk %}"></div>
 {% endblock page_data %}
+
+{% block admin_link %}
+  <a target="_blank" href="{% url 'admin:assessments_assessment_changelist' %}">Assessment admin</a>
+{% endblock admin_link %}
 
 {% block scripts %}
   {{ block.super }}
