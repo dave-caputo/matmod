@@ -67,20 +67,6 @@
   </div>
   <!-- End Question Table -->
 
-  <!-- Admin Link -->
-  <div class="row">
-    <div class="col">
-        <hr>
-        <p class="text-right">
-          <a target="_blank" href="{% url 'admin:sections_section_changelist' %}">
-            <i class="fas fa-tachometer-alt"></i>
-            Go to sections admin
-          </a>
-        </p>
-    </div>
-  </div>
-  <!-- End Admin Link -->
-
   <!-- Question Move Form -->
   <form id="question_move_form">
     {% csrf_token %}
@@ -92,6 +78,10 @@
 {% block page_data %}
   <div id="page_urls" data-section-rename-url="{% url 'sections:update' section.qre.id section.pk %}" data-question-create-url="{% url 'questions:create' section.qre.pk section.pk %}" data-question-list-url="{% url 'questions:list' section.qre.pk section.pk %}"></div>
 {% endblock page_data %}
+
+{% block admin_link %}
+  <a target="_blank" href="{% url 'admin:sections_section_changelist' %}">Section admin</a>
+{% endblock admin_link %}
 
 {% block scripts %}
   {{ block.super }}

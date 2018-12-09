@@ -53,19 +53,16 @@
       </div>
     </div>
   </div>
-  <!-- Admin Link -->
-  <div class="row mt-4">
-    <div class="col">
-      <hr>
-      <p class="text-right"><a target="_blank" href="{% url 'admin:questions_question_changelist' %}"><i class="fas fa-tachometer-alt"></i> Go to questions admin</a></p>
-    </div>
-  </div>
-  <!-- End Admin Link -->
 {% endblock content %}
 
 {% block page_data %}
   <div id="page_urls" data-question-update-url="{% url 'questions:update' qre_pk section_pk question.pk %}"></div>
 {% endblock page_data %}
+
+{% block admin_link %}
+  <a target="_blank" href="{% url 'admin:questions_question_changelist' %}">Question admin</a>
+{% endblock admin_link %}
+
 
 {% block scripts %}
   {{ block.super }}

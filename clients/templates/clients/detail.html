@@ -31,7 +31,7 @@
     <div id="assess_create_div"></div>
     <div>
       <table class="table table-striped" id="assess_table">
-        <thead>
+        <thead class="bg-primary text-white">
           <tr>
             <th>Name</th>
             <th>Date</th>
@@ -41,7 +41,7 @@
             <th>Maturity</th>
           </tr>
         </thead>
-        <tbody id="assess_table_body">
+        <tbody class="border-primary" id="assess_table_body">
             {% include 'assess/list.html' %}
         </tbody>
         <tfoot>
@@ -59,21 +59,14 @@
   </div>
   <!-- End Assessments -->
 
-  <!-- Admin Link -->
-  <div class="row">
-    <div class="col">
-        <hr>
-        <p class="text-right"><a target="_blank" href="{% url 'admin:clients_client_changelist' %}">
-          <i class="fas fa-tachometer-alt"></i> Go to clients admin</a>
-        </p>
-    </div>
-  </div>
-  <!-- End Admin Link -->
-
-{% endblock content %}
-{% block page_data %}
+  {% endblock content %}
+  {% block page_data %}
   <div id="page_urls" data-client-update-url="{% url 'clients:update' client.pk %}" data-assess-create-url="{% url 'assess:create' client.pk %}" data-assess-list-url="{% url 'assess:list' client.pk %}"></div>
-{% endblock page_data %}
+  {% endblock page_data %}
+
+  {% block admin_link %}
+    <a target="_blank" href="{% url 'admin:clients_client_changelist' %}">client admin</a>
+  {% endblock admin_link %}
 
 {% block scripts %}
   {{ block.super }}
