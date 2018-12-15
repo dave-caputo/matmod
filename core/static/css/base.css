@@ -20,17 +20,38 @@ thead th {
 .form-control {
     border-color: #007bff;
 }
-body {
-    background: url("/static/img/pexels-photo-692103.jpeg") 5 0% 0 no-repeat fixed !important;
+/* bootstrap */
+.breadcrumb {
+    background-color: transparent;
 }
-
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 123, 255, 0.2), 0 6px 20px 0 rgba(0, 123, 255, 0.1);
+}
+/* login */
+.login_body {
+    background: url("/static/img/pexels-photo-692103.jpeg") fixed;
+    background-size: cover;
+}
+.jumbotron {
+    background-color: rgba(0, 123, 255, 0.2);
+}
+.login_error_div {
+    height: 60px;
+    color: rgb(235, 170, 72);
+}
+.login_link {
+    color: white;
+    text-decoration: none;
+}
+.login_link:hover {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+/* datatables */
 tr.odd td {
     background-color: #e6f2ff;
 }
-.breadcrumb {
-    background-color: white;
-}
-
 .dataTable thead th {
     border: 1px solid #007bff !important;
 }
@@ -39,8 +60,4 @@ tr.odd td {
 }
 div.dataTables_scrollBody table tbody tr td {
     border-top: 1px solid #007bff;
-}
-
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0, 123, 255, 0.2), 0 6px 20px 0 rgba(0, 123, 255, 0.1);
 }

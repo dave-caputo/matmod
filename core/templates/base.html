@@ -5,6 +5,7 @@
     <head>
       <meta charset="UTF-8">
       <title>{% block title %}{% endblock title %}</title>
+
       {% block styles %}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Muli|Orbitron:900" rel="stylesheet">
@@ -56,15 +57,15 @@
     </div>
     <!-- end of Container -->
     {% block logout %}
-      <footer class="footer">
-        <div class="container">
-          <p class="text-right">logged in as <strong>{{ user.username }}</strong> @
-            {% if user.org %}{{ user.org }}{% else %}{{ user.client }}{% endif %}
-            {% if user.is_staff %}| {% block admin_link%}{% endblock admin_link %}{% endif %} |
-            <a href="{% url 'logout' %}">Log out <i class="fas fa-sign-out-alt"></i></a>
-          </p>
-        </div>
-      </footer>
+    <footer class="footer">
+      <div class="container-fluid">
+        <p class="text-right">logged in as <strong>{{ user.username }}</strong> @
+          {% if user.org %}{{ user.org }}{% else %}{{ user.client }}{% endif %}
+          {% if user.is_staff %}| {% block admin_link%}{% endblock admin_link %}{% endif %} |
+          <a href="{% url 'logout' %}">Log out <i class="fas fa-sign-out-alt"></i></a>
+        </p>
+      </div>
+    </footer>
     {% endblock logout %}
 
     {% block scripts %}
