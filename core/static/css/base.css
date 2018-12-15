@@ -28,10 +28,6 @@ thead th {
     box-shadow: 0 4px 8px 0 rgba(0, 123, 255, 0.2), 0 6px 20px 0 rgba(0, 123, 255, 0.1);
 }
 /* login */
-.login_body {
-    background: url("/static/img/pexels-photo-692103.jpeg") fixed;
-    background-size: cover;
-}
 .jumbotron {
     background-color: rgba(0, 123, 255, 0.2);
 }
