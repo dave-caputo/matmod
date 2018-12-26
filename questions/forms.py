@@ -10,7 +10,7 @@ from .models import Question
 class QuestionForm(forms.ModelForm):
 
     class Meta:
-        fields = [
+        fields = (
             'section',
             'question',
             'weight',
@@ -19,11 +19,8 @@ class QuestionForm(forms.ModelForm):
             'choice_text_3',
             'choice_text_4',
             'choice_text_5',
-        ]
+        )
         model = Question
-        widgets = {
-            'section': forms.HiddenInput(),
-        }
 
     def __init__(self, *args, **kwargs):
         """Initialise crispy forms."""
@@ -35,6 +32,7 @@ class QuestionForm(forms.ModelForm):
         choice_fields = [Div(Field(f'choice_text_{i}', style='height:100px'), css_class='col-md') for i in range(1, 6)]
         self.helper.layout = Layout(
             Div(
+                Div(Field('section', type='hidden'), css_class='col-md-8'),
                 Div(Field('question', style='height:100px;'), css_class='col-md-8'),
                 Div('weight', css_class='col-md-4'),
                 css_class='row',

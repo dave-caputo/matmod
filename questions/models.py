@@ -15,7 +15,6 @@ class Question(OrderedModel):
     choice_text_4 = models.TextField(blank=True)
     choice_text_5 = models.TextField(blank=True)
     max_score = models.DecimalField(max_digits=5, decimal_places=1, default=5)
-
     order_with_respect_to = ('section',)
 
     class Meta(OrderedModel.Meta):
