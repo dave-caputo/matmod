@@ -1,9 +1,9 @@
 {% for section in section_totals %}
   <tr>
     <td>{{ section.order }}. {{ section.name }}</td>
-    <td class="text-right pr-4">{{ section.target_score }}</td>
-    <td class="text-right pr-4">{{ section.score }}</td>
-    <td class="text-right pr-4">{{section.max_score }}</td>
+    <td class="text-right pr-4">{{ section.target_score|floatformat:1 }}</td>
+    <td class="text-right pr-4">{{ section.score|floatformat:1 }}</td>
+    <td class="text-right pr-4">{{section.max_score|floatformat:1 }}</td>
     <td class="text-right pr-4">{{ section.maturity|floatformat:0 }}%</td>
   </tr>
 {% endfor %}

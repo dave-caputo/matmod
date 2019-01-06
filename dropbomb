@@ -6,12 +6,12 @@ echo "Recreating database..."
 psql -d postgres -c "DROP DATABASE matmod_dev;"
 psql -d postgres -c "CREATE DATABASE matmod_dev;"
 
-echo "Destroying migrations..."
-find . -path "*migrations/*.py" -not -name __init__.py -delete
+# echo "Destroying migrations..."
+# find . -path "*migrations/*.py" -not -name __init__.py -delete
 
-echo "Recreating migrations and migrating to db..."
-python manage.py makemigrations
-python manage.py migrate
+# echo "Recreating migrations and migrating to db..."
+# python manage.py makemigrations
+# python manage.py migrate
 
 echo "Setting up initial data"
 # python manage.py loaddata initial_data

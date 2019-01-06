@@ -1,55 +1,76 @@
-{% extends 'base.html' %}
-{% load crispy_forms_tags %}
-
-{% block styles %}
-  {{ block.super }}
-  <link href="https://fonts.googleapis.com/css?family=Muli|Orbitron:900" rel="stylesheet">
-{% endblock styles %}
-
-{% block breadcrumb_section %}{% endblock breadcrumb_section %}
-{% block header_section %}{% endblock header_section %}
-
+{% load crispy_forms_tags static %}
 
 {% block content %}
-  <div class="row align-items-center h-75">
-    <div class="col-5 mx-auto">
-      <div class="jumbotron text-center">
-        <h1 class="text-center brand">{{ site.name }}</h1>
-        {% if form.errors %}
-          <div class="login_alert">
-            <span>Your username and password didn't match. Please try again.</span>
-          </div>
-        {% endif %}
 
-        {% if next %}
-          {% if user.is_authenticated %}
-            <span>Your account doesn't have access to this page. To proceed, please login with an account that has access.</span>
-          {% endif %}
-        {% endif %}
-        <form class="login-form" method="post" action="{% url 'login' %}">
-          {% csrf_token %}
-          <!-- Username field -->
-          <div id="div_id_username" class="form-group">
-            <div class="">
-              <input type="text" placeholder="username" name="username" autofocus="" maxlength="254" class="textinput textInput form-control input-login" required="" id="id_username" style="">
-            </div>
-          </div>
-          <!-- End username field -->
-          <!-- Password field -->
-          <div id="div_id_password" class="form-group">
-            <div class="">
-              <input type="password" placeholder="password" name="password" class="textinput textInput form-control input-login" required="" id="id_password">
-            </div>
-          </div>
-          <!-- End password field -->
-          <button class="btn btn-primary btn-block btn-login" type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
-          <input type="hidden" name="next" value="{{ next }}" />
-        </form>
-        {# Assumes you setup the password_reset view in your URLconf #}
-        <p class="mt-3"><a href="{% url 'password_reset' %}">Forgot password?</a></p>
-      </div>
-    </div>
-  </div>
 {% endblock %}
 
 {% block logout %}{% endblock logout %}
+
+<html>
+  {% block head %}
+    <head>
+      <meta charset="UTF-8">
+      <title>{% block title %}{% endblock title %}</title>
+
+      {% block styles %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Muli|Orbitron:900" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+      {% endblock styles %}
+    </head>
+  {% endblock head %}
+  <body class="login_body" style="background: url({% static 'img/pexels-photo-692103.jpeg' %}) fixed; background-size:cover;">
+    <div class="container">
+      <div class="row align-items-center h-75">
+        <div class="col-5 mx-auto">
+          <div class="jumbotron text-center">
+            <h1 class="text-center brand text-white">{{ site.name }}</h1>
+            <h4 class="text-white">Maturity Model Assessments</h4>
+            <div class="login_error_div">
+              <strong>
+                {% if form.errors %}
+                <div class="login_alert">
+                  <span>Your username and password didn't match. Please try again.</span>
+                </div>
+                {% endif %}
+              </strong>
+            </div>
+
+            {% if next %}
+              {% if user.is_authenticated %}
+                <span>Your account doesn't have access to this page. To proceed, please login with an account that has access.</span>
+              {% endif %}
+            {% endif %}
+            <form class="login-form" method="post" action="{% url 'login' %}">
+              {% csrf_token %}
+              <!-- Username field -->
+              <div id="div_id_username" class="form-group">
+                <div class="">
+                  <input type="text" placeholder="username" name="username" autofocus="" maxlength="254" class="textinput textInput form-control input-login" required="" id="id_username" style="">
+                </div>
+              </div>
+              <!-- End username field -->
+              <!-- Password field -->
+              <div id="div_id_password" class="form-group">
+                <div class="">
+                  <input type="password" placeholder="password" name="password" class="textinput textInput form-control input-login" required="" id="id_password">
+                </div>
+              </div>
+              <!-- End password field -->
+              <button class="btn btn-primary btn-block btn-login" type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+              <input type="hidden" name="next" value="{{ next }}" />
+            </form>
+            {# Assumes you setup the password_reset view in your URLconf #}
+            <p class="mt-3"><a class="login_link" href="{% url 'password_reset' %}">Forgot password?</a></p>
+          </div><!-- End jumbotron -->
+        </div><!-- End col -->
+      </div><!-- End row -->
+    </div><!-- End container -->
+  {% block scripts %}
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="{% static 'js/fontawesome/all.js' %}"></script>
+    <script src="{% static 'js/login.js' %}"></script>
+  {% endblock scripts %}
+  </body>
+</html>

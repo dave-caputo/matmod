@@ -1,5 +1,6 @@
 from django.db import models
-from django.db.models import F, Sum
+from django.db.models import Count, ExpressionWrapper, F, Sum
+from django.db.models.functions import Coalesce
 
 
 class AnswerTotalsManager(models.Manager):
@@ -16,14 +17,25 @@ class AnswerTotalsManager(models.Manager):
                 name=F('question__section__name')
             )
             .annotate(
-                answers=Sum('answer'),
-                score=Sum('score', output_field=models.DecimalField()),
-                target_score=Sum('target_score', output_field=models.DecimalField()),
-                max_score=Sum('question__max_score', output_field=models.DecimalField()),
+                answer_count=Count('answer'),
+            )
+            .annotate(
+                score=ExpressionWrapper(
+                    Coalesce(Sum('score') / F('answer_count'), 0),
+                    output_field=models.DecimalField(),
+                ),
+                target_score=ExpressionWrapper(
+                    Coalesce(Sum('target_score') / F('answer_count'), 0),
+                    output_field=models.DecimalField(),
+                ),
+                max_score=ExpressionWrapper(
+                    Coalesce(Sum('question__max_score') / F('answer_count'), 0),
+                    output_field=models.DecimalField(),
+                ),
             )
             .annotate(
                 maturity=F('score') / F('max_score') * 100,
-                target_score_pc=F('target_score') / F('max_score') * 100
+                target_score_pc=F('target_score') / F('max_score') * 100,
             )
         )
 
