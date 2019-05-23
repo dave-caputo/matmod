@@ -13,3 +13,4 @@ htmlcov
 .coverage
 node_modules
 .vscode
+.idea
