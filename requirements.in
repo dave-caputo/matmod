@@ -19,5 +19,5 @@ flake8-isort<2.8
 pip-tools
 
 # Database
-psycopg2-binary<2.9
+# psycopg2-binary<2.9
 mysqlclient<1.5
