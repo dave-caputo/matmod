@@ -41,7 +41,7 @@ tqdm==4.19.1              # via zappa
 troposphere==2.3.4        # via zappa
 unidecode==1.0.22         # via python-slugify
 urllib3==1.24.1           # via requests
-werkzeug==0.14.1          # via zappa
+werkzeug==0.15.3          # via zappa
 wheel==0.32.3             # via zappa
 wsgi-request-logger==0.4.6  # via zappa
 zappa==0.47.0
