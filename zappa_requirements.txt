@@ -17,7 +17,7 @@ django-js-asset==1.1.0    # via django-mptt
 django-mptt==0.9.1
 django-ordered-model==3.1.1
 django-storages==1.7.1
-django==2.1.2
+django==2.1.11
 docutils==0.14            # via botocore, zappa
 durationpy==0.5           # via zappa
 future==0.16.0            # via django-extended-choices, zappa
