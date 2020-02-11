@@ -17,7 +17,7 @@ django-js-asset==1.1.0    # via django-mptt
 django-mptt==0.9.1
 django-ordered-model==3.1.1
 django-storages==1.7.1
-django==2.1.2
+django==2.2.10
 docutils==0.14            # via botocore, zappa
 durationpy==0.5           # via zappa
 future==0.16.0            # via django-extended-choices, zappa
@@ -36,6 +36,7 @@ pyyaml==3.13              # via cfn-flip, kappa, zappa
 requests==2.20.1          # via zappa
 s3transfer==0.1.11        # via boto3
 six==1.11.0               # via cfn-flip, pip-tools, python-dateutil, zappa
+sqlparse==0.3.0           # via django
 toml==0.10.0              # via zappa
 tqdm==4.19.1              # via zappa
 troposphere==2.3.4        # via zappa
