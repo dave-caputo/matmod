@@ -4,7 +4,7 @@
 #    pip-compile --output-file zappa_requirements.txt zappa_requirements.in
 
 # Django
-Django<2.2
+Django<2.3
 django-crispy-forms<1.8
 django-extended-choices<1.4
 django-mptt
